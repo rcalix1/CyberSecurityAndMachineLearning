@@ -21,6 +21,10 @@
 
 * https://www.nsogroup.com
 
+## Binary Reverse Engineering
+
+* Hydra
+
 ## Additional Resources (old repo)
 
 * https://github.com/rcalix1/STEM/tree/main/MLCyber
