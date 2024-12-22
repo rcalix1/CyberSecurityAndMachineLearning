@@ -28,6 +28,18 @@
 ## Additional Resources (old repo)
 
 * https://github.com/rcalix1/STEM/tree/main/MLCyber
-* 
+
+## Scratch
+
+*  Joint Entropy
+*  Conditional Entropy
+*  Mutual Information
+*  Channel Capacity and Noise
+*  information Compression and Encoding Basics
+
+
+
+
+
 
   
