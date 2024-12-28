@@ -32,8 +32,6 @@
 ## Scratch
 
 *  Joint Entropy
-*  Conditional Entropy
-*  Mutual Information
 *  Channel Capacity and Noise
 *  information Compression and Encoding Basics
 
