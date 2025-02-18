@@ -53,5 +53,10 @@
 * This can help us to find the distance between each pair of point values
 
 
+<a href="https://amzn.to/3QmKKwC"> <img src="https://m.media-amazon.com/images/I/71F2QLFMCFL._SL1233_.jpg" alt="image" width="300" height="auto" /></a>
+
+## Disclaimer
+
+* AI assisted content. This post includes Amazon affiliate links 
 
 
