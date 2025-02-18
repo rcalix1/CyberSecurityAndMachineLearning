@@ -19,7 +19,7 @@
 * This classification depends on their connectivity
 * 
 
-![feedBack](feedBackNets.jpeg)
+![feedBack](images/feedBackNets.jpeg)
 
 * they have been used to study associative memory. Memory can be used for anomaly detection, for instance
 
