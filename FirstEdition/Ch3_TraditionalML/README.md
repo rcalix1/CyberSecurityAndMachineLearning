@@ -25,7 +25,7 @@
 
 ## Hebbian Training
 
-![hebb](hebbBanana.jpeg)
+![hebb](images/hebbBanana.jpeg)
 
 * Hopfield Networks  are sometimes called associative memory networks.
 * John Hopfield won the 2024 nobel prize in physics for this work.
@@ -37,14 +37,14 @@
 
 
 
- ![outerProd](outerProd.png)
+ ![outerProd](images/outerProd.png)
 
 
 
 * The weights are calculated via an "outer product" of the input vector and the transpose of the same vector.
 * The identity matrix is subtracted from the resulting matrix as can be seen in the following formulation.
 
- ![ousdsrProd](weightsCalc.png)
+ ![ousdsrProd](images/weightsCalc.png)
 
 * Here are some important points to note about Hopfield networks and the code:
 * np.outer produces one product between each possible element pairing from 2 tensors
