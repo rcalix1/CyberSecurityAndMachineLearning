@@ -104,20 +104,13 @@ or by the process (e.g. cryptography).
 </p>
 
 <h1>
-Things to know about the code
+RCM
 	
 </h1>
 
 
 	<p>
-As modules.
 
-
-
-
-
-
-%%%%%%%%%%%%%%%%%
 
 
 I have always told my students that before they think about all the technical aspects of cyber security, that they should create a Risk and Control Matrix (RCM). 
@@ -153,34 +146,59 @@ In this example, assume we have "5" threats to our organization with associated 
 
 Given
 
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 threat\_probabilities = [ 0.1, 0.3, 0.3, 0.2, 0.1]
+  
+</textarea>
+  
+</div>
+</center>
+
+
+		
+
 
 and
 
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 threat\_impact        = [ 0.6, 0.8, 0.7, 0.6, 0.9]
+  
+</textarea>
+  
+</div>
+</center>
+
+
 
 we multiply as follows:
 
-\begin{itemize}
-    \item 0.1 * 0.6
-    \item 0.3 * 0.8
-    \item 0.3 * 0.7
-    \item etc.
-\end{itemize}
+
+<ul>
+	<li>0.1 * 0.6</li>
+	<li> 0.3 * 0.8</li>
+	<li>0.3 * 0.7</li>
+	<li>etc</li>
+	
+</ul>
+		
+
 
 Once multiplied, we select the highest probability. 
 
 We can calculate this with Numpy as follows:
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Expected Risk }}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 import numpy as np
 
@@ -196,25 +214,33 @@ print(  highest_risk_index  )
 
 ## Threat with highest expected risk is:
 ## 1
+  
+</textarea>
+  
+</div>
+</center>
 
-\end{lstlisting}
-\end{minipage}
+
+
+
 
 Here, we multiply the probabilities together and determine that threat 1 has the highest expected risk. 
 
-\subsection{Entropy}
 
-We can also use the "Entropy" metric to determine how uncertain we are about a threat probability distribution. We can measure this in bits. The best way to understand this is to compare a sample test case to the 2 possible extremes in our threat level probability distribution. This can be seen in the  next code listing: 
+	<h2>{Entropy</h2>
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Entropy of possible threat probability distributions }}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+We can also use the "Entropy" metric to determine how uncertain we are about a threat probability distribution. We can measure this in bits.
+	The best way to understand this is to compare a sample test case to the 2 possible extremes in our threat level probability distribution. 
+	This can be seen in the  next code listing: 
+
+
+
+	<center>
+<div>
+<textarea rows="15" cols="100">
+
+	
 ## Scenario 1
 
 threat_probabilities = [ 0.1, 0.3, 0.3, 0.2, 0.1]
@@ -248,22 +274,38 @@ print( risk_entropy )
 
 Threat Risk Entropy in bits is: 
 0.38249336186032434
-
-
-\end{lstlisting}
-\end{minipage}
-
-In the previous code listing we can see that we calculated entropy 3 times. The second case is where all probabilities are equal to 0.2. This has the highest Entropy and is the most uncertain scenario (2.32). We do not know which threat is more likely to happen. 
-
-Scenario 3 has the lowest Entropy equal to 0.38. We are the most  certain here given that threat "one" has a probability of 0.95 (i.e. [ 0.95, 0.02, 0.01, 0.01, 0.01]). No surprise here. 
-
-Our actual test case (scenario 1) has an entropy of 2.17. Entropy is high and we have high uncertainty but this scenario is in between the 2 extremes of 0.38 and 2.32. 
+  
+</textarea>
+  
+</div>
+</center>
 
 
 
-\section{Computer Hacking}
 
-Many people think of computer hacking when they think about cyber security. So let us start here. A computer hack can be thought of as gaining un-authorized access to a computer information system. The classic scenario is to exploit vulnerabilities in software  or firewalls. All computer systems use the concept of sockets. Sockets can be defined as tuples of IP addresses and port numbers. These IPs and ports help computers to communicate with each other. Let us think of two computers A and B that want to communicate with each other. To achieve this, a program in computer A with an IP will use a port in computer A to send out information in the form of computer packets. There packets are transmitted across networks seeking the IP for B. Once the packets reach B, they will try to go into computer B through a port number in B. This port in B must be open and will be linked with another program. That program will read the data sent from A and try to run it. It there is a vulnerability in the program in B, an attacker can send specially crafted data to exploit this vulnerability in the software in B. If the hack is successful, the attacker will try to affect one of the following pillars of information  assurance:
+
+In the previous code listing we can see that we calculated entropy 3 times. The second case is where all probabilities are equal to 0.2. 
+	This has the highest Entropy and is the most uncertain scenario (2.32). We do not know which threat is more likely to happen. 
+
+Scenario 3 has the lowest Entropy equal to 0.38. We are the most  certain here given that threat "one" has a probability of 0.95 
+	(i.e. [ 0.95, 0.02, 0.01, 0.01, 0.01]). No surprise here. 
+
+Our actual test case (scenario 1) has an entropy of 2.17. Entropy is high and we have high uncertainty but this scenario is in between the 
+	2 extremes of 0.38 and 2.32. 
+
+
+<h2>Computer Hacking</h2>
+
+
+Many people think of computer hacking when they think about cyber security. So let us start here. A computer hack can be thought of as gaining
+	un-authorized access to a computer information system. The classic scenario is to exploit vulnerabilities in software  or firewalls. 
+	All computer systems use the concept of sockets. Sockets can be defined as tuples of IP addresses and port numbers. 
+	These IPs and ports help computers to communicate with each other. Let us think of two computers A and B that want to communicate with 
+	each other. To achieve this, a program in computer A with an IP will use a port in computer A to send out information in the form of computer packets. 
+	There packets are transmitted across networks seeking the IP for B. Once the packets reach B, they will try to go into computer B through a port number 
+	in B. This port in B must be open and will be linked with another program. That program will read the data sent from A and try to run it. 
+	It there is a vulnerability in the program in B, an attacker can send specially crafted data to exploit this vulnerability in the software in B. 
+	If the hack is successful, the attacker will try to affect one of the following pillars of information  assurance:
 
 \begin{itemize}
     \item Confidentiality
