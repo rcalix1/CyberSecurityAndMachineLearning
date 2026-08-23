@@ -39,7 +39,7 @@
 
 <div class="main">    <!-- for the fixed nav bar -->
 
-<h1>Chapter 4 - Getting Started with Deep Learning </h1>
+<h1>Chapter 2 - Introduction to Cyber Security and Machine Learning </h1>
 
     <center>
       <div>
@@ -78,25 +78,26 @@
 
      <center>
       <div class="img"> 
-        <a href="https://amzn.to/3vOL8NF"><img src="https://m.media-amazon.com/images/I/71Wi+z5fKzL._SL1233_.jpg" height="500" width="auto"></a>
+        <a href="https://m.media-amazon.com/images/I/71F2QLFMCFL._SL1233_.jpg" height="500" width="auto"></a>
       </div>
 
     </center>
     
 
 <h1>
-Deep Learning: Starting at the beginning
+Introduction to Cyber Security and Machine Learning
 	
 </h1>
 
 
 <p>
 
-In this chapter, I will introduce the topic of deep learning. My goal here is to help students and practitioners alike to get started with deep learning. 
-	In particular, I want them to be able to get data and pre-process it for deep learning, load it on their programs, perform classification tasks, and 
-	evaluate their results.  I will discuss some aspects of the theory providing as much intuition as possible. For this task, I will use Linux, Python, Sklearn,
-	and the PyTorch framework. I will also discuss some aspects of using GPU based hardware by the end of the book. 
-For most of my sample code, I used the conda environment. I installed the PyTorch framework following the instructions in the main PyTorch website (https://www.PyTorch.org/ ).
+
+
+Cyber Security is a very broad field. In general, it can be divided into areas such as network security, software assurance, social engineering, cryptography, etc. 
+There are many other ways to divide it and this is just a suggested way to look at it. Here, I am loosely organizing the topics by the input medium (e.g. network data), 
+or by the process (e.g. cryptography). 
+
 	
 
 	
@@ -109,9 +110,7 @@ Things to know about the code
 
 
 	<p>
-As in the previous section with sklearn, I have included the libraries first. Notice, that I use as many sklearn libraries as possible and only use the PyTorch
-		module when absolutely necessary. The goal, again, is to help the reader to best capture the PyTorch concepts by simplification. Once your skills 
-		improve with deep learning frameworks, you will be able to more easily replace sklearn modules with alternative PyTorch modules.
+As modules.
 
 
 
@@ -120,27 +119,37 @@ As in the previous section with sklearn, I have included the libraries first. No
 
 %%%%%%%%%%%%%%%%%
 
-\chapter{Introduction to Cyber Security and Machine Learning}
 
-Cyber Security is a very broad field. In general, it can be divided into areas such as network security, software assurance, social engineering, cryptography, etc. There are many other ways to divide it and this is just a suggested way to look at it. Here, I am loosely organizing the topics by the input medium (e.g. network data), or by the process (e.g. cryptography). 
+I have always told my students that before they think about all the technical aspects of cyber security, that they should create a Risk and Control Matrix (RCM). 
+		This is a very simple table or spread sheet mapping 3 things which are:
 
-I have always told my students that before they think about all the technical aspects of cyber security, that they should create a Risk and Control Matrix (RCM). This is a very simple table or spread sheet mapping 3 things which are:
-
-\begin{itemize}
-    \item Assets
-    \item Threats
-    \item Controls
-\end{itemize}
+<ul>
+    <li>Assets</li>
+    <li>Threats</li>
+	<li>Controls</li>
+</ul>
+   
 
 The logic here is to identify the assets to protect, then find the threats associated with these assets, and finally to put controls in place to mitigate the risk. 
 
-\section{Risk}
+</p>
+	
+	<p>
+		
+	<h1>Risk</h1>
 
-Risk is sometimes mentioned as a term in cyber security to determine course of action. Risk can be quantified with probabilities and metrics from information theory can  help us to make sense of the problem. If you do not know the exact probabilities, you can sometimes guess or arrive at them by speaking to organization stakeholders. This may be better understood with examples. 
+Risk is sometimes mentioned as a term in cyber security to determine course of action. Risk can be quantified with probabilities and metrics from information
+		theory can  help us to make sense of the problem. If you do not know the exact probabilities, you can sometimes guess or arrive at them by speaking 
+		to organization stakeholders. This may be better understood with examples. 
 
-\subsection{Expected Risk given Threat and Impact Probabilities }
+		<h2>
+			Expected Risk given Threat and Impact Probabilities
+		</h2>
 
-In this example, assume we have "5" threats to our organization with associated individual threat probabilities (T probs.) and impact probabilities (I probs.). For each threat, we multiply its threat probability (T prob) with its corresponding impact probability (I prob). The goal is to make  an informed decision as to which threat may have the highest expected risk.
+
+In this example, assume we have "5" threats to our organization with associated individual threat probabilities (T probs.) and impact probabilitie
+		s (I probs.). For each threat, we multiply its threat probability (T prob) with its corresponding impact probability (I prob). The goal is to make 
+		an informed decision as to which threat may have the highest expected risk.
 
 Given
 
