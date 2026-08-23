@@ -43,7 +43,7 @@
 
     <center>
       <div>
-        <img src="https://rcalix1.github.io/DeepLearningAlgorithms/SecondEdition/images/twolayerNN.chp4.300dpi.jpg" height="500" width="auto">
+         <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/goodBadPacket.png" height="500" width="auto">
       </div>
 
     </center>
@@ -342,13 +342,6 @@ Network security relates to the security of the computer network environment. Th
     </center>
 	
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.6]{images/packetBasci.png}
-}
-\caption{Network Packet}
-\label{RegLin:fig}
-\end{figure}
 
 Hackers try to understand these protocols to find vulnerabilities that they can exploit. In general, machine learning algorithms can be used to analyze 
 	incoming packets to try to detect which ones could be related to an attack. Packets can carry both good traffic and bad traffic (next figure).
@@ -360,30 +353,25 @@ Hackers try to understand these protocols to find vulnerabilities that they can 
         <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/goodBadPacket.png" height="500" width="auto">
       </div>
 
-    </center>
+ </center>
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.6]{images/goodBadPacket.png}
-}
-\caption{Packet - Normal or attack traffic}
-\label{RegLin:fig}
-\end{figure}
+
 
 Common network attacks include: denial of service attacks, SYN flooding, TCP session hijacking, buffer overflow attacks, and many more. 
 
-Firewalls and Intrusion Detection Systems (IDS) are a traditional way to defend against these attacks. The problem is that these approaches depend on already knowing the characteristics of the attack. There are other types of attacks that are unknown, and these may require more advanced approaches such as machine learning.
+Firewalls and Intrusion Detection Systems (IDS) are a traditional way to defend against these attacks. The problem is that these approaches depend on 
+	already knowing the characteristics of the attack. There are other types of attacks that are unknown, and these may require more advanced approaches 
+	such as machine learning.
 
 For example, in the next code listing we can see how to easily add heuristic rules to the UFW firewall in Linux.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Add rules to UFW firewall in Linux}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 import os
 
@@ -403,37 +391,49 @@ def configure_firewall():
 
 configure_firewall()
 
-\end{lstlisting}
-\end{minipage}
+  
+</textarea>
+  
+</div>
+</center>
+
+	
+
+
 
 These rules help to block certain IPs or port numbers in a rules based approach. 
 
 Packets that contain these blocked values will be dropped. 
 
-\section{Software Security and Malware}
+	<h2>Software Security and Malware</h2>
 
-Software security relates to protecting the medium of software code and related vulnerabilities. This refers to vulnerabilities in the software itself and not on protocols such as those in Network security. For example, declaring variables in memory that are too small to store the data sent to them is a problem. If not properly coded, this could result in putting data in unintended areas of memory. A program reading data from these unintended areas of memory could result in unexpected behavior including attacks (e.g. the classic buffer overflow attack). 
 
-This area also covers malware issues. Malware is any code that tries to replicate itself in the operating system (or other environments) and cause harm to the system. Common types of malware include: computer viruses, worms, ransomware, etc. The following code segment shows a simple example of how to implement a computer virus with python. Keep in mind that many viruses will be written in other languages such as C/C++ and will be compiled code. The virus in this example will look for files with a "txt" extension and try to infect them. 
+Software security relates to protecting the medium of software code and related vulnerabilities. This refers to vulnerabilities in the software itself and not
+	on protocols such as those in Network security. For example, declaring variables in memory that are too small to store the data sent to them is a problem. 
+	If not properly coded, this could result in putting data in unintended areas of memory. A program reading data from these unintended areas of memory could 
+	result in unexpected behavior including attacks (e.g. the classic buffer overflow attack). 
+
+This area also covers malware issues. Malware is any code that tries to replicate itself in the operating system (or other environments) and cause harm to the system. 
+	Common types of malware include: computer viruses, worms, ransomware, etc. The following code segment shows a simple example of how to implement 
+	a computer virus with python. Keep in mind that many viruses will be written in other languages such as C/C++ and will be compiled code. 
+	The virus in this example will look for files with a "txt" extension and try to infect them. 
 
 The computer virus code has the following functions:
 
-\begin{itemize}
-    \item search()
-    \item infect()
-    \item payload()
-\end{itemize}
+	<ul>
+		<li> search()</li>
+		<li> infect()</li>
+		<li> payload()</li>
+	</ul>
 
-Most of the computer virus behavior happens in the \textbf{infect()} function.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={Computer Virus in Python}  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+Most of the computer virus behavior happens in the <strong>"infect()"</strong> function.
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 import os
 import datetime
@@ -449,6 +449,7 @@ def search(path):
         if temp[1] == "txt":
             files_to_infect.append(file)
     return files_to_infect
+
 
 #################################################
 def infect(files_to_infect):
@@ -484,10 +485,25 @@ files_to_infect = search(path)
 infect(files_to_infect)
 payload()
 
-\end{lstlisting}
-\end{minipage}
+
+  
+</textarea>
+  
+</div>
+</center>
+
 
 Traditional defenses against these attacks include anti-virus scanners. Sometimes malware scanners can be classified as static or dynamic. 
+
+
+
+	
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/StaticOrDynamic.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 \begin{figure}[H]\centering
 \adjustbox{max height=0.6\textheight}{
@@ -498,7 +514,17 @@ Traditional defenses against these attacks include anti-virus scanners. Sometime
 \end{figure}
 
 
-Traditional anti-virus scanners rely on hashing techniques to detect malware and are considered to be static. Hash functions take variable length inputs and produce fixed length outputs called hash values. If one bit of the input file changes, then the hash output value is completely different. 
+Traditional anti-virus scanners rely on hashing techniques to detect malware and are considered to be static. 
+	Hash functions take variable length inputs and produce fixed length outputs called hash values. If one bit of the input file changes, 
+	then the hash output value is completely different. 
+
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/abtiVirusScanner.png" height="500" width="auto">
+      </div>
+
+ </center>
+	
 
 \begin{figure}[H]\centering
 \adjustbox{max height=0.6\textheight}{
@@ -509,7 +535,15 @@ Traditional anti-virus scanners rely on hashing techniques to detect malware and
 \end{figure}
 
 
-In Dynamic Analysis you run the virus in a sandbox environment  using an emulator. The actions (e.g. DLL calls, registry edits, file reads, etc.) of the malware can be recorded in log files. 
+In Dynamic Analysis you run the virus in a sandbox environment  using an emulator. The actions (e.g. DLL calls, registry edits, file reads, etc.) 
+	of the malware can be recorded in log files. 
+
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/EmulatorDynamicStatic.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 
 \begin{figure}[H]\centering
@@ -521,34 +555,46 @@ In Dynamic Analysis you run the virus in a sandbox environment  using an emulato
 \end{figure}
 
 
-These approaches, once again, require previous knowledge of the malware and may not be effective for unknown malware attacks. Here, machine learning can help. For instance, in dynamic analysis the data in the log files can be used to extract the features for ML. 
+These approaches, once again, require previous knowledge of the malware and may not be effective for unknown malware attacks. Here, machine learning can help.
+	For instance, in dynamic analysis the data in the log files can be used to extract the features for ML. 
 
 
 
 Other topics that relate to software security include: cross-site scripting, cross-site request forgery, and others. 
 
-\section{Social Engineering}
+<h2>Social Engineering</h2>
+	
 
-A Social Engineering attack can be considered as a type of cyber security attack that tries to confuse or trick humans. The goal is to get the human to do something such as clicking on a malicious link or revealing secret information. 
+A Social Engineering attack can be considered as a type of cyber security attack that tries to confuse or trick humans. 
+	The goal is to get the human to do something such as clicking on a malicious link or revealing secret information. 
 
-The classic example of social engineering is the phishing attack. Phishing attacks can be done via email. Usually information is provided in the email to trick the human into clicking on some link. 
+The classic example of social engineering is the phishing attack. Phishing attacks can be done via email. Usually information is provided in the email to 
+	trick the human into clicking on some link. 
 
 
+<h2>Cryptography</h2>
 
-\section{Cryptography}
 
-Cryptography is a huge area that is critical to cyber security. Many people think of it as methods to scramble data. This general understanding relates to making data unreadable except for the authorized parties. However, cryptography can also be used for integrity checking, authentication, and for many other purposes. 
+Cryptography is a huge area that is critical to cyber security. Many people think of it as methods to scramble data.
+	This general understanding relates to making data unreadable except for the authorized parties. However, cryptography can also be used for integrity checking, 
+	authentication, and for many other purposes. 
 
-Claude Shannon was one of the first people to consider the problem of cryptography rigorously. He was mainly concerned with the question of "What makes a secure cipher?".
+Claude Shannon was one of the first people to consider the problem of cryptography rigorously. He was mainly concerned with the question 
+	of "What makes a secure cipher?".
 He proposed the following relationship as a metric to measure how secure a cryptographic cipher can be. 
 
 \[  P[ \; E(k, m_0) = c \; ]    =   P[ \; E(k,m_1) = c \;  ]     \]
 
-The previous equation relates 2 outcomes measured by probabilities for two encryptions given $ m_0 $ and $ m_1 $, respectively. Think of the equal sign comparing the 2 probabilities as more of a semantic equality than, say, an algebraic equality.
-Both encryptions use the same algorithm (E) and key (k). The difference lies in the inputs given to "E" which are $ m_0 $ and $ m_1 $. The produced cipher is also the same in both cases. The equation is used to define how to measure a secure cipher (E). The central idea lies in the probabilities which should be the same. Therefore, a secure cipher is one where, given the "intercepted" cipher (c), you cannot tell if "c" was generated from $ m_0 $ or $ m_1 $. They should both be equally likely to have generated "c". The cipher "c"  does not reveal any information about the original message. 
+The previous equation relates 2 outcomes measured by probabilities for two encryptions given $ m_0 $ and $ m_1 $, respectively. Think of the equal sign comparing 
+	the 2 probabilities as more of a semantic equality than, say, an algebraic equality.
+Both encryptions use the same algorithm (E) and key (k). The difference lies in the inputs given to "E" which are $ m_0 $ and $ m_1 $. 
+	The produced cipher is also the same in both cases. The equation is used to define how to measure a secure cipher (E). The central idea lies in the 
+	probabilities which should be the same. Therefore, a secure cipher is one where, given the "intercepted" cipher (c), you cannot tell if "c" was generated 
+	from $ m_0 $ or $ m_1 $. They should both be equally likely to have generated "c". The cipher "c"  does not reveal any information about the original message. 
 
 
-Cryptography and ML may initially seem like unrelated areas. We will later see that there are, in fact, some techniques from machine learning that can be used in the context of cryptography. 
+Cryptography and ML may initially seem like unrelated areas. We will later see that there are, in fact, some techniques from machine learning that
+	can be used in the context of cryptography. 
 
 Entropy is sometimes used in an operating system to find encrypted files, for instance. 
 
