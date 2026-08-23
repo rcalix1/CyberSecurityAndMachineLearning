@@ -150,9 +150,9 @@ Given
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="5" cols="100">
 
-threat\_probabilities = [ 0.1, 0.3, 0.3, 0.2, 0.1]
+threat_probabilities = [ 0.1, 0.3, 0.3, 0.2, 0.1]
   
 </textarea>
   
@@ -167,9 +167,9 @@ and
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="5" cols="100">
 
-threat\_impact        = [ 0.6, 0.8, 0.7, 0.6, 0.9]
+threat_impact        = [ 0.6, 0.8, 0.7, 0.6, 0.9]
   
 </textarea>
   
@@ -227,7 +227,7 @@ print(  highest_risk_index  )
 Here, we multiply the probabilities together and determine that threat 1 has the highest expected risk. 
 
 
-	<h2>{Entropy</h2>
+	<h2>Entropy</h2>
 
 
 We can also use the "Entropy" metric to determine how uncertain we are about a threat probability distribution. We can measure this in bits.
@@ -307,19 +307,30 @@ Many people think of computer hacking when they think about cyber security. So l
 	It there is a vulnerability in the program in B, an attacker can send specially crafted data to exploit this vulnerability in the software in B. 
 	If the hack is successful, the attacker will try to affect one of the following pillars of information  assurance:
 
-\begin{itemize}
-    \item Confidentiality
-    \item Integrity
-    \item Availability
-    \item Non repudiation
-    \item Authentication
-\end{itemize}
 
-Metasploit, netwox, or Kali linux are famous tools for conducting cyber security attacks. That being said, an attack can be crafted with any programming language such as C or python using special libraries. Scapy for instance can be used in python to craft any kind of network packet. It is important to note that there is a term called "ethical hacking" and that hacking is a crime and should only be done in special defensive situations such as in penetration testing with authorized access. 
+<ul>
+	<li>Confidentiality</li>
+	<li>Integrity</li>
+	<li>Availability</li>
+	<li>Non repudiation</li>
+	<li>Authentication</li>
+</ul>
 
-\section{Network Security}
+	
 
-Network security relates to the security of the computer network environment. The unit in this environment is the network packet. Think of packets as little trains with information that are sent from one computer to another over computer networks and the internet (the rail lines). There are many protocols used to send this data across networks such as UDP/IP and TCP/IP. In general, data is encapsulated using several protocols as it is prepared to be sent across the network as network packets. 
+
+Metasploit, netwox, or Kali linux are famous tools for conducting cyber security attacks. That being said, an attack can be crafted with any programming 
+	language such as C or python using special libraries. Scapy for instance can be used in python to craft any kind of network packet. 
+	It is important to note that there is a term called "ethical hacking" and that hacking is a crime and should only be done in special defensive situations 
+	such as in penetration testing with authorized access. 
+
+	<h2>Network Security</h2>
+
+
+Network security relates to the security of the computer network environment. The unit in this environment is the network packet. 
+	Think of packets as little trains with information that are sent from one computer to another over computer networks and the internet (the rail lines). 
+	There are many protocols used to send this data across networks such as UDP/IP and TCP/IP. In general, data is encapsulated using several protocols 
+	as it is prepared to be sent across the network as network packets. 
 
 \begin{figure}[H]\centering
 \adjustbox{max height=0.6\textheight}{
