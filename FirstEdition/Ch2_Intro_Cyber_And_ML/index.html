@@ -432,7 +432,7 @@ Most of the computer virus behavior happens in the <strong>"infect()"</strong> f
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="35" cols="100">
 
 import os
 import datetime
@@ -589,14 +589,11 @@ A popular Python library used for cryptography is "PyCrypto Dome". The following
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={    PyCrypto Dome example        }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+	
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 
 from Crypto.Cipher import AES
@@ -619,53 +616,89 @@ file_out.write(cipher_AES.iv)
 file_out.write(cipher_text)
 file_out.close()
 
+  
+</textarea>
+  
+</div>
+</center>
 
-\end{lstlisting}
-\end{minipage}
+
+
 
 
 In the previous example, we encrypt "data" using the AES symmetric encryption technique. 
 
 
-
-\section{AI Assurance}
+<h2>
+	AI Assurance
+</h2>
+	
 
 
 The topic of AI assurance relates to creating secure and reliable AI systems. With regards to AI assurance,  I will cover topics such as:
 
-\begin{itemize}
-    \item AI auditing and explainability
-    \item Bias testing
-    \item Adversarial attacks
-    \item etc.
-\end{itemize}
 
-\subsection{AI Auditing and Explainability}
+<ul>
+	<li>AI auditing and explainability</li>
+	<li>Bias testing</li>
+	<li>Adversarial attacks</li>
+	<li>AI agent cyber</li>
+	<li>etc</li>
+	
+</ul>
+	
+<h2>AI Auditing and Explainability</h2>
 
-AI auditing is a new emerging field. In general, it relates to the process of checking an AI system to measure how reliable and trustworthy it can be. Explainability is the big buzzword in AI auditing. While it can be difficult to ensure that an AI system is 100\% reliable and trustworthy, it can be easier to provide more clarity into how it works. This is what "explainability" tries to achieve. 
+
+
+AI auditing is a new emerging field. In general, it relates to the process of checking an AI system to measure how reliable and trustworthy it can be. 
+	Explainability is the big buzzword in AI auditing. While it can be difficult to ensure that an AI system is 100\% reliable and trustworthy, 
+	it can be easier to provide more clarity into how it works. This is what "explainability" tries to achieve. 
 
 A classic explainability technique that will be covered in this book is the Shapley explainability metric. 
 
-\subsection{Bias Testing}
+<h2>
+	Bias Testing
+</h2>
+	
 
-Bias testing relates to the process of measuring AI systems to ensure that they are fair, un-biased and trustworthy. This is a complicated topic that is still unsolved but that is very important. I will provide some examples and literature related to this topic. 
+
+Bias testing relates to the process of measuring AI systems to ensure that they are fair, un-biased and trustworthy. 
+	This is a complicated topic that is still unsolved but that is very important. I will provide some examples and literature related to this topic. 
 
 One very basic metric that will be discussed in this book is the 4/5s rule for bias testing. 
 
-\subsection{Adversarial Attacks}
+<h2>
+	Adversarial Attacks
+</h2>
+	
 
 
-The classic example related to adversarial attacks involves fooling an AI system by training it with some confusing data. Attack data is injected into the training data so as to train the model to correlate the attack injected data with some specific outcome. For example putting purple glasses on images of faces and training the system to associate the purple glasses with a specific class. 
+The classic example related to adversarial attacks involves fooling an AI system by training it with some confusing data. Attack data is injected into
+	the training data so as to train the model to correlate the attack injected data with some specific outcome. For example putting purple glasses on
+	images of faces and training the system to associate the purple glasses with a specific class. 
 
-\section{Introduction to Cyber Security and Machine Learning Literature }
+	<h2>
+		Introduction to Cyber Security and Machine Learning Literature
+	</h2>
 
 
-Examples in the literature of previous studies on the use of machine learning for cyber security include: Frederick et al. 2022; \cite{FrederickShapiroRef};  \cite{CabreraCalixRef};  \cite{SankaranCalix2013Ref};  \cite{OdayTextCyber2013Ref}; \cite{SankaranEmbedded2016Ref}; \cite{IqbalEmbedded2016Ref}, etc. These studies, in general, propose feature extraction approaches given the specific medium (e.g. network data) for use in cyber defense (e.g. intrusion detection). The extracted samples are then collected as annotated datasets for use in training machine learning models.
+Examples in the literature of previous studies on the use of machine learning for cyber security include: 
+	Frederick et al. 2022; \cite{FrederickShapiroRef};  \cite{CabreraCalixRef};  \cite{SankaranCalix2013Ref};  \cite{OdayTextCyber2013Ref}; 
+	\cite{SankaranEmbedded2016Ref}; \cite{IqbalEmbedded2016Ref}, etc. 
+	These studies, in general, propose feature extraction approaches given the specific medium (e.g. network data) for use in cyber defense 
+	(e.g. intrusion detection). The extracted samples are then collected as annotated datasets for use in training machine learning models.
 
-In \cite{FrederickShapiroRef}, the authors present a technique to convert malware files to images. This conversion allows for new malware detection models that can leverage pre-trained image classifiers based on ResNets, U-nets, VGGs, etc. This is a great example of the use of Transfer Learning for Cyber Security. \cite{CabreraCalixRef} is a more traditional study on the use of ML for malware detection. Similarly,  \cite{SankaranCalix2013Ref}, is a more traditional study on the use of ML for network intrusion detection. 
+In \cite{FrederickShapiroRef}, the authors present a technique to convert malware files to images. 
+	This conversion allows for new malware detection models that can leverage pre-trained image classifiers based on ResNets, U-nets, VGGs, etc. 
+	This is a great example of the use of Transfer Learning for Cyber Security. \cite{CabreraCalixRef} is a more traditional study on the use of ML 
+	for malware detection. Similarly,  \cite{SankaranCalix2013Ref}, is a more traditional study on the use of ML for network intrusion detection. 
 
 
-\section{Summary}
+	<h2>
+		Summary
+	</h2>
+
 
 This chapter provided a brief introduction to cyber security, AI assurance, and ML. Future chapters will discuss these topics in more depth. 
 
