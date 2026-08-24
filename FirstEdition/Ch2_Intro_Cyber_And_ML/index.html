@@ -703,10 +703,18 @@ In \cite{FrederickShapiroRef}, the authors present a technique to convert malwar
 This chapter provided a brief introduction to cyber security, AI assurance, and ML. Future chapters will discuss these topics in more depth. 
 
  
+<h2>
+	Code Examples
+</h2>
 
 
-
-
+<ul>
+	<li>
+		<a href="https://github.com/rcalix1/CyberSecurityAndMachineLearning/blob/main/FirstEdition/Ch2_Intro_Cyber_And_ML/QuantifyRisksInformationTheory.ipynb">
+		   Example 1
+		</a>
+	</li>
+</ul>
 
 
 
@@ -717,186 +725,16 @@ This chapter provided a brief introduction to cyber security, AI assurance, and 
 
 
 
-<center>
-<div>
-<textarea rows="20" cols="100">
 
-import torch
-import numpy as np
-from numpy import genfromtxt
-
-from sklearn import datasets
-from sklearn.datasets import fetch_mldata
-from sklearn.cross_validation import train_test_split 
-
-import sklearn
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score, f1_score 
-import pandas as pd
-import matplotlib.pyplot as plt
-  
-</textarea>
-  
-</div>
-</center>
   
 
 
-<p>
-In the previous code section, it can be seen that for our deep learning code to work, we only need a few new libraries. The most important new library is Torch. 
-	This of course is the main source of our new code. We will still rely on numpy to efficiently get the data although we can also get data with the
-	statement sklearn.datasets import fetch_mldata.
-The next important issue in our code to do would be to set some parameters. Deep learning algorithms are iterative in the sense that they load samples 
-	in batches to avoid running out of memory. This is very important as it allows you to load millions of data samples in subsets called batches. 
-	Therefore, we can set up the parameters for batch processing. In the code below, we can see that we want to load batches of 100 samples each. 
-	For a training set of 1,000 samples, we would divide the set into 10 bins of 100 samples each and therefore run 10 batches. 
-Two additional parameters in this code are the learning_rate and the n_epochs. The n_epochs parameter represents the number of times that we will run our main “for” loop. 
-	This is the loop that we will run to provide data to our algorithms for training and testing. At this point, an optimization begins to occur which helps the 
-	supervised learning algorithm to learn from the samples. 
-The learning_rate value (in this case 0.01) is a very important parameter in the learning algorithm. Simply speaking, it represents the step that is taken in a
-	gradient descent algorithm to find an optimal solution. Think of this like a giant walking over a mountainous region with many peaks and valleys. 
-	He is trying to find an optimal location; if the step is too big, the giant could go from peak to peak and skip a valley altogether. 
-	On the other hand, if the step is to small the giant may take too long to move in or out of a valley. In terms of PyTorch, the learning rate can affect convergence. 
-
-
-<br/>
-Convergence is the term that means that the iterative algorithm is starting to tend to the optimal solution. The learning_rate can also be assigned a function instead
-	of just a value. 
-This helps to adjust the learning rate in real time while the algorithm is running. Some researchers have suggested that this type of optimization can provide better 
-	results than just using a fixed value learning rate. 
-
-
-	
-</p>
-
-
-
-
-<center>
-<div>
-<textarea rows="20" cols="100">
-
-learning_rate = 0.01 
-n_epochs      = 27000         #1000 
-batch_size    = 100
-  
-</textarea>
-  
-</div>
-</center>
-
-<p>
-Deep learning algorithms in PyTorch consist of a basic structure. Simply put, they have:
-
-	
-</p>
-
-<ul>
-
-	<li>Creating the dataset or DataLoaders</li>
-	<li> Defining the NN architectures (Inference Function)</li>
-	<li>Defining the loss function and optimizer</li>
-	<li>Training the model and adjusting the weights</li>
-</ul>
-
-
-<p>
-In the next section I will proceed to further elaborate on this. 
-
-The figure below presents the accuracy plot per epoch of a deep neural net as it is being trained. The x axis represents the epochs over time and the y
-	axis represents the accuracy score. As can be seen, the accuracy is low at first but it starts to improve after a certain number of epochs when the classifier
-	begins to learn and converge.  
-	
-</p>
 
 
 
 
 
-    <center>
-      <div>
-        <img src="https://rcalix1.github.io/DeepLearningAlgorithms/SecondEdition/images/accuracy_per_epoch.png" height="400" width="auto">
-      </div>
-    </center>
 
-<p>
-In this example on the figure, a deep net takes a few epochs to learn how to detect and classify the samples. After about 200 epochs, a deep net of say 2 hidden 
-	layers stabilizes and is able to maintain a consistent accuracy score. 
-
-	
-</p>
-
-	<h1>
-		Getting Started with Deep Leaning
-	</h1>
-
-<p>
-So what’s it all about? Again, my focus here is not to discuss deep learning from the equations point of view or talk about the derivatives. Those are all very 
-	important concepts but can be overwhelming when starting. Instead, I want to help the reader write deep learning code with PyTorch. Then, the reader will, no doubt,
-	have many questions where the theory and fundamentals will help him or her to better understand and use the algorithms. 
-The figures below present some of the challenges that must be addressed when dealing with real data. Real data such as language data from Twitter is highly noisy and 
-	un-balanced. An imbalance in the data means, for example, that 80% of the samples belong to 1 class and the remaining 20 \% belong to the other class. 
-	Therefore, training a classifier to, say, perform emotion classification (where data is highly imbalanced) can be a difficult task. In the figure below, 
-	a sample of Twitter data is represented. Each sample in the dataset had multiple features but was compressed into a two dimensional vector for visualization purposes. 
-	
-As can be seen, the data in the figures has a high overlap in the classes and the data is difficult to separate. A linear classifier (the line seen on the graph) 
-	can only separate a small portion of the samples and the majority are not easy to separate in this space. The graph below is available on-line in color. 
-
-	
-</p>
-
-
-
-
-
- <center>
-      <div>
-        <img src="https://rcalix1.github.io/DeepLearningAlgorithms/SecondEdition/images/log_reg_line.png" height="400" width="auto">
-      </div>
-    </center>
-
-
-<p>
-So how can we get more of the samples of one class without getting too many of the samples of the other class? Well, the answer is that we could use another type 
-	of line for the separation. For instance, instead of using a straight line we could use a curved line. This is why some algorithms are called linear and others 
-	are called non-linear. Non-linear algorithms can sometimes create better separations in the data and therefore obtain fewer errors. In the next Figure, an example
-	of this is shown using Support Vector Machines (SVM). SVM methods can sometimes build better non-linear classifiers because of their ability to project data to
-	higher dimensional spaces.  Deep neural networks can be used to learn non-linear models as well. This property of non-linear models can help to obtain better 
-	classification accuracy scores. This figure is available on-line in color. 
-
-
-	
-</p>
-	
-
-
-
-
- <center>
-      <div>
-        <img src="https://rcalix1.github.io/DeepLearningAlgorithms/SecondEdition/images/svm_line_chart.png" height="400" width="auto">
-      </div>
-    </center>
-
-<p>
-The figure above shows an SVM classifier building a non-linear separation line (the curved line in the graph) on the data. It could be expected that a deep neural network 
-	could build even better separation boundaries and that different architectures could give different results. This takes us to the very important aspect of deep 
-	architecture. 
-Deep learning architecture is where we define the parameters such as layers and neurons that define a deep neural network. You could think of this as the way that you
-	construct the line that you want to build and use. We will discuss this in the next sections but it is important to know that you can define many deep learning
-	architectures.
-
-	
-</p>
-
-	<h1>
-Deep Leaning Definition
-		
-	</h1>
-	
 
 <p>
 
