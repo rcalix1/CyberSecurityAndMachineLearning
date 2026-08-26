@@ -177,8 +177,13 @@ from sklearn import decomposition
 As you may imagine, the SKlearn library is the main library which contains most of the traditional machine learning tools we will discuss in this chapter. The numpy library is essential for efficient matrix and linear algebra operations. For those with experience with MatLab, I can say that numpy is a way of performing linear algebra operations in Python similar to how they are done in MatLab. Using matrix and linear algebra operations makes the code more efficient in its implementation and faster as well.  The datasets library seen above helps to obtain standard corpora (datasets). You can use it to obtain annotated data like Fisher’s iris data set, for instance.
 
 
-From \textbf{sklearn.cross\_validation} we can import \textbf{train\_test\_split} which is used to create splits in a data matrix such as using 70 \% for training purposes and 30 \% for testing purposes. From \textbf{sklearn.preprocessing} we can import the \textbf{StandardScaler} module which helps to scale  data. We can use functions such as these to scale our data for the PyTorch based models as well. Deep learning algorithms can improve significantly when data is properly scaled. So, it is recommended to do this.  
-We will use the \textbf{sklearn.metrics} module for performance evaluation of the models. I will show that this module can be used with SKlearn models and with PyTorch models. Again, this will help to more easily understand deep learning since we do not have to use the more complex and very verbose PyTorch functions. 
+From \textbf{sklearn.cross\_validation} we can import \textbf{train\_test\_split} which is used to create splits in a data matrix such as using 70 \% for 
+	training purposes and 30 \% for testing purposes. From \textbf{sklearn.preprocessing} we can import the \textbf{StandardScaler} module which helps to scale  data. 
+	We can use functions such as these to scale our data for the PyTorch based models as well. Deep learning algorithms can improve significantly when 
+	data is properly scaled. So, it is recommended to do this.  
+We will use the \textbf{sklearn.metrics} module for performance evaluation of the models. I will show that this module can be used with SKlearn 
+	models and with PyTorch models. Again, this will help to more easily understand deep learning since we do not have to use the more complex and very verbose 
+	PyTorch functions. 
 
 The main metrics used to evaluate classification models are:
 
@@ -200,9 +205,11 @@ The main metrics used to evaluate regression models are:
 
 
 
-Two very important libraries are \textbf{matplotlib.pyplot} and Pandas. The \textbf{matplotlib.pyplot} library is very useful for visualization of data and results, and the Pandas library is very useful for pre-processing. The Pandas library can be very useful to pre-process large data sets in very fast and very efficient ways.
+Two very important libraries are \textbf{matplotlib.pyplot} and Pandas. The \textbf{matplotlib.pyplot} library is very useful for visualization of data and results, 
+	and the Pandas library is very useful for pre-processing. The Pandas library can be very useful to pre-process large data sets in very fast and very efficient ways.
 
-There are some parameters that are sometimes useful to set in your code. The code sample below shows the use of \textbf{np.set\_printoptions}, for instance. The function is used to print all values in a Numpy array. This can be useful when trying to visualize the contents of a large data set. 
+There are some parameters that are sometimes useful to set in your code. The code sample below shows the use of \textbf{np.set\_printoptions}, for instance. 
+	The function is used to print all values in a Numpy array. This can be useful when trying to visualize the contents of a large data set. 
 
 
 
@@ -225,54 +232,46 @@ np.set_printoptions(threshold=np.inf)
 
 
 
-Now, let us assume that our data is stored in the matrix \textbf{"X"}. The code segment below uses the function \textbf{train\_test\_split}. This function is used to split a data set (in this case X) into 4 sets which are \textbf{X\_train}, \textbf{X\_test}, \textbf{y\_train}, \textbf{y\_test}. These are the 4 sets that will be used by the traditional or the deep learning models. The sets that start with \textbf{"X"} hold the input data (feature vectors) and the sets that start with \textbf{y} hold the output labels per sample. 
-The values test\_size=0.01 and random\_state=42 in the function are parameters that define the split. The value 0.01 makes a train set that has 99 percent of all samples while the test set has 1 percent of all samples. In contrast, test\_size=0.20 would mean that there is an 80 \% and 20 \% split. The random\_state=42 allows you to always get the same random data since the seed is defined as 42.
+Now, let us assume that our data is stored in the matrix \textbf{"X"}. The code segment below uses the function \textbf{train\_test\_split}.
+	This function is used to split a data set (in this case X) into 4 sets which are \textbf{X\_train}, \textbf{X\_test}, \textbf{y\_train}, \textbf{y\_test}. 
+	These are the 4 sets that will be used by the traditional or the deep learning models. The sets that start with \textbf{"X"} hold the input data (feature vectors) 
+	and the sets that start with \textbf{y} hold the output labels per sample. 
+The values test\_size=0.01 and random\_state=42 in the function are parameters that define the split. The value 0.01 makes a train set that has 99 percent 
+	of all samples while the test set has 1 percent of all samples. In contrast, test\_size=0.20 would mean that there is an 80 \% and 20 \% split. 
+	The random\_state=42 allows you to always get the same random data since the seed is defined as 42.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Split the data}}
-%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=48)
 
 ## k-folds cross validation all goes in train sets (hence 0.01) 
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.01, random_state=42)
-
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
 </div>
 </center>
 
-To call all the functions or models you can employ the following approach.  Here we have defined 5 common models. Notice that each one gets the 4 data sets obtained from the percentage split operation. Notice also that the data files have a \textbf{\_normalized} added to their name. 
+To call all the functions or models you can employ the following approach.  Here we have defined 5 common models. Notice that each one gets the 4 data sets 
+	obtained from the percentage split operation. Notice also that the data files have a \textbf{\_normalized} added to their name. 
 
 
 
-This is a good standard approach used by programmers to indicate that this data has been scaled (the next chapters address scaling). Here you run \textbf{X\_train} through a scaler function to obtain \textbf{X\_train\_normalized}. The labels \textbf{y} are not scaled, in this case. Although they can be if needed. 
+This is a good standard approach used by programmers to indicate that this data has been scaled (the next chapters address scaling). 
+	Here you run \textbf{X\_train} through a scaler function to obtain \textbf{X\_train\_normalized}. The labels \textbf{y} are not scaled, in this case.
+	Although they can be if needed. 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Sklearn ML models}}
-%%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 logistic_regression_rc(X_train_normalized, y_train, X_test_normalized, y_test)
 
@@ -283,40 +282,33 @@ random_forest_rc(X_train, y_train, X_test, y_test)
 knn_rc(X_train_normalized, y_train, X_test_normalized, y_test) 
 
 multilayer_perceptron_rc(X_train_normalized, y_train, X_test_normalized, y_test)
-
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
 </div>
 </center>
 
-Before we talk about the models, let us address Object Oriented Programming and performance evaluation. Performance evaluation will help you to determine how good your classifier (model) is, given an annotated test data set.
+Before we talk about the models, let us address Object Oriented Programming and performance evaluation. Performance evaluation will help you to determine how 
+	good your classifier (model) is, given an annotated test data set.
 
-\section{Object Oriented Programming}
+	<h3>
+		Object Oriented Programming
+	</h3>
 
 Object Oriented Programming (OOP) will be used extensively in this book to implement our ML and deep learning (DL) algorithms. 
-As is necessary with progress, the DL algorithms are  more complicated, with deeper and more resource intensive networks. This is best exemplified by one of the newest deep learning algorithms: The Transformer. The NN algorithms are just much more complicated. A little bit too much in fact and some proprietary programming libraries, as a result, are starting to abstract too much of the code. 
-I have found that a simple solution to continue to write from scratch code is to write everything in an object oriented fashion. This way, you are still defining the classes from scratch but you can also build far more complicated algorithms thanks to traditional object oriented programming techniques. 
+As is necessary with progress, the DL algorithms are  more complicated, with deeper and more resource intensive networks. This is best exemplified by one of 
+	the newest deep learning algorithms: The Transformer. The NN algorithms are just much more complicated. A little bit too much in fact and some proprietary 
+	programming libraries, as a result, are starting to abstract too much of the code. 
+I have found that a simple solution to continue to write from scratch code is to write everything in an object oriented fashion. This way, you are still defining 
+	the classes from scratch but you can also build far more complicated algorithms thanks to traditional object oriented programming techniques. 
 
 The following code segment includes a simple example of an OOP class format we will use extensively throughout this book for defining DL models.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Object Oriented Programming}}
-%%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 class LinRegNet(nn.Module):
 
@@ -333,15 +325,6 @@ class LinRegNet(nn.Module):
         y_pred = self.linear1(x)
         
         return y_pred
-
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -351,11 +334,17 @@ class LinRegNet(nn.Module):
 
 In general, our OOP model classes will include an \textbf{init} function and \textbf{forward} function. 
 
-\section{Performance Evaluation }
+	<h3>
+		Performance Evaluation
+	</h3>
+
 
 As previously stated, performance evaluation depends on whether we are doing classification or regression. 
 
-\subsection{Regression Performance Evaluation}
+	<h3>
+		Regression Performance Evaluation
+	</h3>
+
 
 
 The main metrics used to evaluate regression models are:
@@ -365,31 +354,13 @@ The main metrics used to evaluate regression models are:
 \item RMSE
 \end{itemize}
 
-My favorite regression evaluation metric is $ R^2 $. The range for the metric goes from 0-1 where 1 means that you have a good model. Generally, I have used sklearn \textbf{metrics} to evaluate regression models. If $ R^2 $ goes negative, then your model may not be learning the proper distribution. 
+My favorite regression evaluation metric is $ R^2 $. The range for the metric goes from 0-1 where 1 means that you have a good model. Generally, 
+	I have used sklearn \textbf{metrics} to evaluate regression models. If $ R^2 $ goes negative, then your model may not be learning the proper distribution. 
 
 The code for $ R^2 $ can be seen in the following code listing: 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Print statistics - Regression}}
-%%%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
-
-## coefficient of determination (R**2)
-from sklearn.metrics import r2_score
-
-print(  
-      r2_score( y_pred.detach().numpy(), y_test.numpy()    )
-)
-
-
-\end{lstlisting}
-\end{minipage}
 
 
 
@@ -397,7 +368,12 @@ print(
 <div>
 <textarea rows="5" cols="100">
 
-??
+## coefficient of determination (R**2)
+from sklearn.metrics import r2_score
+
+print(  
+      r2_score( y_pred.detach().numpy(), y_test.numpy()    )
+)
   
 </textarea>
   
@@ -405,7 +381,10 @@ print(
 </center>
 	
 
-\subsection{Classification Performance Evaluation}
+	<h3>
+		Classification Performance Evaluation
+	</h3>
+
 
 
 The main metrics to evaluate classification models are:
@@ -418,8 +397,10 @@ The main metrics to evaluate classification models are:
 \item confusion\_matrix
 \end{itemize}
 
-Evaluation of the performance of your classifiers is extremely important. The SKlearn kit provides very good modules to address this issue. In particular, evaluation often involves measuring accuracy, precision, recall, and f-measure. 
-The best way to understand these metrics is to think of a confusion matrix. Confusion matrices show how many elements from a class are correctly and incorrectly classified. 
+Evaluation of the performance of your classifiers is extremely important. The SKlearn kit provides very good modules to address this issue. In particular, 
+	evaluation often involves measuring accuracy, precision, recall, and f-measure. 
+The best way to understand these metrics is to think of a confusion matrix. Confusion matrices show how many elements from a class are correctly and incorrectly 
+	classified. 
 
 
 For example, take the following:
@@ -473,15 +454,11 @@ Finally, the "f" measure, which is a harmonic average of recall and precision, c
 The sample code to obtain these metrics using sklearn is provided below.
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Print statistics - Classification}}
-%%%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score, recall_score, accuracy_score, f1_score
@@ -494,15 +471,6 @@ def print_metrics_function(y_test, y_pred):
     print('Precision: %.3f' % precision_score(y_true=y_test, y_pred=y_pred, average='weighted'))
     print('Recall: %.3f' % recall_score(y_true=y_test, y_pred=y_pred, average='weighted'))
     print('F1-measure: %.3f' % f1_score(y_true=y_test, y_pred=y_pred, average='weighted'))
-
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -511,22 +479,27 @@ def print_metrics_function(y_test, y_pred):
 
 
 
-The code above shows a function to print the performance metric statistics for a classifier. Notice that two sets are provided which are \textbf{y\_pred} and \textbf{y\_test}. The \textbf{y\_test} data set contains the original annotated labels. The \textbf{y\_pred} data set contains the labels predicted by your classifier. Each of the metric functions such as \textbf{f1\_score} and \textbf{recall\_score} uses these 2 data sets to calculate the respective metric. Generally speaking, the higher the better. 
+The code above shows a function to print the performance metric statistics for a classifier. Notice that two sets are provided which 
+	are \textbf{y\_pred} and \textbf{y\_test}. The \textbf{y\_test} data set contains the original annotated labels. The \textbf{y\_pred} data set
+	contains the labels predicted by your classifier. Each of the metric functions such as \textbf{f1\_score} and \textbf{recall\_score} uses these 2 data 
+	sets to calculate the respective metric. Generally speaking, the higher the better. 
 
 
-\subsection{Plotting Performance}
+	<h3>
+		Plotting Performance
+	</h3>
 
 
-In the following code segment we can see the function \textbf{plot\_metric\_per\_epoch()} which can be used to plot a metric value every N epochs. For this to work, you store the metric values in a list such as \textbf{precision\_scores\_list} and then proceed to plot these values using the \textbf{matplotlib} library. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Plotting Performance}}
-%%%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+In the following code segment we can see the function \textbf{plot\_metric\_per\_epoch()} which can be used to plot a metric value every N epochs. 
+	For this to work, you store the metric values in a list such as \textbf{precision\_scores\_list} and then proceed to plot these values using
+	the \textbf{matplotlib} library. 
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 def plot_metric_per_epoch( precision_scores_list ):
     x_epochs = []
@@ -541,15 +514,6 @@ def plot_metric_per_epoch( precision_scores_list ):
     plt.legend()
     plt.grid()
     plt.show()
-
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -568,9 +532,14 @@ The output should look like the following figure.
 \label{RegLin:fig}
 \end{figure}
 
-\section{Information Theory}
+	<h3>
+		Information Theory
+	</h3>
+		
 
-Claude Shannon proposed  metrics on how to measure the amount of information available (or not available) in a medium or that can be transmitted over a channel. These metrics include: Entropy, the Kullback–Leibler divergence, mutual information, among many others. 
+
+Claude Shannon proposed  metrics on how to measure the amount of information available (or not available) in a medium or that can be transmitted over a channel. 
+	These metrics include: Entropy, the Kullback–Leibler divergence, mutual information, among many others. 
 
 <h3>
 	Entropy
@@ -603,21 +572,19 @@ In the next graph, we plot the Entropy of a head for a fair coin given the proba
 \end{figure}
 
 
-The top of the graph has the least certainty. At y = 0 (Entropy axis) you have the most certainty. When both sides of the coin are head (p(head)= 1.0), the uncertainty is equal to 0. 
+The top of the graph has the least certainty. At y = 0 (Entropy axis) you have the most certainty. When both sides of the coin are head (p(head)= 1.0),
+	the uncertainty is equal to 0. 
 When both sides of the coin are tail  (p(tail)=1.0), the uncertainty is 0. The entropy (uncertainty) is highest when the coin is fair (p(head)=0.5).
 
 The code and data to generate the previous graph can be seen in the next code listing. 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Entropy Graph Code}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 
 import matplotlib.pyplot as plt
@@ -650,14 +617,6 @@ Result Data:
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8.960422633366421e-14, 0.4689955935892871, 0.7219280948873663, 0.8812908992306951, 0.9709505944546699, 1.0, 0.9709505944546672, 0.8812908992306896, 0.7219280948873574, 0.468995593589273, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -682,15 +641,12 @@ In example 2 we calculate entropy of a fair coin so that p(Head)=0.5 and p(Tail)
 
 We can calculate this with python as well as can be seen in the next code listing. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Code example of entropy }}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 def entropy_fn( p ):
     if p<=0 or p>=1:
@@ -702,26 +658,16 @@ Entropy_ex2 = entropy_fn( p_ex2 )
 Entropy_ex2
 
 ## 1.0
-
-
-
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
 </div>
 </center>
 		
+<h3>
+	Kullback-Leibler (KL) divergence
+</h3>
 
-\subsection{Kullback-Leibler (KL) divergence }
 
 The Kullback-Leibler (KL) divergence  metric from information theory is designed to measure the difference between 2 distributions (P and Q). 
 
@@ -737,14 +683,11 @@ A simple example of how to use the KL divergence can be seen in the next code li
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Drift and KL Divergence}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
 
 import torch
 import torch.nn as nn
@@ -779,17 +722,6 @@ output
 
 ## tensor(0.7253, grad_fn=<DivBackward0>)
 
-
-
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -799,21 +731,23 @@ output
 
 Notice here that "target2" is more divergent from "input" (0.72), than "target" is from "input" (0.43). 
 
-
-\subsection{Mutual Information}
-
-Mutual Information (MI) is a metric that can be used to measure the relationship between one variable and another variable. In ML this can be used to measure the importance of features when predicting labels. For instance, we can use it to measure how much information we can get about one variable (labels) from another variable (features). We can see this with examples. In the next section I will contrast 2 cases (examples). I will create a data set that is 7x3 for "X", and 7x1 for "y". We will use MI to look at the importance of features when predicting the labels. In each of the 2 cases (example 1 and example 2), we will look at the MI between each feature and the labels. The higher the MI, the more related the features are to the labels. 
-
+<h3>
+	Mutual Information
+</h3>
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={MI - Example 1}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+Mutual Information (MI) is a metric that can be used to measure the relationship between one variable and another variable. In ML this can be used to measure the 
+	importance of features when predicting labels. For instance, we can use it to measure how much information we can get about one variable (labels) from another 
+	variable (features). We can see this with examples. In the next section I will contrast 2 cases (examples). I will create a data set that is 7x3 for "X", 
+	and 7x1 for "y". We will use MI to look at the importance of features when predicting the labels. In each of the 2 cases (example 1 and example 2), we will look 
+	at the MI between each feature and the labels. The higher the MI, the more related the features are to the labels. 
+
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 
 from sklearn.feature_selection import mutual_info_classif
@@ -851,14 +785,6 @@ Results
 ## F2.... 0.0887819499348041
 ## F3.... 0.6829081047004715
 
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -871,17 +797,15 @@ From the previous code listing, notice that the values of F3 are the most simila
 
 
 
-To better understand this concept, let us now intentionally increase the MI for F1. To do this we can make the values of F1 be more similar to the values of the labels. This makes the pattern more related and should increase the MI.
+To better understand this concept, let us now intentionally increase the MI for F1. To do this we can make the values of F1 be more similar to the values of the labels. 
+	This makes the pattern more related and should increase the MI.
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={MI - Example 2}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 
 from sklearn.feature_selection import mutual_info_classif
@@ -920,16 +844,6 @@ Results:
 ## F2.... 0.0887819499348041
 ## F3.... 0.6829081047004715
 
-
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -940,23 +854,26 @@ Results:
 As can be seen, the MI of F1 has now gone up from 0.014 to 0.361. 
 
 
+<h3>
+	Information Gain
+</h3>
 
 
-\subsection{Information Gain}
 
-Information Gain can be a useful metric in cyber security. It can help us to compare the entropy in 2 probability distributions. Let us consider a simple example. Assume you have 4 threats with associated probabilities. We are considering purchasing a new AI based security appliance. We have estimated the probabilities of the threat before and after purchasing the security appliance. We use Information Gain to begin to evaluate our outcomes. 
+Information Gain can be a useful metric in cyber security. It can help us to compare the entropy in 2 probability distributions. Let us consider a simple example. 
+	Assume you have 4 threats with associated probabilities. We are considering purchasing a new AI based security appliance. We have estimated the probabilities of 
+	the threat before and after purchasing the security appliance. We use Information Gain to begin to evaluate our outcomes. 
 
 The example is presented in the following code listing: 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Information Gain}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
 
 
 from scipy.stats import entropy
@@ -981,16 +898,6 @@ Updated Entropy  (bits):  1.4166422780956525
 Information Gain (bits):  0.429797066575363
 
 
-
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -999,12 +906,15 @@ Information Gain (bits):  0.429797066575363
 
 From the results, we can see that the Appliance is good. There is an information gain (0.42) of using the appliance which means that there will be less surprise in the outcomes. 
 
+<h3>
+	Conditional Entropy
+</h3>
 
 
-\subsection{Conditional Entropy}
 
 
-Conditional Entropy (CE), like mutual information (MI), can be used to compare the relationship between variables (c and f). In fact, you can consider that MI(f, c) is related to entropy(c) minus CE(c|f). 
+Conditional Entropy (CE), like mutual information (MI), can be used to compare the relationship between variables (c and f). 
+	In fact, you can consider that MI(f, c) is related to entropy(c) minus CE(c|f). 
 
 Conditional Entropy tells you how much surprise is left in "c" given that you know "f".
 
@@ -1018,14 +928,10 @@ This is best understood with 3 examples.
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Conditional Entropy - Example 1 - High conditional uncertainty}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+<center>
+<div>
+<textarea rows="5" cols="100">
+
 
 ## High conditional uncertainty
 import numpy as np
@@ -1071,33 +977,25 @@ print( outputs_only_entropy )
 
 ## 2.584962500721156
 
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
 </div>
 </center>
 
-Notice that in example 1, we have 6 classes and all are equally conditioned by "f1". The variable f1 does not help to differentiate between the classes. So both the conditional entropy and the entropy of just the classes are the same. The "f1" does not help and as such you have a  high conditional uncertainty. We know that the entropy of the class distribution alone is 2.58. And the conditional entropy is also 2.58. The "f1" is completely useless in this case. 
+Notice that in example 1, we have 6 classes and all are equally conditioned by "f1". The variable f1 does not help to differentiate between the classes. 
+	So both the conditional entropy and the entropy of just the classes are the same. The "f1" does not help and as such you have a  high conditional uncertainty. 
+	We know that the entropy of the class distribution alone is 2.58. And the conditional entropy is also 2.58. The "f1" is completely useless in this case. 
 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Conditional Entropy - Example 2 - Medium conditional uncertainty}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
 
 ## Medium conditional uncertainty
 features = ["f1", "f1", "f1", "f2", "f2", "f2"]
@@ -1138,24 +1036,15 @@ print( outputs_only_entropy )
 ## 2.584962500721156
 
 
-
-
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
 </div>
 </center>
 
-The data for example 2 is now different. The first 3 classes depend on f1, and the last 3 classes depend on f2. Conditional entropy now tells you that knowing "f1" or "f2" helps, in general, to reduce the uncertainty of the class variable. We know that the entropy of the class distribution alone is 2.58. But, the conditional distribution is 1.58.
+The data for example 2 is now different. The first 3 classes depend on f1, and the last 3 classes depend on f2. Conditional entropy now tells you that
+	knowing "f1" or "f2" helps, in general, to reduce the uncertainty of the class variable. We know that the entropy of the class distribution alone is 2.58. 
+	But, the conditional distribution is 1.58.
 
 
 
@@ -1166,14 +1055,11 @@ Finally, in this next example we present the other extreme case.
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Conditional Entropy - Example 3 - Low conditional uncertainty}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+
 ## Low conditional uncertainty
 features = ["f1", "f2", "f3", "f4", "f5", "f6"]
 classes  = ["c1", "c2", "c3", "c4", "c5", "c6"]
@@ -1210,15 +1096,6 @@ print( outputs_only_entropy )
 
 ## 2.584962500721156
 
-
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -1226,11 +1103,17 @@ print( outputs_only_entropy )
 </center>
 
 
-In this last example, the data is different. Now each class (c1, c2, ..., c6) depends only on a single feature (f1, f2, ..., f6), respectively. Another way of putting it is that if I know  that the feature is "f3", then I know that the class is "c3". If I know that the feature is "f5", then I know that the class is "c5", and so on. Based on this, knowing the feature means that there is no surprise in the resulting class and the conditional entropy is 0. 
 
+	
+In this last example, the data is different. Now each class (c1, c2, ..., c6) depends only on a single feature (f1, f2, ..., f6), respectively. 
+	Another way of putting it is that if I know  that the feature is "f3", then I know that the class is "c3". If I know that the feature is "f5", then 
+	I know that the class is "c5", and so on. Based on this, knowing the feature means that there is no surprise in the resulting class and the conditional 
+	entropy is 0. 
 
+<h3>
+	Optimization
+</h3>
 
-\section{Optimization}
 
 
 Before we begin to discuss some of the machine learning algorithms, I should also say something about optimization. Optimization is a key process in machine learning. Basically, any supervised learning algorithm needs to learn a prediction equation given a set of annotated data. This prediction function usually has a set of parameters that must be learned. However, the question is \textbf{“how do you learn these parameters?”}
