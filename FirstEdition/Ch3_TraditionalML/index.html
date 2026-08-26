@@ -1116,7 +1116,9 @@ In this last example, the data is different. Now each class (c1, c2, ..., c6) de
 
 
 
-Before we begin to discuss some of the machine learning algorithms, I should also say something about optimization. Optimization is a key process in machine learning. Basically, any supervised learning algorithm needs to learn a prediction equation given a set of annotated data. This prediction function usually has a set of parameters that must be learned. However, the question is \textbf{“how do you learn these parameters?”}
+Before we begin to discuss some of the machine learning algorithms, I should also say something about optimization. Optimization is a key process in machine learning. 
+	Basically, any supervised learning algorithm needs to learn a prediction equation given a set of annotated data. This prediction function usually has 
+	a set of parameters that must be learned. However, the question is \textbf{“how do you learn these parameters?”}
 
 
 
@@ -1128,9 +1130,12 @@ The answer is that you do so through:
 \end{center}
 
 
-In its simplest form, optimization consists of trying many sets of parameters with your model and seeing what result they give you. If the result is not good, the optimization algorithm needs to decide if you should decrease the values of the parameters or increase the values of the parameters. 
+In its simplest form, optimization consists of trying many sets of parameters with your model and seeing what result they give you. If the result is not good, 
+	the optimization algorithm needs to decide if you should decrease the values of the parameters or increase the values of the parameters. 
 
-In general, you do this in a loop (increasing and decreasing the parameter values) until you find an optimal set of parameters. But one of the questions to answer here as you are looping is: \textbf{do the values go up or down in this iteration?} Well, as it turns out, there are methodologies based on \textbf{calculus} that help you to make this decision. 
+In general, you do this in a loop (increasing and decreasing the parameter values) until you find an optimal set of parameters. But one of the questions 
+	to answer here as you are looping is: \textbf{do the values go up or down in this iteration?} Well, as it turns out, there are methodologies based 
+	on \textbf{calculus} that help you to make this decision. 
 
 Let us try to picture this with a graph (below). 
 
@@ -1149,7 +1154,9 @@ Let us try to picture this with a graph (below).
 
 
 
-The above graph represents an optimization problem. The \textbf{y} axis represents the cost (or penalty) of using a given parameter. The \textbf{x} axis represents the value of the parameter (\textbf{w}) being used at the given iteration. The curve represents the behavior that the function (loss) being used to minimize the cost will follow for every value of parameter \textbf{w}. 
+The above graph represents an optimization problem. The \textbf{y} axis represents the cost (or penalty) of using a given parameter. The \textbf{x} axis represents
+	the value of the parameter (\textbf{w}) being used at the given iteration. The curve represents the behavior that the function (loss) being used to minimize 
+	the cost will follow for every value of parameter \textbf{w}. 
 
 \begin{center}
     $ loss = ( \hat{y} - y )^2$
@@ -1157,20 +1164,25 @@ The above graph represents an optimization problem. The \textbf{y} axis represen
 
 
 
-As shown in the graph, the optimal value for the curve is found where the star is located (i.e where the value of cost is at a minimum). So, somehow the optimization algorithm needs to travel through the function and arrive at the position indicated by the star. 
+As shown in the graph, the optimal value for the curve is found where the star is located (i.e where the value of cost is at a minimum). So, somehow the optimization 
+	algorithm needs to travel through the function and arrive at the position indicated by the star. 
 
-At that point, the value of \textbf{“w”} reduces the cost and finds the best solution. Instead of trying all values of \textbf{“w”} at random, the algorithm can make educated guesses about which direction to follow (up or down). To do this, we can use \textbf{calculus} to calculate the derivative of the function at a given point. This will allow us to determine the slope at that point. In the case of the graph, this represents the tangent line to the curve if we calculate the derivative at point \textbf{w}. If we calculate the slope at the position of the star symbol, then the slope is zero because the tangent at that point is parallel to the \textbf{x} axis. The slope at the point \textbf{“w”} will be positive. Based on this result, we can tell the direction we want to take for parameter \textbf{w} (decrease or increase). This type of optimization is called gradient descent and is very important in machine learning and deep learning. There are several approaches to implement gradient descent and this is just the simplest explanation for conceptual purposes. We can write the algorithm for this technique as follows:
+At that point, the value of \textbf{“w”} reduces the cost and finds the best solution. Instead of trying all values of \textbf{“w”} at random, the algorithm 
+	can make educated guesses about which direction to follow (up or down). To do this, we can use \textbf{calculus} to calculate the derivative of the function 
+	at a given point. This will allow us to determine the slope at that point. In the case of the graph, this represents the tangent line to the curve if we 
+	calculate the derivative at point \textbf{w}. If we calculate the slope at the position of the star symbol, then the slope is zero because the tangent at
+	that point is parallel to the \textbf{x} axis. The slope at the point \textbf{“w”} will be positive. Based on this result, we can tell the direction we want
+	to take for parameter \textbf{w} (decrease or increase). This type of optimization is called gradient descent and is very important in machine learning and 
+	deep learning. There are several approaches to implement gradient descent and this is just the simplest explanation for conceptual purposes. 
+	We can write the algorithm for this technique as follows:
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Optimization Algorithm}}
-%%% \lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 old_x = 0
 new_x = 4 
@@ -1185,18 +1197,6 @@ while absolute_value(new_x – old_x) > precision:
     new_x = old_x – step_size * function_derivative(old_x) 
         
 print(“result is: ”, new_x)
-
-
-
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -1212,22 +1212,40 @@ The derivative for f() is:
 
                $          f '() = 3 x^2 - 6x   $
 
-So, the parameter \textbf{x} can be calculated in a loop using the derivative function which will determine the direction to follow when increasing or decreasing the parameter \textbf{x}.
+So, the parameter \textbf{x} can be calculated in a loop using the derivative function which will determine the direction to follow when increasing 
+	or decreasing the parameter \textbf{x}.
 
 
-\section{Anomaly Detection Algorithms}
+	<h3>
+		Anomaly Detection Algorithms
+	</h3>
 
-Perhaps the first set of machine learning algorithms to discuss in a "Cyber Security and Machine Learning" book is the set of algorithms related to Anomaly Detection. There are no machine learning algorithms exclusively for cyber security. Instead, there are many machine learning algorithms that can be applied to cyber security. Anomaly detection algorithms, as the name implies, seem to correlate well with cyber security problems. 
 
-So what is special about an anomaly detection algorithm? Essentially, I would say that the key characteristic is that you do not need labels for the data samples. Usually in machine learning you have "X" and "y". Where "X" is the data of samples with features, and "y" includes the labels. Anomaly detection algorithms do not have associated labels. They are unsupervised. In this case, the machine learning  model must learn what the data looks like. Once trained, the model can be used  to compare new test samples to the learned distribution and determine if the test sample is similar or anomalous. 
+Perhaps the first set of machine learning algorithms to discuss in a "Cyber Security and Machine Learning" book is the set of algorithms related to Anomaly Detection. 
+	There are no machine learning algorithms exclusively for cyber security. Instead, there are many machine learning algorithms that can be applied to cyber security. 
+	Anomaly detection algorithms, as the name implies, seem to correlate well with cyber security problems. 
 
-There are several algorithms that can fit in this category. Some of them include: Hopfield networks (\cite{hopfield1982Ref}), Boltzman Machines (\cite{hinton1985Ref}), clustering, auto-encoders, etc. Clustering will be covered in the next sections in the context of KNN. Auto-encoders will be covered after deep learning is introduced in the next chapters. Throughout this book I will provide examples of how to use these for cyber security problems. 
+So what is special about an anomaly detection algorithm? Essentially, I would say that the key characteristic is that you do not need labels for the data samples. 
+	Usually in machine learning you have "X" and "y". Where "X" is the data of samples with features, and "y" includes the labels. Anomaly detection algorithms 
+	do not have associated labels. They are unsupervised. In this case, the machine learning  model must learn what the data looks like. Once trained, the model
+	can be used  to compare new test samples to the learned distribution and determine if the test sample is similar or anomalous. 
 
-\subsection{Hopfield Networks}
+There are several algorithms that can fit in this category. Some of them include: Hopfield networks (\cite{hopfield1982Ref}), 
+	Boltzman Machines (\cite{hinton1985Ref}), clustering, auto-encoders, etc. Clustering will be covered in the next sections in the context of KNN.
+	Auto-encoders will be covered after deep learning is introduced in the next chapters. Throughout this book I will provide examples of how to use these 
+	for cyber security problems. 
 
-Hopfield Networks (\cite{hopfield1982Ref}) are sometimes called associative memory networks. John Hopfield won the 2024 nobel prize in physics for this work. They can be related to Information Theory because they can be used to store and re-construct (retrieve) information. The number of neurons can determine the amount of information that can be stored in the model. 
+	<h3>
+		Hopfield Networks
+	</h3>
 
-Hopfield Networks use the "outer product" multiplication to calculate the weights matrix. The "outer product" is an operation in linear algebra which, given 2 vectors, can return a matrix. The "outer product" operation can be seen in the next example:
+
+Hopfield Networks (\cite{hopfield1982Ref}) are sometimes called associative memory networks. John Hopfield won the 2024 nobel prize in physics for this work. 
+	They can be related to Information Theory because they can be used to store and re-construct (retrieve) information. The number of neurons can determine 
+	the amount of information that can be stored in the model. 
+
+Hopfield Networks use the "outer product" multiplication to calculate the weights matrix. The "outer product" is an operation in linear algebra which,
+	given 2 vectors, can return a matrix. The "outer product" operation can be seen in the next example:
 
 \[  
 \begin{bmatrix}  
@@ -1251,7 +1269,8 @@ u_3 v_1 & u_3 v_2 & u_3 v_3 & u_3 v_4 \\
 
 
 
-The weights are calculated via an "outer product" of the input vector and the transpose of the same vector. The identity matrix is subtracted from the resulting matrix as can be seen in the following formulation.
+The weights are calculated via an "outer product" of the input vector and the transpose of the same vector. The identity matrix is subtracted from the resulting 
+	matrix as can be seen in the following formulation.
 
 \[ W = v \times v^T - I  \]
 
@@ -1270,14 +1289,14 @@ The following code segments provide an example of the basic idea with Hopfield n
 
 First we define the Hopfield network and create some random data. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={ Hopfield Networks - Define net and train }}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
 
 import torch
 import numpy as np
@@ -1321,9 +1340,16 @@ hopfield.weights
 
 hopfield.train( data )
 
+  
+</textarea>
+  
+</div>
+</center>
 
-\end{lstlisting}
-\end{minipage}
+After training, we can use the model to find anomalies. We take an input sample and reconstruct it through the network to create an output. 
+	We measure the hamming distance between input and output. A higher hamming distance may indicate anomaly.
+
+
 
 
 
@@ -1331,25 +1357,6 @@ hopfield.train( data )
 <div>
 <textarea rows="5" cols="100">
 
-??
-  
-</textarea>
-  
-</div>
-</center>
-
-After training, we can use the model to find anomalies. We take an input sample and reconstruct it through the network to create an output. We measure the hamming distance between input and output. A higher hamming distance may indicate anomaly.
-
-
-
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={ Hopfield Networks - Use Model to find Anomalies }}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
 def hamming_distance(a, b):
     """
@@ -1403,24 +1410,18 @@ print( distance )
 ## Distance: 2
 
 
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
 </div>
 </center>
 
-As can be seen in the previous code listing, the normal sample resulted in a hamming distance of 0. Whereas the abnormal sample resulted in a hamming distance of 2. 
+As can be seen in the previous code listing, the normal sample resulted in a hamming distance of 0. Whereas the abnormal sample resulted in a 
+	hamming distance of 2. 
 
 
-Finally, Hopfield networks are considered a type of storage approach and have been called associative memory networks. As such, you can assign to them the information theory metric of "Storage Capacity". This metric helps to measure the limit in the number of samples the network can store.
+Finally, Hopfield networks are considered a type of storage approach and have been called associative memory networks. As such, you can assign to them the 
+	information theory metric of "Storage Capacity". This metric helps to measure the limit in the number of samples the network can store.
 
 Storage capacity can be defined as follows:
 
@@ -1433,51 +1434,51 @@ where "d" is the dimensionality of the sample vectors.
 	</h3>
 
 
-Boltzman Machines (\cite{hinton1985Ref}) build on the idea of Hopfield networks and can be used to discover properties in data or anomalies. Geoffrey Hinton won the 2024 nobel prize in physics for this work. 
+Boltzman Machines (\cite{hinton1985Ref}) build on the idea of Hopfield networks and can be used to discover properties in data or anomalies. 
+	Geoffrey Hinton won the 2024 nobel prize in physics for this work. 
 
 
 
-I will cover Restricted Boltzman Machines (RBMs) in this book, but not in this chapter. The reason for this is that RBMs are based on neural networks. Therefore, I will cover them in the network security chapter after I have introduced many concepts related to neural networks. 
+I will cover Restricted Boltzman Machines (RBMs) in this book, but not in this chapter. The reason for this is that RBMs are based on neural networks. 
+	Therefore, I will cover them in the network security chapter after I have introduced many concepts related to neural networks. 
 
 
-\section{Popular Supervised Learning Algorithms}
+	<h3>
+		Popular Supervised Learning Algorithms
+	</h3>
+
 
 In this section, I will discuss some traditional and popular supervised learning algorithms. These are the ones that learn to correlate data to labels. 
 
-\subsection{KNN}
+	<h3>
+		KNN
+	</h3>
 
-The k-nearest neighbor (KNN) classifier is a popular algorithm that I always like to use. It requires very little parameter tuning and can be easily implemented. Here, the KNN code is implemented in pure Numpy because of its simplicity. In this case, the \textbf{k} closest samples are selected. 
+
+The k-nearest neighbor (KNN) classifier is a popular algorithm that I always like to use. It requires very little parameter tuning and can be easily implemented. 
+	Here, the KNN code is implemented in pure Numpy because of its simplicity. In this case, the \textbf{k} closest samples are selected. 
 
 
-In the next code listings, you can see all the code needed to run KNN. Wow! Pretty short right? This code splits our data into \textbf{train} and \textbf{test} sets. Then grabs every sample in the test set and compares it to every sample in the train set. For each test sample, we get all distances between the test sample and all train samples. We then rank the distances and select the closest \textbf{K} distances. Finally, we assign the majority class associated with the closest 5 distances. That is it!
+In the next code listings, you can see all the code needed to run KNN. Wow! Pretty short right? This code splits our data into \textbf{train} 
+	and \textbf{test} sets. Then grabs every sample in the test set and compares it to every sample in the train set. For each test sample, we get all 
+	distances between the test sample and all train samples. We then rank the distances and select the closest \textbf{K} distances. Finally, we assign the 
+	majority class associated with the closest 5 distances. That is it!
 
 Let us get started. 
 
 First the libraries. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={The libraries for the KNN algorithm code}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
-   
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.tri as tri
-from pyodide.http import open_url
-
-\end{lstlisting}
-\end{minipage}
 
 
 <center>
 <div>
 <textarea rows="5" cols="100">
 
-??
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.tri as tri
+from pyodide.http import open_url
   
 </textarea>
   
@@ -1486,13 +1487,11 @@ from pyodide.http import open_url
 
 Now we define the full KNN algorithm.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={The whole KNN algorithm code}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 
 
@@ -1529,14 +1528,6 @@ def my_gen_function():
        
 my_gen_function() 
 
-\end{lstlisting}
-\end{minipage}
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -1546,42 +1537,34 @@ my_gen_function()
 
 The KNN code includes  a function called the "Euclidean\_distance" as can be seen in the next code listing. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Euclidean Distance}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
-
-def euclidean_distance(v1, v2):
-    return np.sqrt( np.sum(   (v1 - v2)**2   )   )
-
-        
-
-\end{lstlisting}
-\end{minipage}
 
 
 <center>
 <div>
 <textarea rows="5" cols="100">
 
-??
+def euclidean_distance(v1, v2):
+    return np.sqrt( np.sum(   (v1 - v2)**2   )   )
+
   
 </textarea>
   
 </div>
 </center>
 
-This is the function that measures the distance between 2 points in a vector space. These 2 points need to have the same size but the size can be of any dimension. For instance, for the Iris data, every point has 4 features. So in the code the 2 points v1 and v2 would be of size 4 each. However, we could also have points (samples) of many more dimensions. For instance, points with 100 features. So in this case v1 and v2 would both need to have size 100. But the great thing is that the function for distance calculation would still work. That is the power of Numpy. 
+This is the function that measures the distance between 2 points in a vector space. These 2 points need to have the same size but the size can be of any dimension.
+	For instance, for the Iris data, every point has 4 features. So in the code the 2 points v1 and v2 would be of size 4 each. However, we could also have points 
+	(samples) of many more dimensions. For instance, points with 100 features. So in this case v1 and v2 would both need to have size 100. But the great thing is 
+	that the function for distance calculation would still work. That is the power of Numpy. 
 
 
 
-The name Euclidean distance comes from a Greek philosopher named Euclid. He is best known for putting together one of the earliest books on geometry. The book was so good for its time that the type of mathematics it discussed became known as Euclidean geometry.
+The name Euclidean distance comes from a Greek philosopher named Euclid. He is best known for putting together one of the earliest books on geometry. 
+	The book was so good for its time that the type of mathematics it discussed became known as Euclidean geometry.
 
-So, where does this magical Euclidean distance function come from? Would you believe that it is related to an idea one of the great Greek philosophers (Pytagoras) is credited with? Pytagoras was before Euclid and is credited with coming up with the Pythagorean Theorem (bubble in the figure). 
+So, where does this magical Euclidean distance function come from? Would you believe that it is related to an idea one of the great Greek philosophers 
+	(Pytagoras) is credited with? Pytagoras was before Euclid and is credited with coming up with the Pythagorean Theorem (bubble in the figure). 
 
 
 \begin{figure}[H]\centering
@@ -1594,7 +1577,8 @@ So, where does this magical Euclidean distance function come from? Would you bel
 
 
 
-The theorem states that given a triangle (see figures), the sum of the areas of the two squares on the legs (a and b in green) equals the area of the square on the hypotenuse (c in green). 
+The theorem states that given a triangle (see figures), the sum of the areas of the two squares on the legs (a and b in green) equals the area of the square on the
+	hypotenuse (c in green). 
 
 If you look closely at the figure below, you can see that I have written down the connection between Pythagoras' theorem, and the Euclidean function we used in our code. 
 
@@ -1606,14 +1590,19 @@ If you look closely at the figure below, you can see that I have written down th
 \label{RegLin:fig}
 \end{figure}
 
-Now, with some of the math history out of the way, let us continue with our code description. In the next section we can see some of the details of the KNN \textbf{predict} function. Actually, the \textbf{predict} function is the actual KNN algorithm. I will describe it in detail next. The variable \textbf{test\_x} is the sample in question. Say, one Iris test sample with 4 features (\textbf{[x1, x2, x3, x4]}). The next line of code:
+Now, with some of the math history out of the way, let us continue with our code description. In the next section we can see some of the details of the 
+	KNN \textbf{predict} function. Actually, the \textbf{predict} function is the actual KNN algorithm. I will describe it in detail next. 
+	The variable \textbf{test\_x} is the sample in question. Say, one Iris test sample with 4 features (\textbf{[x1, x2, x3, x4]}). The next line of code:
 
 \begin{center}
     distances = [ euclidean\_distance(test\_x , x)  for x in X\_train    ]
 
 \end{center}
 
-calculates all the distances between \textbf{test\_x} and all the training samples in \textbf{X\_train}. The way this statement is written is called a list comprehension in Python. The \textbf{"for x"} part of the statement means that each sample in the train set is grabbed and passed to the \textbf{euclidean\_distance} function along with the test sample. Both points are passed to the Euclidean equation and the distance between them is returned. This is done for every training sample and in the end, the list \textbf{"distances"} contains all the measured distances. 
+calculates all the distances between \textbf{test\_x} and all the training samples in \textbf{X\_train}. The way this statement is written is called a list
+	comprehension in Python. The \textbf{"for x"} part of the statement means that each sample in the train set is grabbed and passed to
+	the \textbf{euclidean\_distance} function along with the test sample. Both points are passed to the Euclidean equation and the distance between them 
+	is returned. This is done for every training sample and in the end, the list \textbf{"distances"} contains all the measured distances. 
 
 
 
@@ -1625,7 +1614,11 @@ The next statement:
 
 
 
-takes all the distances and, using \textbf{np.argsort()}, sorts them. Then we slice the sorted vector with \textbf{[:k]}. This slicing only returns the indeces for the k smallest distances. The indeces are assigned to the array named \textbf{k\_neighbor\_indices}. One important note is that \textbf{"argsort"} returns only the indeces in the vector and not the values themselves. Since the indeces in the \textbf{"X"} data and \textbf{"y"} labels are aligned, then we can use these same indeces to extract the corresponding labels from \textbf{"y"}. And that is exactly what we do with the following statement:
+takes all the distances and, using \textbf{np.argsort()}, sorts them. Then we slice the sorted vector with \textbf{[:k]}. This slicing only 
+	returns the indeces for the k smallest distances. The indeces are assigned to the array named \textbf{k\_neighbor\_indices}. 
+	One important note is that \textbf{"argsort"} returns only the indeces in the vector and not the values themselves. Since the indeces in the \textbf{"X"} 
+	data and \textbf{"y"} labels are aligned, then we can use these same indeces to extract the corresponding labels from \textbf{"y"}. And that is 
+	exactly what we do with the following statement:
 
 \begin{center}
     \textbf{labels = [ y\_train[i]  for i in k\_neighbor\_indices  ]}
@@ -1633,7 +1626,8 @@ takes all the distances and, using \textbf{np.argsort()}, sorts them. Then we sl
 
 
 
-Finally, the list \textbf{labels} is converted into a Numpy array of the labels which are numbers, and the mean of them is calculated. That is it. You have found the label.
+Finally, the list \textbf{labels} is converted into a Numpy array of the labels which are numbers, and the mean of them is calculated. 
+	That is it. You have found the label.
 
 
 
@@ -1644,21 +1638,21 @@ Wasn't that easy? We have described the whole KNN algorithm from scratch. Wow!
 
 
 
+<h3>
+	Logistic Regression
+</h3>
 
 
-\subsection{Logistic Regression}
 
 
 Logistic regression is a simple algorithm that is often used by practitioners of machine learning because it can obtain good results. Logistic regression is a linear function much like linear regression which predicts the probability of a sample belonging to a given class. Logistic regression uses another optimization function instead of the standard least squares cost function used in linear regression. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Log Reg}}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 def logistic_regression_rc(X_train_normalized, y_train, X_test_normalized, y_test):
     from sklearn.linear_model import LogisticRegression
@@ -1669,45 +1663,48 @@ def logistic_regression_rc(X_train_normalized, y_train, X_test_normalized, y_tes
     
     print_stats_percentage_train_test( "log re", y_test, y_pred)
 
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
 </div>
 </center>
 
-The predicted values from a standard regression approach are now passed through a sigmoid function that basically maps the output to a probability range scale between 0 and 1. The code above provides an example of how to use the logistic regression function with SKlearn. Later, we will implement this logistic regression function again with PyTorch from scratch. 
+The predicted values from a standard regression approach are now passed through a sigmoid function that basically maps the output to a probability range scale 
+	between 0 and 1. The code above provides an example of how to use the logistic regression function with SKlearn. Later, we will implement this logistic 
+	regression function again with PyTorch from scratch. 
 
 
 
-In the previous function, the train and test sets are provided for the model to be trained and tested. In SKlearn most steps are abstracted. In contrast, PyTorch will allow us to define more steps such as the cost function, optimization, inference equation, and other aspects. 
+In the previous function, the train and test sets are provided for the model to be trained and tested. In SKlearn most steps are abstracted. In contrast, 
+	PyTorch will allow us to define more steps such as the cost function, optimization, inference equation, and other aspects. 
 
-In the function \textbf{logistic\_regression\_rc}, first you initialized a logistic regression object (lr) and then you train and test it with the functions \textbf{lr.fit} and \textbf{lr.predict}. The final step is to measure performance using the previously described function \textbf{print\_stats\_percentage\_train\_test}. Most classifiers are implemented in the same way with SKlearn. In the next section, I will demonstrate how this is done for a neural network in Sklearn.
+In the function \textbf{logistic\_regression\_rc}, first you initialized a logistic regression object (lr) and then you train and test it with the 
+	functions \textbf{lr.fit} and \textbf{lr.predict}. The final step is to measure performance using the previously described 
+	function \textbf{print\_stats\_percentage\_train\_test}. Most classifiers are implemented in the same way with SKlearn. 
+	In the next section, I will demonstrate how this is done for a neural network in Sklearn.
 
-\subsection{Neural Networks}
-
-Neural networks can be very complex models that take a long time to train. Therefore, the use of them in SKlearn may not be recommended except for the smallest of data sets.  The code is shown here for contrast purposes with later implementations of neural networks in PyTorch. In the next chapters, we will focus on how to do this in PyTorch and how to create networks of multiple layers from scratch.
-
-
-
-In the code below we can see that everything is very similar to the previous logistic regression implementation. The new changes appear in the definition of the \textbf{clf} multilayer object. Here, the parameter \textbf{hidden\_layer\_sizes}=(100,100) means that the architecture of the network consists of 2 hidden layers with 100 neurons each. A parameter such as (200,  ) would mean that the network has 1 hidden layer with 200 neurons.
+	<h3>
+		Neural Networks
+	</h3>
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={NN in sklearn}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+Neural networks can be very complex models that take a long time to train. Therefore, the use of them in SKlearn may not be recommended except for the smallest 
+	of data sets.  The code is shown here for contrast purposes with later implementations of neural networks in PyTorch. In the next chapters, we will 
+	focus on how to do this in PyTorch and how to create networks of multiple layers from scratch.
+
+
+
+In the code below we can see that everything is very similar to the previous logistic regression implementation. The new changes appear in the 
+	definition of the \textbf{clf} multilayer object. Here, the parameter \textbf{hidden\_layer\_sizes}=(100,100) means that the architecture of
+	the network consists of 2 hidden layers with 100 neurons each. A parameter such as (200,  ) would mean that the network has 1 hidden layer with 200 neurons.
+
+
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 def multilayer_perceptron_rc(X_train_normalized, y_train, X_test_normalized, y_test):
 
@@ -1719,16 +1716,6 @@ def multilayer_perceptron_rc(X_train_normalized, y_train, X_test_normalized, y_t
     y_pred = clf.predict(X_test_normalized) 
     
     print_stats_percentage_train_test("multilayer perceptron", y_test, y_pred)
-
-\end{lstlisting}
-\end{minipage}
-
-
-<center>
-<div>
-<textarea rows="5" cols="100">
-
-??
   
 </textarea>
   
@@ -1738,16 +1725,24 @@ def multilayer_perceptron_rc(X_train_normalized, y_train, X_test_normalized, y_t
 
 
 
+<h3>
+	Regression, Trees, and XGBoost
+</h3>
 
 
-\subsection{Regression, Trees, and XGBoost}
  
-There are several ML approaches to fit models to regression data. Three important ones are linear regression, regression trees, and neural networks. The next sections discuss regression and regression trees leading up to XGBoost. A more detailed discussion of regression will be covered later in the book.
+There are several ML approaches to fit models to regression data. Three important ones are linear regression, regression trees, and neural networks. 
+	The next sections discuss regression and regression trees leading up to XGBoost. A more detailed discussion of regression will be covered later in the book.
 
 
-\subsubsection{Regression Trees}
+	<h3>
+		Regression Trees
+	</h3>
 
-Regression trees (Torgo 2017) can fit nonlinear regression data. Regression trees are a type of decision tree in which the predicted values are not discrete classes but instead are real valued numbers. The key concept here is to use the features from the samples to build a tree. The nodes in the tree are decision points leading to leaves. The leaves contain values that are used to determine the final predicted regression value. 
+
+Regression trees (Torgo 2017) can fit nonlinear regression data. Regression trees are a type of decision tree in which the predicted values are not 
+	discrete classes but instead are real valued numbers. The key concept here is to use the features from the samples to build a tree. The nodes in the tree
+	are decision points leading to leaves. The leaves contain values that are used to determine the final predicted regression value. 
 
 <h3>
 	XGBoost
@@ -1799,64 +1794,34 @@ model.fit(X, y)
 
 
 	
+<h3>
+	Summary
+</h3>
 
 
-\section{Summary}
 
-This chapter provided an overview of some of the main traditional topics in machine learning. In particular, the following machine learning algorithms were presented: anomaly detection, logistic regression, KNN, and neural networks. Code examples of their implementation using the sklearn toolkit or Numpy  were presented and discussed. Additionally, issues related to classifier performance and information theory were also addressed. The next chapter will focus on issues related to data and data pre-processing that apply to "cyber security and machine learning".
+This chapter provided an overview of some of the main traditional topics in machine learning. In particular, the following machine learning algorithms 
+	were presented: anomaly detection, logistic regression, KNN, and neural networks. Code examples of their implementation using the sklearn toolkit 
+	or Numpy  were presented and discussed. Additionally, issues related to classifier performance and information theory were also addressed. 
+	The next chapter will focus on issues related to data and data pre-processing that apply to "cyber security and machine learning".
 
 
 
  
-
-
-
-
-
-
-
-
-	
 	
 </p>
 
+
+
+	
 <h1>
 RCM
 	
 </h1>
 
 
-	<p>
 
-
-
-I have always told my students that before they think about all the technical aspects of cyber security, that they should create a Risk and Control Matrix (RCM). 
-		This is a very simple table or spread sheet mapping 3 things which are:
-
-<ul>
-    <li>Assets</li>
-    <li>Threats</li>
-	<li>Controls</li>
-</ul>
    
-
-The logic here is to identify the assets to protect, then find the threats associated with these assets, and finally to put controls in place to mitigate the risk. 
-
-</p>
-	
-	<p>
-		
-	<h1>Risk</h1>
-
-Risk is sometimes mentioned as a term in cyber security to determine course of action. Risk can be quantified with probabilities and metrics from information
-		theory can  help us to make sense of the problem. If you do not know the exact probabilities, you can sometimes guess or arrive at them by speaking 
-		to organization stakeholders. This may be better understood with examples. 
-
-		<h2>
-			Expected Risk given Threat and Impact Probabilities
-		</h2>
-
-
 In this example, assume we have "5" threats to our organization with associated individual threat probabilities (T probs.) and impact probabilitie
 		s (I probs.). For each threat, we multiply its threat probability (T prob) with its corresponding impact probability (I prob). The goal is to make 
 		an informed decision as to which threat may have the highest expected risk.
