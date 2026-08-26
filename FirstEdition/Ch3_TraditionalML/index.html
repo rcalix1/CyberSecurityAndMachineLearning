@@ -38,7 +38,7 @@
 
 <div class="main">    <!-- for the fixed nav bar -->
 
-<h1>Chapter 2 - Introduction to Cyber Security and Machine Learning </h1>
+<h1>Chapter 3 - Traditional Machine Learning (Sample) </h1>
 
     <center>
       <div>
@@ -84,7 +84,7 @@
     
 
 <h1>
-Introduction to Cyber Security and Machine Learning
+Traditional Machine Learning
 	
 </h1>
 
@@ -93,50 +93,50 @@ Introduction to Cyber Security and Machine Learning
 
 
 
-Cyber Security is a very broad field. In general, it can be divided into areas such as network security, software assurance, social engineering, cryptography, etc. 
-There are many other ways to divide it and this is just a suggested way to look at it. Here, I am loosely organizing the topics by the input medium (e.g. network data), 
-or by the process (e.g. cryptography). 
-
-	
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% Check out the accompanying book, Even Better Books with LaTeX the Agile Way in 2023, for a discussion of the template and step-by-step instructions. https://amzn.to/3HqwgXM https://leanpub.com/eBBwLtAW/
-% The template was originally created by Clemens Lode, LODE Publishing (www.lode.de), on 1/1/2023. Feel free to use this template for your book project! 
-% I would be happy if you included a short mention in your book in order to help others to create their own books, too ("Book template based on \textit{Even Better Books with LaTeX the Agile Way in 2023} by Clemens Lode").
-% Contact me at mail@lode.de if you need help with the template or are interested in our editing and publishing services.
-% And don't forget to follow us on Instagram! https://www.instagram.com/lodepublishing/ https://www.instagram.com/betterbookswithlatex/
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%
-% This is an excerpt from the accompanying book, Even Better Books with LaTeX the Agile Way in 2023. https://www.amazon.com/Better-Books-LaTeX-Agile-Book-ebook/dp/B0BMZJ5LF7
-%%%%%%%%%%%%%%%%%
-
-\chapter{Traditional Machine Learning}
+In this chapter, I will address some of the traditional machine learning topics. I will use python, numpy, and the Sklearn library to provide example code on
+	how to use the different models and other tools. I will quickly move through KNN to arrive at other algorithms. 
+	Much of what we learn from using the SKlearn tool kit can be integrated with PyTorch to make your deep learning code more powerful and modular. 
+	That way, you will be able to re-use your code for many different tasks. I will not focus on the theory of traditional machine learning algorithms here. 
+	There are many books on the theory of machine learning algorithms so instead I will concentrate on the practical aspects of using them in Python.  
 
 
 
-In this chapter, I will address some of the traditional machine learning topics. I will use python, numpy, and the Sklearn library to provide example code on how to use the different models and other tools. I will quickly move through KNN to arrive at other algorithms. Much of what we learn from using the SKlearn tool kit can be integrated with PyTorch to make your deep learning code more powerful and modular. That way, you will be able to re-use your code for many different tasks. I will not focus on the theory of traditional machine learning algorithms here. There are many books on the theory of machine learning algorithms so instead I will concentrate on the practical aspects of using them in Python.  
+Machine Learning (ML) is essential to enable automated systems to make decisions and to infer new knowledge about the world. This section describes some of the most
+	important traditional methodologies currently in use in the field of machine learning. Machine learning approaches can be divided into supervised learning
+	(such as Support Vector Machines) and unsupervised learning (such as K-means clustering). Within supervised approaches, 
+	the learning methodologies can be divided, based on whether they predict a class or a magnitude, into classification and regression approaches, respectively. 
+	An additional categorization for ML methods depends on whether they use sequential or non-sequential data. 
 
 
-
-Machine Learning (ML) is essential to enable automated systems to make decisions and to infer new knowledge about the world. This section describes some of the most important traditional methodologies currently in use in the field of machine learning. Machine learning approaches can be divided into supervised learning (such as Support Vector Machines) and unsupervised learning (such as K-means clustering). Within supervised approaches, the learning methodologies can be divided, based on whether they predict a class or a magnitude, into classification and regression approaches, respectively. An additional categorization for ML methods depends on whether they use sequential or non-sequential data. 
-
-
-Classifiers are machine learning approaches that produce as an output a specific class given some input features. Important classifiers include Support Vector Machines (Burges 1998) commonly implemented using LibSVM (Chang and Lin, 2001), Naïve Bayes, artificial neural networks, deep learning based neural networks, decision trees, random forests, and the k-nearest neighbor classifier ( \babelEN{\cite{wittenRef}} ). 
+Classifiers are machine learning approaches that produce as an output a specific class given some input features. Important classifiers include
+	Support Vector Machines (Burges 1998) commonly implemented using LibSVM (Chang and Lin, 2001), Naïve Bayes, artificial neural networks,
+	deep learning based neural networks, decision trees, random forests, and the k-nearest neighbor classifier. 
 
 Regression models are those that produce a real valued number (magnitude) instead of a class such as the price or square footage of a house, or temperature, etc. 
 
-Deep learning methods have made a big impact in the field of machine learning in recent years. In their simplest form, deep learning based methods are simply neural networks with more layers between inputs and outputs. In particular, they are very important because, given enough computational power, they can automatically learn the optimal features to be used in a ML model from the raw data. In the past, learning what features to use required using humans to engineer the features. This issue has now been alleviated considerably by deep learning.
-Additionally, artificial neural networks are models that can handle non-linearly separable data. In theory, this capability allows them to model data that may be more difficult to infer. 
+Deep learning methods have made a big impact in the field of machine learning in recent years. In their simplest form, deep learning based methods are simply neural 
+	networks with more layers between inputs and outputs. In particular, they are very important because, given enough computational power, they can automatically 
+	learn the optimal features to be used in a ML model from the raw data. In the past, learning what features to use required using humans to engineer the features. 
+	This issue has now been alleviated considerably by deep learning.
+Additionally, artificial neural networks are models that can handle non-linearly separable data. In theory, this capability allows them to model data that 
+	may be more difficult to infer. 
 
 DL methods have many more capabilities and some of them will be discussed in future chapters. 
 
-\section{Code Issues}
+	<h3>
+		Code Issues
+	</h3>
 
-Before we begin, I want to address some issues about the code. First, I have tried to be consistent with other programmers of machine learning in Python. We will be using many libraries to implement the models. In particular, I selected to use the SKLearn library since it is very powerful and widely use. Especially for pre-processing steps.
 
-I only introduce enough SKlearn code for us to know how to integrate it with PyTorch in our deep learning endeavors. For a more in-depth discussion of SKlearn, I highly recommend the book “Python Machine Learning” by Sebastian Raschka. I have tried to be consistent with the conventions used in that book so that both books can be used together. 
+Before we begin, I want to address some issues about the code. First, I have tried to be consistent with other programmers of machine learning in Python. 
+	We will be using many libraries to implement the models. In particular, I selected to use the SKLearn library since it is very powerful and widely use. 
+	Especially for pre-processing steps.
+
+I only introduce enough SKlearn code for us to know how to integrate it with PyTorch in our deep learning endeavors. For a more in-depth discussion of SKlearn, 
+	I highly recommend the book “Python Machine Learning” by Sebastian Raschka. I have tried to be consistent with the conventions used in that book so 
+	that both books can be used together. 
 
 So, now, getting back to the code, here is an example of some of the most important libraries that we can use for our machine learning modeling.
 
@@ -144,14 +144,12 @@ So, now, getting back to the code, here is an example of some of the most import
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Libraries}}
-%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 import numpy as np
 from sklearn import datasets
@@ -167,12 +165,11 @@ from sklearn.metrics import recall_score, f1_score
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn import decomposition
-
-\end{lstlisting}
-\end{minipage}
-
-
-
+  
+</textarea>
+  
+</div>
+</center>
 
 
 
@@ -207,24 +204,24 @@ Two very important libraries are \textbf{matplotlib.pyplot} and Pandas. The \tex
 
 There are some parameters that are sometimes useful to set in your code. The code sample below shows the use of \textbf{np.set\_printoptions}, for instance. The function is used to print all values in a Numpy array. This can be useful when trying to visualize the contents of a large data set. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Print options}}
-%%%\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+	
 
 ## set parameters
 
 np.set_printoptions(threshold=np.inf) 
 
 ## print all values in numpy array
-
-\end{lstlisting}
-\end{minipage}
-
+  
+</textarea>
+  
+</div>
+</center>
 
 
 
@@ -249,7 +246,16 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.01, random
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
 
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 To call all the functions or models you can employ the following approach.  Here we have defined 5 common models. Notice that each one gets the 4 data sets obtained from the percentage split operation. Notice also that the data files have a \textbf{\_normalized} added to their name. 
 
@@ -281,7 +287,16 @@ multilayer_perceptron_rc(X_train_normalized, y_train, X_test_normalized, y_test)
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
 
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 Before we talk about the models, let us address Object Oriented Programming and performance evaluation. Performance evaluation will help you to determine how good your classifier (model) is, given an annotated test data set.
 
@@ -321,6 +336,17 @@ class LinRegNet(nn.Module):
 
 \end{lstlisting}
 \end{minipage}
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 
 In general, our OOP model classes will include an \textbf{init} function and \textbf{forward} function. 
@@ -366,6 +392,18 @@ print(
 \end{minipage}
 
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+	
 
 \subsection{Classification Performance Evaluation}
 
@@ -460,7 +498,16 @@ def print_metrics_function(y_test, y_pred):
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
 
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 
 
@@ -498,6 +545,17 @@ def plot_metric_per_epoch( precision_scores_list ):
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+	
 
 The output should look like the following figure. 
 
@@ -514,10 +572,16 @@ The output should look like the following figure.
 
 Claude Shannon proposed  metrics on how to measure the amount of information available (or not available) in a medium or that can be transmitted over a channel. These metrics include: Entropy, the Kullback–Leibler divergence, mutual information, among many others. 
 
-\subsection{Entropy}
+<h3>
+	Entropy
+</h3>
+	
+
 
 Entropy is an idea in the context of information theory to describe uncertainty. 
-For example, given a very biased coin with both sides having a tail, the probability of getting a head is 0\%. The chance of getting a tail is 100\%. So, we are 100\% sure of the outcome. Entropy, in this case, is 0 given that the uncertainty is 0. On the other hand, if we have a fair coin where both head and tail are equally likely; then, the uncertainty in this outcome is the highest. 
+For example, given a very biased coin with both sides having a tail, the probability of getting a head is 0\%. The chance of getting a tail is 100 %. 
+	So, we are 100\% sure of the outcome. Entropy, in this case, is 0 given that the uncertainty is 0. On the other hand, if we have a fair coin where both head and
+	tail are equally likely; then, the uncertainty in this outcome is the highest. 
 
 The formula for Entropy is as follows:
 
@@ -589,6 +653,17 @@ Result Data:
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
 
 Let us look at a couple of examples to better understand this concept. 
 
@@ -633,6 +708,18 @@ Entropy_ex2
 \end{lstlisting}
 \end{minipage}
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+		
 
 \subsection{Kullback-Leibler (KL) divergence }
 
@@ -698,6 +785,18 @@ output
 \end{minipage}
 
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+	
+
 Notice here that "target2" is more divergent from "input" (0.72), than "target" is from "input" (0.43). 
 
 
@@ -755,7 +854,16 @@ Results
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
 
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 
 From the previous code listing, notice that the values of F3 are the most similar to the labels and as such have the highest MI.
@@ -817,6 +925,18 @@ Results:
 \end{minipage}
 
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
+
 As can be seen, the MI of F1 has now gone up from 0.014 to 0.361. 
 
 
@@ -864,6 +984,18 @@ Information Gain (bits):  0.429797066575363
 
 \end{lstlisting}
 \end{minipage}
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 From the results, we can see that the Appliance is good. There is an information gain (0.42) of using the appliance which means that there will be less surprise in the outcomes. 
 
@@ -942,6 +1074,17 @@ print( outputs_only_entropy )
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
 Notice that in example 1, we have 6 classes and all are equally conditioned by "f1". The variable f1 does not help to differentiate between the classes. So both the conditional entropy and the entropy of just the classes are the same. The "f1" does not help and as such you have a  high conditional uncertainty. We know that the entropy of the class distribution alone is 2.58. And the conditional entropy is also 2.58. The "f1" is completely useless in this case. 
 
 
@@ -999,6 +1142,18 @@ print( outputs_only_entropy )
 
 \end{lstlisting}
 \end{minipage}
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 The data for example 2 is now different. The first 3 classes depend on f1, and the last 3 classes depend on f2. Conditional entropy now tells you that knowing "f1" or "f2" helps, in general, to reduce the uncertainty of the class variable. We know that the entropy of the class distribution alone is 2.58. But, the conditional distribution is 1.58.
 
@@ -1058,6 +1213,17 @@ print( outputs_only_entropy )
 
 \end{lstlisting}
 \end{minipage}
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 
 In this last example, the data is different. Now each class (c1, c2, ..., c6) depends only on a single feature (f1, f2, ..., f6), respectively. Another way of putting it is that if I know  that the feature is "f3", then I know that the class is "c3". If I know that the feature is "f5", then I know that the class is "c5", and so on. Based on this, knowing the feature means that there is no surprise in the resulting class and the conditional entropy is 0. 
@@ -1142,6 +1308,18 @@ print(“result is: ”, new_x)
 \end{lstlisting}
 \end{minipage}
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+	
 In the previous code example we assume a loss function of: 
 
                   $   f() =  x^3 - 3 x^2 + 7    $
@@ -1265,6 +1443,18 @@ hopfield.train( data )
 \end{minipage}
 
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
 After training, we can use the model to find anomalies. We take an input sample and reconstruct it through the network to create an output. We measure the hamming distance between input and output. A higher hamming distance may indicate anomaly.
 
 
@@ -1333,6 +1523,17 @@ print( distance )
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
 As can be seen in the previous code listing, the normal sample resulted in a hamming distance of 0. Whereas the abnormal sample resulted in a hamming distance of 2. 
 
 
@@ -1344,7 +1545,10 @@ Storage capacity can be defined as follows:
 
 where "d" is the dimensionality of the sample vectors. 
 
-\subsection{Boltzman Machines}
+	<h3>
+		Boltzman Machines
+	</h3>
+
 
 Boltzman Machines (\cite{hinton1985Ref}) build on the idea of Hopfield networks and can be used to discover properties in data or anomalies. Geoffrey Hinton won the 2024 nobel prize in physics for this work. 
 
@@ -1384,6 +1588,18 @@ from pyodide.http import open_url
 
 \end{lstlisting}
 \end{minipage}
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 Now we define the full KNN algorithm.
 
@@ -1433,6 +1649,17 @@ my_gen_function()
 \end{lstlisting}
 \end{minipage}
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
 
 The KNN code includes  a function called the "Euclidean\_distance" as can be seen in the next code listing. 
 
@@ -1452,6 +1679,18 @@ def euclidean_distance(v1, v2):
 
 \end{lstlisting}
 \end{minipage}
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
 
 This is the function that measures the distance between 2 points in a vector space. These 2 points need to have the same size but the size can be of any dimension. For instance, for the Iris data, every point has 4 features. So in the code the 2 points v1 and v2 would be of size 4 each. However, we could also have points (samples) of many more dimensions. For instance, points with 100 features. So in this case v1 and v2 would both need to have size 100. But the great thing is that the function for distance calculation would still work. That is the power of Numpy. 
 
@@ -1550,6 +1789,18 @@ def logistic_regression_rc(X_train_normalized, y_train, X_test_normalized, y_tes
 \end{lstlisting}
 \end{minipage}
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
 The predicted values from a standard regression approach are now passed through a sigmoid function that basically maps the output to a probability range scale between 0 and 1. The code above provides an example of how to use the logistic regression function with SKlearn. Later, we will implement this logistic regression function again with PyTorch from scratch. 
 
 
@@ -1590,6 +1841,18 @@ def multilayer_perceptron_rc(X_train_normalized, y_train, X_test_normalized, y_t
 \end{minipage}
 
 
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+??
+  
+</textarea>
+  
+</div>
+</center>
+
+
 
 
 
@@ -1603,23 +1866,28 @@ There are several ML approaches to fit models to regression data. Three importan
 
 Regression trees (Torgo 2017) can fit nonlinear regression data. Regression trees are a type of decision tree in which the predicted values are not discrete classes but instead are real valued numbers. The key concept here is to use the features from the samples to build a tree. The nodes in the tree are decision points leading to leaves. The leaves contain values that are used to determine the final predicted regression value. 
 
+<h3>
+	XGBoost
+</h3>
 
 
-\subsubsection{XGBoost}
 
-The "XGBoost" technique represents an improvement over other regression techniques like gradient boosting. XGBoost has new algorithms and approaches for generating the regression tree. It also has several optimizations that improve the speed and performance by which it can learn and process data. As of 2023, XGBoost can outperform many ML techniques including neural networks for small tabular data.
+The "XGBoost" technique represents an improvement over other regression techniques like gradient boosting. 
+	XGBoost has new algorithms and approaches for generating the regression tree. It also has several optimizations that improve the speed and performance by 
+	which it can learn and process data. As of 2023, XGBoost can outperform many ML techniques including neural networks for small tabular data.
 
 
-XGBoost is also very easy to use and I would recommend always trying it with your tabular cyber security data. A usage example of XGBoost can be seen in the next code listing. 
+XGBoost is also very easy to use and I would recommend always trying it with your tabular cyber security data.
+	A usage example of XGBoost can be seen in the next code listing. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={XGBoost}  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
 
 from xgboost import XGBRegressor
 
@@ -1639,11 +1907,15 @@ y = boston.target
 model = XGBRegressor()
 
 model.fit(X, y)
+  
+</textarea>
+  
+</div>
+</center>
 
-\end{lstlisting}
-\end{minipage}
 
 
+	
 
 
 \section{Summary}
