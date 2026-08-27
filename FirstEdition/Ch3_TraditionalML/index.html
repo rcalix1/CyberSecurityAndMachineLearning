@@ -349,10 +349,16 @@ As previously stated, performance evaluation depends on whether we are doing cla
 
 The main metrics used to evaluate regression models are:
 
-\begin{itemize}
-\item Coefficient of determination ($ R^2 $)
-\item RMSE
-\end{itemize}
+
+
+	<ul>
+		<li>
+			Coefficient of determination ($ R^2 $)
+		</li>
+		<li>
+			RMSE
+		</li>
+	</ul>
 
 My favorite regression evaluation metric is $ R^2 $. The range for the metric goes from 0-1 where 1 means that you have a good model. Generally, 
 	I have used sklearn \textbf{metrics} to evaluate regression models. If $ R^2 $ goes negative, then your model may not be learning the proper distribution. 
@@ -389,13 +395,15 @@ print(
 
 The main metrics to evaluate classification models are:
 
-\begin{itemize}
-\item accuracy\_score
-\item recall\_score
-\item f1\_score
-\item precision\_score
-\item confusion\_matrix
-\end{itemize}
+	<ul>
+        <li>accuracy score</li>
+		<li>recall score</li>
+		<li>f1 score</li>
+		<li>precision score</li>
+		<li>confusion matrix</li>
+	</ul>
+
+
 
 Evaluation of the performance of your classifiers is extremely important. The SKlearn kit provides very good modules to address this issue. In particular, 
 	evaluation often involves measuring accuracy, precision, recall, and f-measure. 
@@ -407,13 +415,6 @@ For example, take the following:
 
 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=.55\textheight}{
-    \includegraphics{images/ch2_metrics_table.png}
-}
-\caption{Performance errors}
-\label{RegLin:fig}
-\end{figure}
 
 
  <center>
@@ -532,13 +533,7 @@ def plot_metric_per_epoch( precision_scores_list ):
 The output should look like the following figure. 
 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=.50\textheight}{
-    \includegraphics{images/plot_performance_ch2.png}
-}
-\caption{Performance per epoch example}
-\label{RegLin:fig}
-\end{figure}
+
 
 
 
@@ -584,13 +579,7 @@ In the next graph, we plot the Entropy of a head for a fair coin given the proba
 
 
 
-\begin{figure}[H]\centering
-\adjustbox{height=.55\textheight}{
-    \includegraphics{images/entropy_graph.png}
-}
-\caption{Entropy Graph}
-\label{RegLin:fig}
-\end{figure}
+
 
  <center>
       <div>
@@ -1169,13 +1158,6 @@ Let us try to picture this with a graph (below).
 
 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=.95\textheight}{
-    \includegraphics{images/optimizationgraph.chapt2.3.300dpi.jpg}
-}
-\caption{Optimization graph}
-\label{RegLin:fig}
-\end{figure}
 
  <center>
       <div>
@@ -1308,13 +1290,15 @@ The weights are calculated via an "outer product" of the input vector and the tr
 
 Here are some important points to note about Hopfield networks and the code:
 
-\begin{itemize}
-    \item np.outer produces one product between each possible element pairing from 2 tensors
-    \item np.outer is used for the "outer product" 
-    \item The intuition is like a pairwise distance matrix
-    \item This can help us to find the distance between each pair of point values
-    \item The Hebbian learning rule can be used for training 
-\end{itemize}
+	<ul>
+		<li>np.outer produces one product between each possible element pairing from 2 tensors</li>
+		<li>np.outer is used for the "outer product" </li>
+		<li>The intuition is like a pairwise distance matrix</li>
+		<li>This can help us to find the distance between each pair of point values</li>
+		<li>The Hebbian learning rule can be used for training </li>
+	</ul>
+
+
 
 
 The following code segments provide an example of the basic idea with Hopfield networks for anomaly detection. 
@@ -1599,13 +1583,7 @@ So, where does this magical Euclidean distance function come from? Would you bel
 	(Pytagoras) is credited with? Pytagoras was before Euclid and is credited with coming up with the Pythagorean Theorem (bubble in the figure). 
 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=.55\textheight}{
-    \includegraphics{images/Pythagoras.jpg}
-}
-\caption{Pythagoras}
-\label{RegLin:fig}
-\end{figure}
+
 
 
  <center>
@@ -1632,7 +1610,7 @@ If you look closely at the figure below, you can see that I have written down th
 
 <center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/Pythagoras.jpg" height="500" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/mathPythagoras.jpg" height="500" width="auto">
       </div>
 
  </center>
@@ -1861,24 +1839,6 @@ This chapter provided an overview of some of the main traditional topics in mach
 
 
 
-	
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
 
 
 
@@ -1886,16 +1846,6 @@ The topic of AI assurance relates to creating secure and reliable AI systems. Wi
 
 
 
-
-
-
-
-	<h2>
-		Summary
-	</h2>
-
-
-This chapter provided a brief introduction to cyber security, AI assurance, and ML. Future chapters will discuss these topics in more depth. 
 
  
 <h2>
@@ -1905,7 +1855,7 @@ This chapter provided a brief introduction to cyber security, AI assurance, and 
 
 <ul>
 	<li>
-		<a href="https://github.com/rcalix1/CyberSecurityAndMachineLearning/blob/main/FirstEdition/Ch2_Intro_Cyber_And_ML/QuantifyRisksInformationTheory.ipynb">
+		<a href="">
 		   Example 1
 		</a>
 	</li>
@@ -1921,17 +1871,20 @@ This chapter provided a brief introduction to cyber security, AI assurance, and 
 	Model Cyber Cases 
 </h3>
 
+<ul>
+	<li>https://github.com/rcalix1/DeepLearningAlgorithms/tree/main/SecondEdition/Chapter2_TraditionalML</li>
+</ul>
 
-* https://github.com/rcalix1/DeepLearningAlgorithms/tree/main/SecondEdition/Chapter2_TraditionalML
-* 
 
 	<h3>
 		Hopfield Networks
 	</h3>
  
 
-* Code Example: https://github.com/rcalix1/CyberSecurityAndMachineLearning/blob/main/FirstEdition/Ch3_TraditionalML/HopfieldNetworks.ipynb
-* 
+	<ul>
+		<li>Code Example: https://github.com/rcalix1/CyberSecurityAndMachineLearning/blob/main/FirstEdition/Ch3_TraditionalML/HopfieldNetworks.ipynb</li>
+	</ul>
+
 
 	<h3>
 		Hopfield Networks
@@ -1952,11 +1905,25 @@ This chapter provided a brief introduction to cyber security, AI assurance, and 
 
 ![feedBack](images/feedBackNets.jpeg)
 
+	<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/feedBackNets.jpeg" height="500" width="auto">
+      </div>
+
+ </center>
+
 * they have been used to study associative memory. Memory can be used for anomaly detection, for instance
 
 ## Hebbian Training
 
 ![hebb](images/hebbBanana.jpeg)
+
+	<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/hebbBanana.jpeg" height="500" width="auto">
+      </div>
+
+ </center>
 
 * Hopfield Networks  are sometimes called associative memory networks.
 * John Hopfield won the 2024 nobel prize in physics for this work.
@@ -1970,12 +1937,26 @@ This chapter provided a brief introduction to cyber security, AI assurance, and 
 
  ![outerProd](images/outerProd.png)
 
+	<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/outerProd.png" height="500" width="auto">
+      </div>
+
+ </center>
+
 
 
 * The weights are calculated via an "outer product" of the input vector and the transpose of the same vector.
 * The identity matrix is subtracted from the resulting matrix as can be seen in the following formulation.
 
  ![ousdsrProd](images/weightsCalc.png)
+
+	<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/weightsCalc.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 * Here are some important points to note about Hopfield networks and the code:
 * np.outer produces one product between each possible element pairing from 2 tensors
