@@ -1912,9 +1912,16 @@ The topic of AI assurance relates to creating secure and reliable AI systems. Wi
 
  </center>
 
-* they have been used to study associative memory. Memory can be used for anomaly detection, for instance
 
-## Hebbian Training
+<ul>
+	<li>they have been used to study associative memory. Memory can be used for anomaly detection, for instance</li>
+</ul>
+	
+
+
+<h3>Hebbian Training</h3>
+	
+
 
 ![hebb](images/hebbBanana.jpeg)
 
@@ -1925,13 +1932,22 @@ The topic of AI assurance relates to creating secure and reliable AI systems. Wi
 
  </center>
 
-* Hopfield Networks  are sometimes called associative memory networks.
-* John Hopfield won the 2024 nobel prize in physics for this work.
-* They can be related to Information Theory because they can be used to store and re-construct (retrieve) information.
-* The number of neurons can determine the amount of information that can be stored in the model.
-* Hopfield Networks use the "outer product" multiplication to calculate the weights matrix.
-* The "outer product" is an operation in linear algebra which, given 2 vectors, can return a matrix.
-* The "outer product" operation can be seen in the next example:
+
+
+
+<ul>
+	<li>Hopfield Networks  are sometimes called associative memory networks.</li>
+	<li> John Hopfield won the 2024 nobel prize in physics for this work.</li>
+	<li> They can be related to Information Theory because they can be used to store and re-construct (retrieve) information.</li>
+	<li>The number of neurons can determine the amount of information that can be stored in the model.</li>
+	<li>Hopfield Networks use the "outer product" multiplication to calculate the weights matrix.</li>
+	<li>The "outer product" is an operation in linear algebra which, given 2 vectors, can return a matrix.</li>
+	<li>The "outer product" operation can be seen in the next example:</li>
+</ul>
+
+
+	
+
 
 
 
@@ -1944,10 +1960,12 @@ The topic of AI assurance relates to creating secure and reliable AI systems. Wi
 
  </center>
 
+<ul>
+	<li>The weights are calculated via an "outer product" of the input vector and the transpose of the same vector.</li>
+	<li>The identity matrix is subtracted from the resulting matrix as can be seen in the following formulation.</li>
+</ul>
 
 
-* The weights are calculated via an "outer product" of the input vector and the transpose of the same vector.
-* The identity matrix is subtracted from the resulting matrix as can be seen in the following formulation.
 
  ![ousdsrProd](images/weightsCalc.png)
 
@@ -1958,17 +1976,17 @@ The topic of AI assurance relates to creating secure and reliable AI systems. Wi
 
  </center>
 
-* Here are some important points to note about Hopfield networks and the code:
-* np.outer produces one product between each possible element pairing from 2 tensors
-* np.outer is used for the "outer product" 
-* The intuition is like a pairwise distance matrix
-* This can help us to find the distance between each pair of point values
+Here are some important points to note about Hopfield networks and the code:
 
-
-
-
-
+<ul>
+	<li>np.outer produces one product between each possible element pairing from 2 tensors</li>
+	<li>np.outer is used for the "outer product"</li>
+	<li>The intuition is like a pairwise distance matrix</li>
+	<li>This can help us to find the distance between each pair of point values</li>
+</ul>
 	
+
+
 		
 		
 	</p>
