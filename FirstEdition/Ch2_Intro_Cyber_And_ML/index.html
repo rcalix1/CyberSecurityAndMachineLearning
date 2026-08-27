@@ -404,6 +404,57 @@ These rules help to block certain IPs or port numbers in a rules based approach.
 
 Packets that contain these blocked values will be dropped. 
 
+
+	<h2>
+		Putty, Virtual Box and linux VM
+	</h2>
+
+If you want to 
+
+<ul>
+	<li>Latest Putty if on Windows or SSH on MAC </li>
+	<li>Linux VM -> Seed Labs</li>
+	<li>Virtual Box</li>
+	<li></li>
+</ul>
+
+
+
+For NAT, configure this in VirtualBox:
+	
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+VM Settings → Network → Adapter 1 → NAT → Advanced → Port Forwarding
+
+Name:       SSH
+Protocol:   TCP
+Host IP:    127.0.0.1
+Host Port:  2222
+Guest IP:   10.0.2.15
+Guest Port: 22
+
+Then on Putty
+
+Host: 127.0.0.1
+Port: 2222
+SSH
+
+Important: don't put 10.0.2.15 into PuTTY when using this NAT setup. Use 127.0.0.1 in Putty
+  
+</textarea>
+  
+</div>
+</center>
+
+	
+
+
+	
+
 	<h2>Software Security and Malware</h2>
 
 
