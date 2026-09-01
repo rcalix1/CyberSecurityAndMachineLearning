@@ -149,7 +149,7 @@ So, now, getting back to the code, here is an example of some of the most import
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="10" cols="100">
 
 import numpy as np
 from sklearn import datasets
@@ -218,9 +218,7 @@ There are some parameters that are sometimes useful to set in your code. The cod
 
 <center>
 <div>
-<textarea rows="5" cols="100">
-
-	
+<textarea rows="8" cols="100">
 
 ## set parameters
 
@@ -375,7 +373,7 @@ The code for $ R^2 $ can be seen in the following code listing:
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="10" cols="100">
 
 ## coefficient of determination (R**2)
 from sklearn.metrics import r2_score
@@ -434,7 +432,7 @@ Given this table, we can calculate accuracy as:
           
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="5" cols="100">
 
 accuracy = (a+d) / (a + b + c + d) 
   
@@ -449,7 +447,7 @@ Precision is defined as follows:
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="5" cols="100">
 
  precision = a / (a + c)
   
@@ -467,7 +465,7 @@ The recall metric can be computed as follows:
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="5" cols="100">
 
 recall = a / (a + b) 
   
@@ -484,7 +482,7 @@ Finally, the "f" measure, which is a harmonic average of recall and precision, c
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="5" cols="100">
 
 F = (2 * (precision*recall)) / (precision + recall)
   
@@ -501,7 +499,7 @@ The sample code to obtain these metrics using sklearn is provided below.
 
 <center>
 <div>
-<textarea rows="25" cols="100">
+<textarea rows="15" cols="100">
 
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score, recall_score, accuracy_score, f1_score
@@ -542,7 +540,7 @@ In the following code segment we can see the function \textbf{plot\_metric\_per\
 
 <center>
 <div>
-<textarea rows="25" cols="100">
+<textarea rows="15" cols="100">
 
 def plot_metric_per_epoch( precision_scores_list ):
     x_epochs = []
@@ -696,7 +694,7 @@ We can calculate this with python as well as can be seen in the next code listin
 
 <center>
 <div>
-<textarea rows="25" cols="100">
+<textarea rows="15" cols="100">
 
 def entropy_fn( p ):
     if p<=0 or p>=1:
@@ -723,10 +721,14 @@ The Kullback-Leibler (KL) divergence  metric from information theory is designed
 
 The formula for the Kullback-Leibler (KL) divergence is as follows: 
 
+</br>
+
 
     $ D_{KL} ( p(x) || q(x) ) = \sum p(x) \cdot ln \frac{p(x)}{q(x)} $
 
 
+	</br>
+	
 A simple example of how to use the KL divergence can be seen in the next code listing.
 
 
@@ -797,7 +799,7 @@ Mutual Information (MI) is a metric that can be used to measure the relationship
 
 <center>
 <div>
-<textarea rows="55" cols="100">
+<textarea rows="35" cols="100">
 
 
 from sklearn.feature_selection import mutual_info_classif
@@ -1045,7 +1047,7 @@ Notice that in example 1, we have 6 classes and all are equally conditioned by "
 
 <center>
 <div>
-<textarea rows="55" cols="100">
+<textarea rows="45" cols="100">
 
 
 ## Medium conditional uncertainty
@@ -1108,7 +1110,7 @@ Finally, in this next example we present the other extreme case.
 
 <center>
 <div>
-<textarea rows="55" cols="100">
+<textarea rows="45" cols="100">
 
 
 ## Low conditional uncertainty
@@ -1228,7 +1230,7 @@ At that point, the value of \textbf{“w”} reduces the cost and finds the best
 
 <center>
 <div>
-<textarea rows="35" cols="100">
+<textarea rows="20" cols="100">
 
 old_x = 0
 new_x = 4 
@@ -1520,7 +1522,7 @@ First the libraries.
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="10" cols="100">
 
 import numpy as np
 import pandas as pd
@@ -1539,7 +1541,7 @@ Now we define the full KNN algorithm.
 
 <center>
 <div>
-<textarea rows="55" cols="100">
+<textarea rows="35" cols="100">
 
 
 
@@ -1733,7 +1735,7 @@ Logistic regression is a simple algorithm that is often used by practitioners of
 
 <center>
 <div>
-<textarea rows="25" cols="100">
+<textarea rows="15" cols="100">
 
 def logistic_regression_rc(X_train_normalized, y_train, X_test_normalized, y_test):
     from sklearn.linear_model import LogisticRegression
@@ -1947,11 +1949,10 @@ This chapter provided an overview of some of the main traditional topics in mach
 
 	
 
-![feedBack](images/feedBackNets.jpeg)
 
 	<center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/feedBackNets.jpeg" height="500" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/feedBackNets.jpeg" height="600" width="auto">
       </div>
 
  </center>
@@ -1967,11 +1968,11 @@ This chapter provided an overview of some of the main traditional topics in mach
 	
 
 
-![hebb](images/hebbBanana.jpeg)
+
 
 	<center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/hebbBanana.jpeg" height="300" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/hebbBanana.jpeg" height="500" width="auto">
       </div>
 
  </center>
@@ -1995,11 +1996,11 @@ This chapter provided an overview of some of the main traditional topics in mach
 
 
 
- ![outerProd](images/outerProd.png)
+
 
 	<center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/outerProd.png" height="500" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/outerProd.png" height="200" width="auto">
       </div>
 
  </center>
@@ -2011,11 +2012,11 @@ This chapter provided an overview of some of the main traditional topics in mach
 
 
 
- ![ousdsrProd](images/weightsCalc.png)
+
 
 	<center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/weightsCalc.png" height="300" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/weightsCalc.png" height="200" width="auto">
       </div>
 
  </center>
