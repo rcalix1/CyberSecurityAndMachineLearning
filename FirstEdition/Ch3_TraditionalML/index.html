@@ -259,12 +259,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.01, random
 </center>
 
 To call all the functions or models you can employ the following approach.  Here we have defined 5 common models. Notice that each one gets the 4 data sets 
-	obtained from the percentage split operation. Notice also that the data files have a \textbf{\_normalized} added to their name. 
+	obtained from the percentage split operation. Notice also that the data files have a _normalized added to their name. 
 
 
 
 This is a good standard approach used by programmers to indicate that this data has been scaled (the next chapters address scaling). 
-	Here you run \textbf{X\_train} through a scaler function to obtain \textbf{X\_train\_normalized}. The labels \textbf{y} are not scaled, in this case.
+	Here you run X_train through a scaler function to obtain X_train_normalized. The labels "y" are not scaled, in this case.
 	Although they can be if needed. 
 
 
@@ -521,8 +521,8 @@ def print_metrics_function(y_test, y_pred):
 
 
 The code above shows a function to print the performance metric statistics for a classifier. Notice that two sets are provided which 
-	are \textbf{y\_pred} and \textbf{y\_test}. The \textbf{y\_test} data set contains the original annotated labels. The \textbf{y\_pred} data set
-	contains the labels predicted by your classifier. Each of the metric functions such as \textbf{f1\_score} and \textbf{recall\_score} uses these 2 data 
+	are y_pred and y_test. The y_test data set contains the original annotated labels. The y_pred data set
+	contains the labels predicted by your classifier. Each of the metric functions such as f1_score and recall_score uses these 2 data 
 	sets to calculate the respective metric. Generally speaking, the higher the better. 
 
 
@@ -532,9 +532,9 @@ The code above shows a function to print the performance metric statistics for a
 
 
 
-In the following code segment we can see the function \textbf{plot\_metric\_per\_epoch()} which can be used to plot a metric value every N epochs. 
-	For this to work, you store the metric values in a list such as \textbf{precision\_scores\_list} and then proceed to plot these values using
-	the \textbf{matplotlib} library. 
+In the following code segment we can see the function plot_metric_per_epoch() which can be used to plot a metric value every N epochs. 
+	For this to work, you store the metric values in a list such as precision_scores_list and then proceed to plot these values using
+	the "matplotlib" library. 
 
 
 
@@ -1171,7 +1171,7 @@ In this last example, the data is different. Now each class (c1, c2, ..., c6) de
 
 Before we begin to discuss some of the machine learning algorithms, I should also say something about optimization. Optimization is a key process in machine learning. 
 	Basically, any supervised learning algorithm needs to learn a prediction equation given a set of annotated data. This prediction function usually has 
-	a set of parameters that must be learned. However, the question is \textbf{“how do you learn these parameters?”}
+	a set of parameters that must be learned. However, the question is “how do you learn these parameters?”
 
 
 
