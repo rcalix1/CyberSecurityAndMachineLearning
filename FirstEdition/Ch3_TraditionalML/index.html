@@ -177,38 +177,41 @@ from sklearn import decomposition
 As you may imagine, the SKlearn library is the main library which contains most of the traditional machine learning tools we will discuss in this chapter. The numpy library is essential for efficient matrix and linear algebra operations. For those with experience with MatLab, I can say that numpy is a way of performing linear algebra operations in Python similar to how they are done in MatLab. Using matrix and linear algebra operations makes the code more efficient in its implementation and faster as well.  The datasets library seen above helps to obtain standard corpora (datasets). You can use it to obtain annotated data like Fisher’s iris data set, for instance.
 
 
-From \textbf{sklearn.cross\_validation} we can import \textbf{train\_test\_split} which is used to create splits in a data matrix such as using 70 \% for 
-	training purposes and 30 \% for testing purposes. From \textbf{sklearn.preprocessing} we can import the \textbf{StandardScaler} module which helps to scale  data. 
+From sklearn.cross_validation} we can import train_test_split which is used to create splits in a data matrix such as using 70 \% for 
+	training purposes and 30 % for testing purposes. From sklearn.preprocessing we can import the StandardScaler module which helps to scale  data. 
 	We can use functions such as these to scale our data for the PyTorch based models as well. Deep learning algorithms can improve significantly when 
 	data is properly scaled. So, it is recommended to do this.  
-We will use the \textbf{sklearn.metrics} module for performance evaluation of the models. I will show that this module can be used with SKlearn 
+We will use the sklearn.metrics module for performance evaluation of the models. I will show that this module can be used with SKlearn 
 	models and with PyTorch models. Again, this will help to more easily understand deep learning since we do not have to use the more complex and very verbose 
 	PyTorch functions. 
 
 The main metrics used to evaluate classification models are:
 
-\begin{itemize}
-\item accuracy\_score
-\item recall\_score
-\item f1\_score
-\item precision\_score
-\item confusion\_matrix
-\end{itemize}
+
+
+	<ul>
+		<li>accuracy_score</li>
+		<li>recall_score</li>
+		<li>f1_score</li>
+		<li> precision_score</li>
+		<li>confusion_matrix</li>
+	</ul>
 
 The main metrics used to evaluate regression models are:
 
-\begin{itemize}
-\item coefficient of determination ($ R^2 $)
-\item RMSE
-\end{itemize}
 
 
+<ul>
+		<li>coefficient of determination ($ R^2 $)</li>
+		<li> RMSE</li>
+		<li></li>
+	</ul>
 
 
-Two very important libraries are \textbf{matplotlib.pyplot} and Pandas. The \textbf{matplotlib.pyplot} library is very useful for visualization of data and results, 
+Two very important libraries are matplotlib.pyplot and Pandas. The matplotlib.pyplot library is very useful for visualization of data and results, 
 	and the Pandas library is very useful for pre-processing. The Pandas library can be very useful to pre-process large data sets in very fast and very efficient ways.
 
-There are some parameters that are sometimes useful to set in your code. The code sample below shows the use of \textbf{np.set\_printoptions}, for instance. 
+There are some parameters that are sometimes useful to set in your code. The code sample below shows the use of np.set_printoptions, for instance. 
 	The function is used to print all values in a Numpy array. This can be useful when trying to visualize the contents of a large data set. 
 
 
@@ -237,7 +240,7 @@ Now, let us assume that our data is stored in the matrix \textbf{"X"}. The code 
 	These are the 4 sets that will be used by the traditional or the deep learning models. The sets that start with \textbf{"X"} hold the input data (feature vectors) 
 	and the sets that start with \textbf{y} hold the output labels per sample. 
 The values test\_size=0.01 and random\_state=42 in the function are parameters that define the split. The value 0.01 makes a train set that has 99 percent 
-	of all samples while the test set has 1 percent of all samples. In contrast, test\_size=0.20 would mean that there is an 80 \% and 20 \% split. 
+	of all samples while the test set has 1 percent of all samples. In contrast, test\_size=0.20 would mean that there is an 80 % and 20 % split. 
 	The random\_state=42 allows you to always get the same random data since the seed is defined as 42.
 
 
@@ -271,7 +274,7 @@ This is a good standard approach used by programmers to indicate that this data 
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="15" cols="100">
 
 logistic_regression_rc(X_train_normalized, y_train, X_test_normalized, y_test)
 
@@ -308,7 +311,7 @@ The following code segment includes a simple example of an OOP class format we w
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="25" cols="100">
 
 class LinRegNet(nn.Module):
 
@@ -372,7 +375,7 @@ The code for $ R^2 $ can be seen in the following code listing:
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="15" cols="100">
 
 ## coefficient of determination (R**2)
 from sklearn.metrics import r2_score
@@ -427,38 +430,69 @@ For example, take the following:
 
 Given this table, we can calculate accuracy as:
 
-\begin{center}
-    $     accuracy = (a+d) / (a + b + c + d)   $
-\end{center}
-          
 
+          
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+accuracy = (a+d) / (a + b + c + d) 
+  
+</textarea>
+  
+</div>
+</center>
 
 Precision is defined as follows:
 
-\begin{center}
-    precision = a / (a + c)
-\end{center}
 
 
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+ precision = a / (a + c)
+  
+</textarea>
+  
+</div>
+</center>
                 
 
 
 The recall metric can be computed as follows:
 
-\begin{center}
-       recall = a / (a + b) 
-\end{center}
 
 
-              
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+recall = a / (a + b) 
+  
+</textarea>
+  
+</div>
+</center>              
 
 
 Finally, the "f" measure, which is a harmonic average of recall and precision, can be computed as follows:
 
-\begin{center}
-        F = (2 * (precision*recall)) / (precision + recall)  
-\end{center}
 
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+F = (2 * (precision*recall)) / (precision + recall)
+  
+</textarea>
+  
+</div>
+</center>
+	
 
 The sample code to obtain these metrics using sklearn is provided below.
 
@@ -467,7 +501,7 @@ The sample code to obtain these metrics using sklearn is provided below.
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="25" cols="100">
 
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score, recall_score, accuracy_score, f1_score
@@ -508,7 +542,7 @@ In the following code segment we can see the function \textbf{plot\_metric\_per\
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="25" cols="100">
 
 def plot_metric_per_epoch( precision_scores_list ):
     x_epochs = []
@@ -564,8 +598,8 @@ Claude Shannon proposed  metrics on how to measure the amount of information ava
 
 
 Entropy is an idea in the context of information theory to describe uncertainty. 
-For example, given a very biased coin with both sides having a tail, the probability of getting a head is 0\%. The chance of getting a tail is 100 %. 
-	So, we are 100\% sure of the outcome. Entropy, in this case, is 0 given that the uncertainty is 0. On the other hand, if we have a fair coin where both head and
+For example, given a very biased coin with both sides having a tail, the probability of getting a head is 0 %. The chance of getting a tail is 100 %. 
+	So, we are 100 % sure of the outcome. Entropy, in this case, is 0 given that the uncertainty is 0. On the other hand, if we have a fair coin where both head and
 	tail are equally likely; then, the uncertainty in this outcome is the highest. 
 
 The formula for Entropy is as follows:
@@ -600,7 +634,7 @@ The code and data to generate the previous graph can be seen in the next code li
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="35" cols="100">
 
 
 import matplotlib.pyplot as plt
@@ -662,7 +696,7 @@ We can calculate this with python as well as can be seen in the next code listin
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="25" cols="100">
 
 def entropy_fn( p ):
     if p<=0 or p>=1:
@@ -689,9 +723,9 @@ The Kullback-Leibler (KL) divergence  metric from information theory is designed
 
 The formula for the Kullback-Leibler (KL) divergence is as follows: 
 
-\begin{center}
+
     $ D_{KL} ( p(x) || q(x) ) = \sum p(x) \cdot ln \frac{p(x)}{q(x)} $
-\end{center}
+
 
 A simple example of how to use the KL divergence can be seen in the next code listing.
 
@@ -702,7 +736,7 @@ A simple example of how to use the KL divergence can be seen in the next code li
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="35" cols="100">
 
 
 import torch
@@ -763,7 +797,7 @@ Mutual Information (MI) is a metric that can be used to measure the relationship
 
 <center>
 <div>
-<textarea rows="45" cols="100">
+<textarea rows="55" cols="100">
 
 
 from sklearn.feature_selection import mutual_info_classif
@@ -920,7 +954,8 @@ Information Gain (bits):  0.429797066575363
 </div>
 </center>
 
-From the results, we can see that the Appliance is good. There is an information gain (0.42) of using the appliance which means that there will be less surprise in the outcomes. 
+From the results, we can see that the Appliance is good. There is an information gain (0.42) of using the appliance which means that there will
+	be less surprise in the outcomes. 
 
 <h3>
 	Conditional Entropy
@@ -1138,12 +1173,9 @@ Before we begin to discuss some of the machine learning algorithms, I should als
 
 
 
-The answer is that you do so through: 
+The answer is that you do so through: Optimization.
 
-\begin{center}
-    \textbf{Optimization}
 
-\end{center}
 
 
 In its simplest form, optimization consists of trying many sets of parameters with your model and seeing what result they give you. If the result is not good, 
@@ -1151,7 +1183,7 @@ In its simplest form, optimization consists of trying many sets of parameters wi
 
 In general, you do this in a loop (increasing and decreasing the parameter values) until you find an optimal set of parameters. But one of the questions 
 	to answer here as you are looping is: \textbf{do the values go up or down in this iteration?} Well, as it turns out, there are methodologies based 
-	on \textbf{calculus} that help you to make this decision. 
+	on calculus that help you to make this decision. 
 
 Let us try to picture this with a graph (below). 
 
@@ -1172,9 +1204,9 @@ The above graph represents an optimization problem. The \textbf{y} axis represen
 	the value of the parameter (\textbf{w}) being used at the given iteration. The curve represents the behavior that the function (loss) being used to minimize 
 	the cost will follow for every value of parameter \textbf{w}. 
 
-\begin{center}
+
     $ loss = ( \hat{y} - y )^2$
-\end{center}
+
 
 
 
@@ -1196,7 +1228,7 @@ At that point, the value of \textbf{“w”} reduces the cost and finds the best
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="35" cols="100">
 
 old_x = 0
 new_x = 4 
@@ -1488,7 +1520,7 @@ First the libraries.
 
 <center>
 <div>
-<textarea rows="5" cols="100">
+<textarea rows="15" cols="100">
 
 import numpy as np
 import pandas as pd
@@ -1599,13 +1631,7 @@ The theorem states that given a triangle (see figures), the sum of the areas of 
 
 If you look closely at the figure below, you can see that I have written down the connection between Pythagoras' theorem, and the Euclidean function we used in our code. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=.55\textheight}{
-    \includegraphics{images/mathPythagoras.jpg}
-}
-\caption{Pythagorean Theorem and the distance function}
-\label{RegLin:fig}
-\end{figure}
+
 
 
 <center>
@@ -1620,24 +1646,44 @@ Now, with some of the math history out of the way, let us continue with our code
 	KNN \textbf{predict} function. Actually, the \textbf{predict} function is the actual KNN algorithm. I will describe it in detail next. 
 	The variable \textbf{test\_x} is the sample in question. Say, one Iris test sample with 4 features (\textbf{[x1, x2, x3, x4]}). The next line of code:
 
-\begin{center}
-    distances = [ euclidean\_distance(test\_x , x)  for x in X\_train    ]
+	
+   
 
-\end{center}
 
-calculates all the distances between \textbf{test\_x} and all the training samples in \textbf{X\_train}. The way this statement is written is called a list
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+ distances = [ euclidean\_distance(test\_x , x)  for x in X\_train    ]
+  
+</textarea>
+  
+</div>
+</center>	
+
+
+calculates all the distances between \textbf{test_x} and all the training samples in \textbf{X_train}. The way this statement is written is called a list
 	comprehension in Python. The \textbf{"for x"} part of the statement means that each sample in the train set is grabbed and passed to
-	the \textbf{euclidean\_distance} function along with the test sample. Both points are passed to the Euclidean equation and the distance between them 
+	the \textbf{euclidean_distance} function along with the test sample. Both points are passed to the Euclidean equation and the distance between them 
 	is returned. This is done for every training sample and in the end, the list \textbf{"distances"} contains all the measured distances. 
 
 
 
 The next statement:
 
-\begin{center}
-    \textbf{k\_neighbor\_indices = np.argsort(distances)[:k]}
-\end{center}
 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+k_neighbor_indices = np.argsort(distances)[:k]
+  
+</textarea>
+  
+</div>
+</center>
 
 
 takes all the distances and, using \textbf{np.argsort()}, sorts them. Then we slice the sorted vector with \textbf{[:k]}. This slicing only 
@@ -1646,10 +1692,19 @@ takes all the distances and, using \textbf{np.argsort()}, sorts them. Then we sl
 	data and \textbf{"y"} labels are aligned, then we can use these same indeces to extract the corresponding labels from \textbf{"y"}. And that is 
 	exactly what we do with the following statement:
 
-\begin{center}
-    \textbf{labels = [ y\_train[i]  for i in k\_neighbor\_indices  ]}
-\end{center}
 
+ 
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+labels = [ y_train[i]  for i in k_neighbor_indices  ]
+  
+</textarea>
+  
+</div>
+</center>
 
 
 Finally, the list \textbf{labels} is converted into a Numpy array of the labels which are numbers, and the mean of them is calculated. 
@@ -1842,10 +1897,6 @@ This chapter provided an overview of some of the main traditional topics in mach
 
 
 
-The topic of AI assurance relates to creating secure and reliable AI systems. With regards to AI assurance,  I will cover topics such as:
-
-
-
 
  
 <h2>
@@ -1867,13 +1918,6 @@ The topic of AI assurance relates to creating secure and reliable AI systems. Wi
 </h2>
 
 
-<h3>
-	Model Cyber Cases 
-</h3>
-
-<ul>
-	<li>https://github.com/rcalix1/DeepLearningAlgorithms/tree/main/SecondEdition/Chapter2_TraditionalML</li>
-</ul>
 
 
 	<h3>
