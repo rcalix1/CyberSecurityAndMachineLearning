@@ -233,13 +233,13 @@ np.set_printoptions(threshold=np.inf)
 
 
 
-Now, let us assume that our data is stored in the matrix \textbf{"X"}. The code segment below uses the function \textbf{train\_test\_split}.
-	This function is used to split a data set (in this case X) into 4 sets which are \textbf{X\_train}, \textbf{X\_test}, \textbf{y\_train}, \textbf{y\_test}. 
-	These are the 4 sets that will be used by the traditional or the deep learning models. The sets that start with \textbf{"X"} hold the input data (feature vectors) 
-	and the sets that start with \textbf{y} hold the output labels per sample. 
-The values test\_size=0.01 and random\_state=42 in the function are parameters that define the split. The value 0.01 makes a train set that has 99 percent 
-	of all samples while the test set has 1 percent of all samples. In contrast, test\_size=0.20 would mean that there is an 80 % and 20 % split. 
-	The random\_state=42 allows you to always get the same random data since the seed is defined as 42.
+Now, let us assume that our data is stored in the matrix "X". The code segment below uses the function train_test_split}.
+	This function is used to split a data set (in this case X) into 4 sets which are X_train, X_test, y_train, y_test. 
+	These are the 4 sets that will be used by the traditional or the deep learning models. The sets that start with "X" hold the input data (feature vectors) 
+	and the sets that start with "y" hold the output labels per sample. 
+The values test_size=0.01 and random_state=42 in the function are parameters that define the split. The value 0.01 makes a train set that has 99 percent 
+	of all samples while the test set has 1 percent of all samples. In contrast, test_size=0.20 would mean that there is an 80 % and 20 % split. 
+	The random_state=42 allows you to always get the same random data since the seed is defined as 42.
 
 
 
@@ -333,7 +333,7 @@ class LinRegNet(nn.Module):
 </center>
 
 
-In general, our OOP model classes will include an \textbf{init} function and \textbf{forward} function. 
+In general, our OOP model classes will include an "init" function and "forward" function. 
 
 	<h3>
 		Performance Evaluation
