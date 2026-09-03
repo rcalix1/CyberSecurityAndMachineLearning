@@ -1431,11 +1431,14 @@ Notice that the outer product creates the initial matrix of pairwise relationshi
 Here are some important points to note about Hopfield networks and the code:
 
 	<ul>
-		<li>np.outer produces one product between each possible element pairing from 2 tensors</li>
-		<li>np.outer is used for the "outer product" </li>
-		<li>The intuition is like a pairwise distance matrix</li>
-		<li>This can help us to find the distance between each pair of point values</li>
-		<li>The Hebbian learning rule can be used for training </li>
+		<li>np.outer produces one product between each possible element pairing from two vectors</li>
+		<li> np.outer is used to calculate the "outer product" </li>
+		<li>The outer product captures pairwise relationships between the features of a sample</li>
+		<li>During training, these pairwise relationships are accumulated across the normal samples and stored in the weights matrix</li>
+		<li>The Hopfield network can therefore be thought of as an associative memory of the normal patterns </li>
+		<li>A new sample can be reconstructed using this stored memory and compared with its reconstructed version</li>
+		<li> A large Hamming distance between the original and reconstructed samples may indicate an anomaly</li>
+		<li>The Hebbian learning rule can be used for training</li>
 	</ul>
 
 
