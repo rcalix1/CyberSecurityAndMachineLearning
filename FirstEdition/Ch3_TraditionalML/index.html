@@ -1588,6 +1588,65 @@ Storage capacity can be defined as follows:
 
 where "d" is the dimensionality of the sample vectors. 
 
+
+The storage capacity of a Hopfield network depends on the number of neurons \(d\), which in this example corresponds to the dimensionality of the input samples. For example, a network with 1,000 neurons has an estimated storage capacity of approximately 72 representative patterns or memories. The network does not need to store every observed sample; instead, these stored patterns can represent characteristic states against which new samples can be recalled and compared.
+
+
+
+<center>
+<div>
+<textarea rows="55" cols="100">
+	
+import numpy as np
+
+d_vals = [6, 100, 1000, 10000]
+
+for d in d_vals:
+
+```
+storage_capacity = d / (2 * np.log(d))
+
+print("Neurons:", d,
+      "Storage Capacity:", round(storage_capacity, 2))
+```
+
+  
+</textarea>
+  
+</div>
+</center>
+
+The previous code produces approximately the following results:
+
+\begin{verbatim}
+Neurons: 6      Storage Capacity: 1.67
+Neurons: 100    Storage Capacity: 10.86
+Neurons: 1000   Storage Capacity: 72.38
+Neurons: 10000  Storage Capacity: 542.87
+\end{verbatim}
+
+
+
+
+
+It is important to note that storage capacity can be defined in different ways depending on the reliability requirements imposed on the Hopfield network. The approximation
+
+$$
+C \simeq \frac{d}{2\ln(d)}
+$$
+
+provides a conservative estimate associated with highly reliable storage and recall of random patterns. Another commonly cited result for classical
+	Hopfield networks is approximately
+	
+	$$
+	C \simeq 0.138d
+	$$
+	
+	which uses a less restrictive criterion for successful recall. Therefore, storage capacity should be interpreted as an approximate measure that depends
+	on how successful memory storage and retrieval are defined.
+
+	
+
 	<h3>
 		Boltzman Machines
 	</h3>
