@@ -1602,13 +1602,10 @@ import numpy as np
 d_vals = [6, 100, 1000, 10000]
 
 for d in d_vals:
+    storage_capacity = d / (2 * np.log(d))
 
-```
-storage_capacity = d / (2 * np.log(d))
+    print("Neurons:", d, "Storage Capacity:", round(storage_capacity, 2))
 
-print("Neurons:", d,
-      "Storage Capacity:", round(storage_capacity, 2))
-```
 
   
 </textarea>
