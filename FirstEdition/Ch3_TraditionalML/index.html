@@ -1335,7 +1335,20 @@ $$
 w'_{ij} = v_i v_j.
 $$
 
-In a Hopfield network, neurons are not connected to themselves. Therefore, the diagonal elements of the final weight matrix must be set to zero. For bipolar input vectors, where \(v_i \in \{-1,1\}\), the diagonal elements produced by the outer product are all equal to one since \(v_i^2=1\). These self-connections can therefore be removed by subtracting the identity matrix:
+In a Hopfield network, neurons are not connected to themselves. Therefore, the diagonal elements of the final weight matrix must be set to zero. 
+	For bipolar input vectors, where 
+	
+	$$
+	v_i \in \{-1,1\}
+	$$
+	
+	the diagonal elements produced by the outer product are all equal to one since 
+	
+	$$
+	v_i^2=1
+	$$
+	
+	These self-connections can therefore be removed by subtracting the identity matrix:
 
 $$
 W = vv^T - I
