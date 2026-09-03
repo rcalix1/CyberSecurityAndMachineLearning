@@ -1322,6 +1322,99 @@ The weights are calculated via an "outer product" of the input vector and the tr
 
 \[ W = v \times v^T - I  \]
 
+
+The weights are calculated using the "outer product" of the input vector and the transpose of the same vector. The outer product itself is simply
+
+$$
+W' = vv^T
+$$
+
+or, for each element,
+
+$$
+w'_{ij} = v_i v_j.
+$$
+
+In a Hopfield network, neurons are not connected to themselves. Therefore, the diagonal elements of the final weight matrix must be set to zero. For bipolar input vectors, where \(v_i \in \{-1,1\}\), the diagonal elements produced by the outer product are all equal to one since \(v_i^2=1\). These self-connections can therefore be removed by subtracting the identity matrix:
+
+$$
+W = vv^T - I
+$$
+
+Equivalently, each individual Hopfield weight can be written as
+
+$$
+w_{ij} = v_i v_j - \delta_{ij}
+$$
+
+where \(\delta_{ij}\) is the Kronecker delta, defined as
+
+$$
+\delta_{ij} =
+\begin{cases}
+1, & i=j \\
+0, & i\neq j.
+\end{cases}
+$$
+
+For example, consider the bipolar input vector
+
+$$
+v =
+\begin{bmatrix}
+1\\
+-1\\
+1
+\end{bmatrix}.
+$$
+
+First, the outer product is calculated:
+
+$$
+vv^T =
+\begin{bmatrix}
+1\\
+-1\\
+1
+\end{bmatrix}
+\begin{bmatrix}
+1 & -1 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & -1 & 1\\
+-1 & 1 & -1\\
+1 & -1 & 1
+\end{bmatrix}.
+$$
+
+The Hopfield algorithm then removes the self-connections by subtracting the identity matrix:
+
+$$
+W = vv^T-I
+=
+\begin{bmatrix}
+1 & -1 & 1\\
+-1 & 1 & -1\\
+1 & -1 & 1
+\end{bmatrix}
+-
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & -1 & 1\\
+-1 & 0 & -1\\
+1 & -1 & 0
+\end{bmatrix}.
+$$
+
+Notice that the outer product creates the initial matrix of pairwise relationships, while subtracting the identity matrix is a Hopfield-specific step used to eliminate the self-connections.
+
+
 Here are some important points to note about Hopfield networks and the code:
 
 	<ul>
