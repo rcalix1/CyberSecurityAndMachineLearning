@@ -783,6 +783,14 @@ output
 
 Notice here that "target2" is more divergent from "input" (0.72), than "target" is from "input" (0.43). 
 
+PyTorch's KL divergence expects the input as log-probabilities (`log_softmax`) and the target as probabilities (`softmax`), the 
+	
+	\(9\times8\) 
+	
+	tensors represent a batch of 9 probability distributions with 8 values each rather than comparing only their means, and multiplying the second random 
+	tensor by 3 produces a generally more distinct probability distribution after applying softmax.
+
+
 <h3>
 	Mutual Information
 </h3>
