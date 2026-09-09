@@ -1040,7 +1040,7 @@ After running these "exe" files in an emulator, we could end up with a \textbf{l
 
 <center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalTwo.png" height="500" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalTwo.png" height="400" width="auto">
       </div>
  </center>
 
@@ -1084,7 +1084,7 @@ For instance, we could have 50 samples of malware and 50 samples of goodware. Th
 
 <center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalFive.png" height="500" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalFive.png" height="300" width="auto">
       </div>
  </center>
 	
@@ -1098,7 +1098,7 @@ Each sample (S1, S2, ...) should be consistently represented by the same feature
 
 <center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalSix.png" height="500" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalSix.png" height="300" width="auto">
       </div>
  </center>
 
@@ -1387,7 +1387,7 @@ scan_vulnerabilities(url)
 			
 
 
-Here, the approach in the code looks for occurrences of the "<script>" tag, for instance. 
+Here, the approach in the code looks for occurrences of the "script" tag, for instance. 
 
 
 <h3>
@@ -1401,25 +1401,45 @@ Feature extraction from images is another area where deep learning is revolution
 	contain the pixel intensities that define the image. For color images, you have 3 two-dimensional matrices where each stores the 
 		intensity for the R, G, and B color channels of the image. 
 
-\subsubsection{Traditional Image Feature Extraction Techniques}
 
-In the past, these images where converted into feature vectors for use in machine learning using image processing based feature extraction techniques. Again, here, researchers spent considerable amounts of time performing feature engineering. Some of the methods widely used in image processing (\babelEN{\cite{Gonzales2007Ref}}) include:
-
-
-
-\begin{itemize}
-\item Image segmentation
-\item Edge detection
-\item Region growing
-\item Image morphing
-\item Fourier transformations
-\item Etc.
-\end{itemize}
-
-Many features could be extracted using these methods. Generally speaking, many of these techniques are implemented as a filter that is applied to the images to convert them into another matrix of the same size or of another size. This new image will store new information about the image such as the pixel positions where an edge was detected. Here, once again, deep learning changed how this process is done. 
+<h3>
+	Traditional Image Feature Extraction Techniques
+</h3>
+	
 
 
-Deep neural networks can be used to discover the features simply by providing the raw inputs and some annotation (e.g. labels). This information alone allows the neural network architecture to connect the neurons in ways where it can discover features by itself. In fact, deep neural networks are not just used for classification anymore but can also be used just for feature extraction. ResNet is an example of this. The extracted features can then be used with other classifiers such as SVM, logistic regression, etc. In these cases, the input layer and hidden layers are used for feature extraction without having to use the output layer from the original classification task. Instead, the classification task can be changed to another task. Convolutional Neural Networks (CNNs) can provide this functionality for image processing and classification.
+In the past, these images where converted into feature vectors for use in machine learning using image processing based feature extraction techniques. 
+	Again, here, researchers spent considerable amounts of time performing feature engineering. Some of the methods widely used in image
+	processing (\babelEN{\cite{Gonzales2007Ref}}) include:
+
+
+
+
+
+
+
+
+<ul>
+	<li>Image segmentation</li>
+	<li>Edge detection</li>
+	<li>Region growing</li>
+	<li>Image morphing</li>
+	<li>Fourier transformations</li>
+</ul>
+
+	
+
+Many features could be extracted using these methods. Generally speaking, many of these techniques are implemented as a filter that
+	is applied to the images to convert them into another matrix of the same size or of another size. This new image will store new information about the 
+	image such as the pixel positions where an edge was detected. Here, once again, deep learning changed how this process is done. 
+
+
+Deep neural networks can be used to discover the features simply by providing the raw inputs and some annotation (e.g. labels). This information alone allows
+	the neural network architecture to connect the neurons in ways where it can discover features by itself. In fact, deep neural networks are not just used for
+	classification anymore but can also be used just for feature extraction. ResNet is an example of this. The extracted features can then be used with other
+	classifiers such as SVM, logistic regression, etc. In these cases, the input layer and hidden layers are used for feature extraction without having to use the 
+	output layer from the original classification task. Instead, the classification task can be changed to another task. Convolutional Neural Networks (CNNs) 
+	can provide this functionality for image processing and classification.
 
 \subsubsection{A Class to Load Images into Tensors}
 
