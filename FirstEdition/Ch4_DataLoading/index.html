@@ -749,7 +749,7 @@ In this example, we extract features from PCAP files in order to represent the r
 
 <center>
       <div>
-        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/PCAPfileExample.png" height="500" width="auto">
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/PCAPfileExample.png" height="300" width="auto">
       </div>
 
  </center>
@@ -794,7 +794,9 @@ Some of the "tshark" flags from the previous code segment are described in the f
 
 
 
-
+</br>
+	</br>
+	</br>
 
 
 
@@ -806,7 +808,9 @@ Some of the "tshark" flags from the previous code segment are described in the f
  </center>
 	
 
-	
+	</br>
+	</br>
+	</br>
 
 	
 
@@ -879,51 +883,69 @@ for filteredFile in glob.glob('filtered_pcap/*.pcap'):
 	
 After running the previous code, the extracted features, written to the final text file, should look like the following. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.35]{images/AfterPCAPextractionCODE.png}
-}
-\caption{Extracted PCAP features}
-\label{RegLin:fig}
-\end{figure}
-
-As such, the fields in the packets are represented as columns in the CSV file (Next figure). The columns in the CSV will be used to extract "X" and "y" for use in training the ML algorithms. 
-
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.35]{images/packetsXandy.png}
-}
-\caption{Packets as CSV}
-\label{RegLin:fig}
-\end{figure}
-
-In the previous example, we defined each sample as being a single packet. However, that is not necessarily the only option. For instance, for detecting denial of service attacks, we may need to use samples that include multiple packet information. In this case, instead of individual packets as samples, we may need to create samples that include averages of multiple packet data  given a window of time. 
-
-
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.35]{images/timeWindowPackets.png}
-}
-\caption{Samples - Single packet vs time window of packets}
-\label{RegLin:fig}
-\end{figure}
 
 
 
-\subsection{Features from Malware}
 
-Extracting features from malware can seem like a daunting task. But, in fact, this can be simple depending on the approach. In static malware analysis, we do not need to run the malware in a sandbox environment and instead just extract data from the actual static malware files. This can be as simple as the following:
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/AfterPCAPextractionCODE.png" height="500" width="auto">
+      </div>
+
+ </center>
+	
+
+As such, the fields in the packets are represented as columns in the CSV file (Next figure). The columns in the CSV will be used to extract "X" and "y" for 
+	use in training the ML algorithms. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={Extract features from malware }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+	<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/packetsXandy.png" height="500" width="auto">
+      </div>
+ </center>
+
+In the previous example, we defined each sample as being a single packet. However, that is not necessarily the only option. For instance, for detecting 
+	denial of service attacks, we may need to use samples that include multiple packet information. In this case, instead of individual packets as samples,
+	we may need to create samples that include averages of multiple packet data  given a window of time. 
+
+
+
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/timeWindowPackets.png" height="500" width="auto">
+      </div>
+ </center>
+	
+
+
+<h2>
+	Features from Malware
+</h2>
+
+	
+
+
+Extracting features from malware can seem like a daunting task. But, in fact, this can be simple depending on the approach. In static malware analysis, 
+	we do not need to run the malware in a sandbox environment and instead just extract data from the actual static malware files. This can be as simple 
+	as the following:
+
+
+
+
+
+
+	
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 ## src = Path to the folder containing the files you want to process.
 
 def convertToFeatures(src):
@@ -938,30 +960,36 @@ def convertToFeatures(src):
             malwareByteArr = bytearray( f.read() ) 
 
             extract_features( malwareByteArr  )
-            
-
-\end{lstlisting}
-\end{minipage}
-
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
+	
 
 Notice that in the previous code segment, we copy the "exe" file data into a bytearray. The function 
 
-\textbf{   extract\_features()   }
+<strong>
+	extract_features() 
+</strong>  
 
-is simpler than it seems. The "malwareByteArr" variable is now a sequence of data much like a string in Byte format. Common sequences of characters can be extracted in a similar way to how you would process syllables in text. 
+is simpler than it seems. The "malwareByteArr" variable is now a sequence of data much like a string in Byte format. Common sequences of characters 
+	can be extracted in a similar way to how you would process syllables in text. 
 
 We could, for instance, use a tokenizer as in the next code listing. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={Tokenizer to extract features from malware }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 from transformers import AutoTokenizer
 
 # Choose a tokenizer
@@ -975,12 +1003,12 @@ def extract_features(text):
     token_string = str(encoded_text)
 
     print( token_string ) 
-
-
-            
-
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 From here, we could use the "bag of words" approach to generate the CSV for use with ML algorithms. See \textbf{Bag of Words} approach in the next section. This example will be covered in more detail in the Malware chapter. 
 
