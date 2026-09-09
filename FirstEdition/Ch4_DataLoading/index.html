@@ -38,7 +38,7 @@
 
 <div class="main">    <!-- for the fixed nav bar -->
 
-<h1>Chapter 3 - Traditional Machine Learning (Sample) </h1>
+<h1>Chapter 4 - Data Loading and Pre-processing(Sample) </h1>
 
     <center>
       <div>
@@ -84,7 +84,7 @@
     
 
 <h1>
-Traditional Machine Learning
+Data Loading and Pre-processing
 	
 </h1>
 
@@ -95,55 +95,47 @@ Traditional Machine Learning
 
 
 
-In this chapter, I will address some of the traditional machine learning topics. I will use python, numpy, and the Sklearn library to provide example code on
-	how to use the different models and other tools. I will quickly move through KNN to arrive at other algorithms. 
-	Much of what we learn from using the SKlearn tool kit can be integrated with PyTorch to make your deep learning code more powerful and modular. 
-	That way, you will be able to re-use your code for many different tasks. I will not focus on the theory of traditional machine learning algorithms here. 
-	There are many books on the theory of machine learning algorithms so instead I will concentrate on the practical aspects of using them in Python.  
+In this chapter, I will address the very important issue of dealing with the data. To me and most practitioners, data processing is the most important issue 
+	in machine learning. 
 
 
-
-
-
-
-\chapter{Data Loading and Pre-processing}
-
-
-In this chapter, I will address the very important issue of dealing with the data. To me and most practitioners, data processing is the most important issue in machine learning. 
-
-\textbf{ \underline{Objective:}} To address Data Loading and Pre-processing.
 
 
 There are many aspects that must be addressed when dealing with data. These include: 
 
-\begin{itemize}
-\item getting the data
-\item cleaning the data
-\item pre-processing the data
-\item extracting the features
-\item building a corpus and annotating it
-\item performing inter-annotator agreement
-\item etc.
-\end{itemize}
+
+
+<ul>
+	<li> getting the data</li>
+	<li>cleaning the data</li>
+	<li> pre-processing the data</li>
+	<li>extracting the features</li>
+	<li>building a corpus and annotating it</li>
+	<li>performing inter-annotator agreement</li>
+	<li>etc.</li>
+</ul>
+
+Here in this chapter I will address general issues about data as well as data issues related to cyber security and machine learning such 
+	as one-hot encoding and feature extraction.   
+
+	<h3>
+		Loading the Data
+	</h3>
+
+
+Data can be obtained from the web such as text from twitter or web pages. Specific data sets can also be obtained from the machine learning libraries. 
+	Sklearn has a “dataset” module, for instance. This dataset module can be used to obtain certain data sets such as the Iris dataset. An example of 
+	this code can be seen below.
 
 
 
 
-Here in this chapter I will address general issues about data as well as data issues related to cyber security and machine learning such as one-hot encoding and feature extraction.   
-
-\section{ Loading the Data}
-
-Data can be obtained from the web such as text from twitter or web pages. Specific data sets can also be obtained from the machine learning libraries. Sklearn has a “dataset” module, for instance. This dataset module can be used to obtain certain data sets such as the Iris dataset. An example of this code can be seen below.
 
 
-
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Iris data}}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+	
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 iris = datasets.load_iris() 
 
@@ -152,31 +144,31 @@ X = iris.data[:, [1,2,3]]
 y = iris.target
    
 
-
-\end{lstlisting}
-\end{minipage}
-
-
-
-\begin{comment}
-
-This is my comment.
-Note that it can span multiple lines.
-This is very useful.
-\end{comment}
+  
+</textarea>
+  
+</div>
+</center>
 
 
-Here, the first index in the data matrix represents the rows and the second index represents the columns. Data can also be obtained from text files. Many practitioners and academics will have their own data in text files. This data can be formatted in many different ways and loaded into the code. In most of the examples in this book, the data is assumed to be formatted in csv (comma separated) format. 
-The code to load the data to both SKlearn based traditional machine learning algorithms and to PyTorch code files is shown below. In the code, we can see that we can use the Numpy library (or namespace) to obtain the data. For the example below we assume that the data is stored in the file \textbf{data/12559\_Training\_Dataset.csv} and is read by loadtxt() into the python variable \textbf{Matrix\_data}. Since we are using csv format, the Iris data file can look like the following.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Iris data}}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+Here, the first index in the data matrix represents the rows and the second index represents the columns. Data can also be obtained from text files. 
+	Many practitioners and academics will have their own data in text files. This data can be formatted in many different ways and loaded into the code. 
+	In most of the examples in this book, the data is assumed to be formatted in csv (comma separated) format. 
+The code to load the data to both SKlearn based traditional machine learning algorithms and to PyTorch code files is shown below. In the code, we can see that
+	we can use the Numpy library (or namespace) to obtain the data. For the example below we assume that the data is stored in 
+	the file \textbf{data/12559_Training_Dataset.csv} and is read by loadtxt() into the python variable \textbf{Matrix_data}. 
+	Since we are using csv format, the Iris data file can look like the following.
+
+
+
+	
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+	
 1.0,6.1,2.8,4.7,1.2 
 0.0,5.7,3.8,1.7,0.3 
 2.0,7.7,2.6,6.9,2.3 
@@ -186,12 +178,16 @@ The code to load the data to both SKlearn based traditional machine learning alg
 ...
    
 
+  
+</textarea>
+  
+</div>
+</center>
+	
 
-\end{lstlisting}
-\end{minipage}
-
-
-Once the data is in \textbf{Matrix\_data}, it can be processed as a Numpy array matrix. This means that it is no longer just an array but instead it is more a vector or matrix as in linear algebra. Many operations are now simplified like extracting certain columns or rows. This is usually referred to as slicing.
+Once the data is in \textbf{Matrix_data}, it can be processed as a Numpy array matrix. This means that it is no longer just an array but instead it 
+	is more a vector or matrix as in linear algebra. Many operations are now simplified like extracting certain columns or rows. This is usually referred 
+	to as slicing.
 
 \begin{figure}[H]\centering
 \adjustbox{max height=.55\textheight}{
@@ -202,14 +198,25 @@ Once the data is in \textbf{Matrix\_data}, it can be processed as a Numpy array 
 \end{figure}
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Iris data slicing}}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/numpySliceCake.jpg" height="500" width="auto">
+      </div>
+
+ </center>
+	
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+	
 f_numpy = open("data/12559_Training_Dataset.csv",'r') 
 
 Matrix_data = numpy.loadtxt(f_numpy, delimiter=",", skiprows=1)
@@ -221,11 +228,16 @@ print("num features,", A )
 X = Matrix_data[:,:18]             #[:,:149] 
 y = Matrix_data[:, 19]
    
+   
+
+  
+</textarea>
+  
+</div>
+</center>
 
 
-\end{lstlisting}
-\end{minipage}
-
+	
 
 In the previous code listing we can see that we can calculate the dimensions of the matrix as follows:
 
@@ -2463,52 +2475,6 @@ Finally, in this next example we present the other extreme case.
 
 
 
-<center>
-<div>
-<textarea rows="45" cols="100">
-
-
-## Low conditional uncertainty
-features = ["f1", "f2", "f3", "f4", "f5", "f6"]
-classes  = ["c1", "c2", "c3", "c4", "c5", "c6"]
-
-joint_probs = {}
-for feature,the_class in zip( features, classes ):
-    joint_probs[ (feature, the_class) ] = joint_probs.get((feature, the_class), 0) + 1
-print( joint_probs )
-joint_probs = {k: v / len(classes) for k, v in joint_probs.items()}
-print( joint_probs )
-
-marginal_probs = {}
-for feature in features:
-    marginal_probs[feature] = marginal_probs.get(feature, 0) + 1
-print( marginal_probs )
-marginal_probs = {k: v / len(features) for k, v in marginal_probs.items()}
-print( marginal_probs )
-
-conditional_entropy = 0
-for (feature, the_class), p_joint in joint_probs.items():
-    conditional_entropy = conditional_entropy - p_joint * np.log2(p_joint / marginal_probs[feature])
-print( conditional_entropy )
-
-## 0.0 
-
-outputs_probs = {}
-for item in classes:
-    outputs_probs[item] = outputs_probs.get(item, 0) + 1
-print( outputs_probs )
-outputs_probs = {k: v / len( classes ) for k, v in outputs_probs.items()}
-print( outputs_probs  )
-outputs_only_entropy = -np.sum( [ p * np.log2(p) for k,p in outputs_probs.items() ]  )
-print( outputs_only_entropy )
-
-## 2.584962500721156
-
-  
-</textarea>
-  
-</div>
-</center>
 
 
 
