@@ -1010,116 +1010,152 @@ def extract_features(text):
 </div>
 </center>
 
-From here, we could use the "bag of words" approach to generate the CSV for use with ML algorithms. See \textbf{Bag of Words} approach in the next section. This example will be covered in more detail in the Malware chapter. 
+From here, we could use the "bag of words" approach to generate the CSV for use with ML algorithms. See \textbf{Bag of Words} approach in the next section.
+	This example will be covered in more detail in the Malware chapter. 
 
-Another type of malware analysis approach is called "Dynamic Malware Analysis". In dynamic malware analysis, we would generate a \textbf{log file} containing information about the behavior of the malware after running it in a sandbox environment with an emulator. 
+Another type of malware analysis approach is called "Dynamic Malware Analysis". In dynamic malware analysis, we would generate a \textbf{log file} containing 
+	information about the behavior of the malware after running it in a sandbox environment with an emulator. 
 
-The following figure shows an example of a log file with malware behavior data (from dynamic analysis). The information in this file can include: file read traces, DLL calls, registry edits, etc. DLL is the acronym for dynamic linked library. These are files that contain code, data, etc. that can be used by several programs when running on the operating system. 
+The following figure shows an example of a log file with malware behavior data (from dynamic analysis). The information in this file can include: file 
+	read traces, DLL calls, registry edits, etc. DLL is the acronym for dynamic linked library. These are files that contain code, data, etc. that can 
+	be used by several programs when running on the operating system. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.35]{images/DMalOne.png}
-}
-\caption{Malware - Log file }
-\label{RegLin:fig}
-\end{figure}
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalOne.png" height="500" width="auto">
+      </div>
+ </center>
+	
 
 Let us consider a scenario where we have "exe" files (goodware and malware). 
 
 After running these "exe" files in an emulator, we could end up with a \textbf{log file} (CSV) for every goodware or malware sample (Figure below). 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.35]{images/DMalTwo.png}
-}
-\caption{Goodware and malware log files }
-\label{RegLin:fig}
-\end{figure}
 
-Each of these log files could become a sample in our \textbf{X} matrix for use in ML modeling. The contents of the log files could be the source to extract the features for each sample. 
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalTwo.png" height="500" width="auto">
+      </div>
+ </center>
+
+	
+
+Each of these log files could become a sample in our \textbf{X} matrix for use in ML modeling. The contents of the log files could be the source to extract 
+	the features for each sample. 
 
 As can be seen in the next figure, each log file (s1, s2, etc.) is used to create the \textbf{X} matrix.
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.45]{images/DMalThree.png}
-}
-\caption{Log files are individual samples with features}
-\label{RegLin:fig}
-\end{figure}
+
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalThree.png" height="500" width="auto">
+      </div>
+ </center>
 
 
 We can then combine the goodware and malware log files to create our data set with samples and labels. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.35]{images/DMalFour.png}
-}
-\caption{Log files to create our data set}
-\label{RegLin:fig}
-\end{figure}
 
 
 
-For instance, we could have 50 samples of malware and 50 samples of goodware. This data is available on the GitHub and this example will be covered further in the "Malware" chapter. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.8\textheight}{
-    \includegraphics[scale=0.55]{images/DMalFive.png}
-}
-\caption{Samples of goodware and malware}
-\label{RegLin:fig}
-\end{figure}
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalFour.png" height="500" width="auto">
+      </div>
+ </center>
+	
 
+For instance, we could have 50 samples of malware and 50 samples of goodware. This data is available on the GitHub and this example will be 
+	covered further in the "Malware" chapter. 
+
+
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalFive.png" height="500" width="auto">
+      </div>
+ </center>
+	
+
+	
 
 Each sample (S1, S2, ...) should be consistently represented by the same features such as DLL calls, registry edits, file read traces, etc. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.8\textheight}{
-    \includegraphics[scale=0.55]{images/DMalSix.png}
-}
-\caption{Log file features }
-\label{RegLin:fig}
-\end{figure}
 
 
-When we are extracting the features from the log files we can also add the labels using the file names (i.e. goodeware or malware). The code for this can be seen in the next figure. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.40]{images/DMalSeven.png}
-}
-\caption{Code to extract features and labels }
-\label{RegLin:fig}
-\end{figure}
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalSix.png" height="500" width="auto">
+      </div>
+ </center>
+
+
+When we are extracting the features from the log files we can also add the labels using the file names (i.e. goodeware or malware). The code for this can be seen 
+	in the next figure. 
+
+
+
+
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DMalSeven.png" height="500" width="auto">
+      </div>
+ </center>
+	
 
 Once the data is extracted, we can proceed to build the neural network model (such as the following). This will be addressed further in the "Malware" chapter. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.45]{images/DmalEight.png}
-}
-\caption{NN model }
-\label{RegLin:fig}
-\end{figure}
-
-\subsection{Features from Forensics}
 
 
-Digital forensics is a huge field and there are many techniques that fall under the topic. In this section I will show a simple example of how to extract meta-data from an image file. Digital meta data has been used by law enforcement to solve many crimes.  
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/DmalEight.png" height="500" width="auto">
+      </div>
+ </center>
+
+
+
+<h3>
+	Features from Forensics
+</h3>
+
+
+
+
+Digital forensics is a huge field and there are many techniques that fall under the topic. In this section I will show a simple example of how to extract 
+	meta-data from an image file. Digital meta data has been used by law enforcement to solve many crimes.  
 
 The following code listing shows the example code. You can use any JPG file with this code. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={ Forensics - Features }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 from PIL import Image
 from PIL.ExifTags import TAGS
 
@@ -1137,69 +1173,110 @@ image_path = "prof.jpg"
 exif_data = extract_forensic_data(image_path)
 
 print("EXIF Data:", exif_data)
-            
+   
+   
+</textarea>
+  
+</div>
+</center>
 
-\end{lstlisting}
-\end{minipage}
 
 
+	
 The extracted forensic data should look like the following. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={ Forensics - Result data }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 
 EXIF Data: {'ResolutionUnit': 2, 'ExifOffset': 224, 'Make': 'Mac', 'Model': 'phone 3', 'Software': '3.45.1', 'Orientation': 0, 'DateTime': '2023:06:20 10:00:59', ... 'CompositeImage': 2, 'MakerNote': b'Mac iOS\x00\x00\x01MM\x00\x00\x0e\x00\x02\x00\x07\x00...\x00\x00\n'}
 
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+
+	
 
 
 As can be seen, we have information about the OS, the software version, etc. 
 
-\subsection{Features from Text}
-
-Feature extraction from text usually involves the processing of text documents to extract tokens, words, chunks, or other phrases to be used to create the features. There are many, many types of features that can be extracted from text. Some of the methods (\babelEN{\cite{Jurafsky2008Ref}}) that can be used include:
 
 
+<h3>
+	Features from Text
+</h3>
+	
 
 
-\begin{itemize}
-\item the bag of words approach
-\item frequency histograms of the words
-\item Part of speech tagging of the words
-\item Syntactic parsing of sentences
-\item Anaphora resolution
-\item word embeddings (the main method used today)
-\end{itemize}
+Feature extraction from text usually involves the processing of text documents to extract tokens, words, chunks, or other phrases to be used to create 
+	the features. There are many, many types of features that can be extracted from text. Some of the methods (\babelEN{\cite{Jurafsky2008Ref}}) that can
+	be used include:
 
-With the information provided by the previous methods, many features can be extracted. In general, text features can be binary or numeric. Binary features include the presence or absence of words, part of speech tags, chunks, syntactic parses, semantic parses, etc. Numeric based text features can be derived from performing counts or calculating distance metrics between words or higher level semantic concepts such as with embeddings.
+
+<ul>
+	<li>the bag of words approach</li>
+	<li> frequency histograms of the words</li>
+	<li> Part of speech tagging of the words</li>
+	<li><Syntactic parsing of sentences/li>
+	<li>Anaphora resolution</li>
+	<li>word embeddings (the main method used today)</li>
+	<li></li>
+</ul>
+
+
+
+With the information provided by the previous methods, many features can be extracted. In general, text features can be binary or numeric. 
+	Binary features include the presence or absence of words, part of speech tags, chunks, syntactic parses, semantic parses, etc. Numeric 
+	based text features can be derived from performing counts or calculating distance metrics between words or higher level semantic concepts such as with embeddings.
  
-One simple technique, for example, that has had success in extracting features for supervised machine learning is called the gramulator (McCarthy et al. 2012). The gramulator is a feature extraction technique used particularly in natural language processing. The main idea is that, for a 2 class problem, you want to extract features (e.g. words or tokens) that are very frequent in one class but infrequent in the other. This helps to better discriminate between the classes. The downside of this approach, however, is that it needs a lot of annotated or labeled data to extract the grams or words from each class that are infrequent in the opposite class. If the grams are representative of the entire population; then, it can be expected that a classifier will have good performance in the classification task.
+One simple technique, for example, that has had success in extracting features for supervised machine learning is called the gramulator 
+	(McCarthy et al. 2012). The gramulator is a feature extraction technique used particularly in natural language processing. 
+	The main idea is that, for a 2 class problem, you want to extract features (e.g. words or tokens) that are very frequent in one class but 
+	infrequent in the other. This helps to better discriminate between the classes. The downside of this approach, however, is that it needs
+	a lot of annotated or labeled data to extract the grams or words from each class that are infrequent in the opposite class. If the grams 
+	are representative of the entire population; then, it can be expected that a classifier will have good performance in the classification task.
 
-The downside of most of these techniques is that in the past they have required annotated data. Deep learning provides several new techniques that address this issue and obtain good performance without needing large amounts of annotated data. These mainly involve some type of word embedding approach with self-learning. Word embeddings are vector representations of words or syllables or subwords. The vectors are dense and usually of fixed size such as 256. The values of each vector representing the token in question are learned through some algorithmic scheme such as Word2Vec (Mikolov et al. 2014), or Transformers.
+The downside of most of these techniques is that in the past they have required annotated data. Deep learning provides several new techniques 
+	that address this issue and obtain good performance without needing large amounts of annotated data. These mainly involve some type of word 
+	embedding approach with self-learning. Word embeddings are vector representations of words or syllables or subwords. The vectors are dense 
+	and usually of fixed size such as 256. The values of each vector representing the token in question are learned through some algorithmic 
+	scheme such as Word2Vec (Mikolov et al. 2014), or Transformers.
 
 These techniques can be very useful for cyber security. 
 
-\subsubsection{Bag of Words approach}
 
 
-A very simple example of performing the "bag of words" approach can be seen in the next code listing. The code uses the "CountVectorizer" function from sklearn to perform this task. We will use "CountVectorizer" with a concrete example in a future chapter. 
+	<h3>
+		Bag of Words approach
+	</h3>
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={ Bag of Words }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+A very simple example of performing the "bag of words" approach can be seen in the next code listing. The code uses the "CountVectorizer" function
+	from sklearn to perform this task. We will use "CountVectorizer" with a concrete example in a future chapter. 
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
+	
+
 
 import sklearn
 import pandas as pd
@@ -1224,39 +1301,47 @@ dtm_pd = pd.DataFrame( dtm.toarray(), index=examples, columns=vectorizer.get_fea
 
 print( dtm_pd )
 
-            
+   
+   
+</textarea>
+  
+</div>
+</center>
 
-\end{lstlisting}
-\end{minipage}
+
+	<h3>
+		Features from Websites for Web Security
+	</h3>
 
 
-\subsection{Features from Websites for Web Security}
 
 Web security can relate to defending against web attacks such as SQL injections and cross site scripting attacks (XSS). 
 
 Web Attacks
 
-\begin{itemize}
-    \item cross site scripting attacks (XSS)
-    \item SQL injections
-    \item cross site request forgery
-\end{itemize}
 
-
-The following code listing shows how to extract features for use in addressing these types of attacks. In particular we can use the python "beautifulsoup" library to extract data from HTML files.
-
+	<ul>
+		<li> cross site scripting attacks (XSS)</li>
+		<li>SQL injections</li>
+		<li>cross site request forgery</li>
+	</ul>
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={ XSS ans SQL features }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+The following code listing shows how to extract features for use in addressing these types of attacks. In particular we can use the
+	python "beautifulsoup" library to extract data from HTML files.
 
+
+
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
 
 import requests
 from bs4 import BeautifulSoup
@@ -1292,18 +1377,29 @@ def scan_vulnerabilities(url):
 url = "https://www.lsu.edu/index.php"
 scan_vulnerabilities(url) 
 
-            
 
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
+			
 
 
 Here, the approach in the code looks for occurrences of the "<script>" tag, for instance. 
 
 
-\subsection{Features from Images}
+<h3>
+	Features from Images
+	</h3>
+	
 
-Feature extraction from images is another area where deep learning is revolutionizing the way features are engineered and obtained. The input to a model when performing image processing and classification is an image. In general, images are 2 dimensional arrays that contain the pixel intensities that define the image. For color images, you have 3 two-dimensional matrices where each stores the intensity for the R, G, and B color channels of the image. 
+
+Feature extraction from images is another area where deep learning is revolutionizing the way features are engineered and obtained. 
+	The input to a model when performing image processing and classification is an image. In general, images are 2 dimensional arrays that 
+	contain the pixel intensities that define the image. For color images, you have 3 two-dimensional matrices where each stores the 
+		intensity for the R, G, and B color channels of the image. 
 
 \subsubsection{Traditional Image Feature Extraction Techniques}
 
