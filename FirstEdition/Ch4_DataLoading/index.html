@@ -189,13 +189,6 @@ Once the data is in \textbf{Matrix_data}, it can be processed as a Numpy array m
 	is more a vector or matrix as in linear algebra. Many operations are now simplified like extracting certain columns or rows. This is usually referred 
 	to as slicing.
 
-\begin{figure}[H]\centering
-\adjustbox{max height=.55\textheight}{
-    \includegraphics{images/numpySliceCake.jpg}
-}
-\caption{Like slicing a cake}
-\label{RegLin:fig}
-\end{figure}
 
 
 
@@ -241,33 +234,47 @@ y = Matrix_data[:, 19]
 
 In the previous code listing we can see that we can calculate the dimensions of the matrix as follows:
 
-\begin{center}
 
+
+
+<center>
+<div>
+<textarea rows="5" cols="100">
+
+	
 A = len( Matrix\_data[0,:] ) 
-    
-\end{center}
+   
+   
+</textarea>
+  
+</div>
+</center>
 
-
-
+	
 And this gives you the number of columns or  number of features plus the class. 
 
 
-
-\section{Data and Feature Pre-Processing }
-
-Feature scaling is very important to achieving good results in ML modeling tasks. For example, in Principal Component Analysis (PCA) which is a feature reduction technique, feature scaling is very important. The purpose of PCA is to project data to a space that captures the most variability in the data. If the features are not scaled properly, one feature could dominate over the others and therefore be considered as the most variable feature. 
-With feature scaling, features with real valued numbers from any range can be mapped to other ranges such as from -1.0 to 1.0. This is performed for all features so that no one feature will dominate in the model. 
-All machine learning models are  susceptible to feature scaling. The code below shows how the data can be scaled from \textbf{X\_train} to \textbf{X\_train\_normalized}. 
+	<h3>
+		Data and Feature Pre-Processing 
+	</h3>
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Feature Scaling}}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+Feature scaling is very important to achieving good results in ML modeling tasks. For example, in Principal Component Analysis (PCA) which is a feature reduction 
+	technique, feature scaling is very important. The purpose of PCA is to project data to a space that captures the most variability in the data. If the features 
+	are not scaled properly, one feature could dominate over the others and therefore be considered as the most variable feature. 
+With feature scaling, features with real valued numbers from any range can be mapped to other ranges such as from -1.0 to 1.0. This is performed for all features 
+	so that no one feature will dominate in the model. 
+All machine learning models are  susceptible to feature scaling. The code below shows how the data can be scaled from \textbf{X_train} to \textbf{X_train_normalized}. 
+
+
+
+
+<center>
+<div>
+<textarea rows="10" cols="100">
+
+	
 ## feature scaling
 sc = StandardScaler()
 
@@ -275,24 +282,33 @@ sc.fit(X_train)
 
 X_train_normalized = sc.transform(X_train)
 X_test_normalized  = sc.transform(X_test)
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 
-\end{lstlisting}
-\end{minipage}
+	<h3>
+		CSV Files
+	</h3>
 
-\subsection{CSV Files}
 
-In the following code listing I am showing you a general way in which you can take a standard dataset such as Iris or mnist obtained from a library module  and save it to a csv file. 
-This approach allows you to do the machine learning modeling by reading data from text files where the data is formatted in a very standard and well known format such as csv (comma separated format). 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={create csv files }}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+In the following code listing I am showing you a general way in which you can take a standard dataset such as Iris or mnist obtained from a library module  
+	and save it to a csv file. 
+This approach allows you to do the machine learning modeling by reading data from text files where the data is formatted in a very standard and well known 
+	format such as csv (comma separated format). 
 
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 ## create csv files from mnist or iris
 
 def buildDataFromMnist(data_set):
@@ -312,25 +328,33 @@ def buildDataFromMnist(data_set):
         f.write(",".join([str(s) for s in k]) + '\n')
     f.close()
 
+   
+   
+</textarea>
+  
+</div>
+</center>
 
-\end{lstlisting}
-\end{minipage}
+
+	<h3>
+		One Hot Encoding
+	</h3>
 
 
-\section{ One Hot Encoding}
 
 ML algorithm implementations in PyTorch use one-hot encoding. Quite simply, one hot encoding means that you take labels in the following format.
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={one-hot encoding (before) }}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 0 
 1 
 1 
@@ -343,24 +367,27 @@ ML algorithm implementations in PyTorch use one-hot encoding. Quite simply, one 
 ...
 
 
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+	
+
+and convert them to labels in the equivalent one-hot encoded format as shown below. So, we create new vectors where all values are zero except for the 
+	value of the position corresponding to the correct class in the vector. 
 
 
 
-and convert them to labels in the equivalent one-hot encoded format as shown below. So, we create new vectors where all values are zero except for the value of the position corresponding to the correct class in the vector. 
 
 
+	<center>
+<div>
+<textarea rows="25" cols="100">
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={one-hot encoding (after)}}
-%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
-
-
+	
 1,0,0 
 0,1,0 
 0,1,0 
@@ -372,24 +399,32 @@ and convert them to labels in the equivalent one-hot encoded format as shown bel
 0,1,0 
 ...
 
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 
-One-hot encoding transforms the labels vector (\textbf{y}) of size \textbf{n} into a matrix of size \textbf{n} by \textbf{B} where \textbf{B} represents the number of classes in the data set. For the case of the Iris dataset, we have 3 classes and, therefore, for a sample with label 2 we would get an equivalent one-hot encoded vector equal to [0,0,1]. 
-The code to convert the data to one-hot encoded format is provided below. There are several ways of implementing one-hot encoding. I have used the approach below because I think it is the easiest to understand (while possibly not the most efficient or pythony).
-Notice how \textbf{“a”} is a 2-dimensional array initialized with all zeros. You use the value in the input vector data to determine the indeces \textbf{i} and \textbf{j} that are used to assign a "1" to the correct position in the matrix. 
+
+One-hot encoding transforms the labels vector (\textbf{y}) of size \textbf{n} into a matrix of size \textbf{n} by \textbf{B} where \textbf{B} represents the number
+	of classes in the data set. For the case of the Iris dataset, we have 3 classes and, therefore, for a sample with label 2 we would get an equivalent one-hot 
+	encoded vector equal to [0,0,1]. 
+The code to convert the data to one-hot encoded format is provided below. There are several ways of implementing one-hot encoding. I have used the approach below
+	because I think it is the easiest to understand (while possibly not the most efficient or pythony).
+Notice how \textbf{“a”} is a 2-dimensional array initialized with all zeros. You use the value in the input vector data to determine the 
+	indeces \textbf{i} and \textbf{j} that are used to assign a "1" to the correct position in the matrix. 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={one-hot encoding code}}
-%%\lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
+	
 # Convert to one hot data
 def convertOneHot_data2(data):
     y=np.array([int(i) for i in data])
@@ -410,14 +445,33 @@ def convertOneHot_data2(data):
         
     return (a)
 
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
 
-\section{Features}
+	
+<h3>
+	Features
+</h3>
+	
 
-A machine learning (ML) algorithm is only as good as the features that are provided to it. This statement used to be very true and many people made careers of just developing features for problems in different domains. For instance, in NLP, many people would spend a lot of time developing parsers and other techniques to find and create features from a text input. Similarly, in image processing, researchers developed many techniques to filter data out of images to perform efficient image classification. Today, deep learning has somewhat changed this. DL has managed to introduce approaches to decrease the amount of human involvement in the feature extraction process. Basically, deep learning (DL) methods, in some cases, have the ability to extract features from raw data using only un-supervised or self-supervised techniques, transfer learning, etc. In some way, you can say that deep learning algorithms can extract the features themselves without human involvement. This ability has had a very strong impact on the performance of the algorithms implemented in industry and in the work performed by machine learning specialists. These abilities, for enhanced feature extraction, are available for the main ML mediums such as for text processing and for image processing. I think they are less developed in the medium of Cyber Security. 
+A machine learning (ML) algorithm is only as good as the features that are provided to it. This statement used to be very true and many people made careers
+	of just developing features for problems in different domains. For instance, in NLP, many people would spend a lot of time developing parsers and other 
+	techniques to find and create features from a text input. Similarly, in image processing, researchers developed many techniques to filter data out of images
+	to perform efficient image classification. Today, deep learning has somewhat changed this. DL has managed to introduce approaches to decrease the amount of 
+	human involvement in the feature extraction process. Basically, deep learning (DL) methods, in some cases, have the ability to extract features from 
+	raw data using only un-supervised or self-supervised techniques, transfer learning, etc. In some way, you can say that deep learning algorithms can extract
+	the features themselves without human involvement. This ability has had a very strong impact on the performance of the algorithms implemented in industry 
+	and in the work performed by machine learning specialists. These abilities, for enhanced feature extraction, are available for the main ML mediums such as 
+	for text processing and for image processing. I think they are less developed in the medium of Cyber Security. 
 
-In this section, I will cover ways of extracting features to address problems such as: malware detection, network intrusion detection, phishing detection, etc. In general, we need techniques to extract data from cyber security related sources that we can convert to vector space model formats for use in machine learning algorithms. The vector space model format is simply a comma separate file (CSV) where each column(F1, F2, F3, ...) maps to an axis in a vector space (X, Y, Z, ...).
+In this section, I will cover ways of extracting features to address problems such as: malware detection, network intrusion detection, phishing detection, etc. 
+	In general, we need techniques to extract data from cyber security related sources that we can convert to vector space model formats for use in machine 
+	learning algorithms. The vector space model format is simply a comma separate file (CSV) where each column(F1, F2, F3, ...) maps to an axis in a vector 
+	space (X, Y, Z, ...).
 
 
 \begin{figure}[H]\centering
@@ -427,6 +481,14 @@ In this section, I will cover ways of extracting features to address problems su
 \caption{Vector Space model format}
 \label{RegLin:fig}
 \end{figure}
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/vectorSpaceFeaturechap4.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 
 The columns are the axes on the vector space. An N number of columns corresponds to an N number of axes in the vector space ($R^N$). 
@@ -440,6 +502,14 @@ The columns are the axes on the vector space. An N number of columns corresponds
 \end{figure}
 
 
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/multipleVectorSpaces.png" height="500" width="auto">
+      </div>
+
+ </center>
+
+	
 
 \subsection{Sniffing and Spoofing}
 
