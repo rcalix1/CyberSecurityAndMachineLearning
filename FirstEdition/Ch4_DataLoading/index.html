@@ -474,13 +474,6 @@ In this section, I will cover ways of extracting features to address problems su
 	space (X, Y, Z, ...).
 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.4]{images/vectorSpaceFeaturechap4.png}
-}
-\caption{Vector Space model format}
-\label{RegLin:fig}
-\end{figure}
 
 
 <center>
@@ -493,13 +486,7 @@ In this section, I will cover ways of extracting features to address problems su
 
 The columns are the axes on the vector space. An N number of columns corresponds to an N number of axes in the vector space ($R^N$). 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.4]{images/multipleVectorSpaces.png}
-}
-\caption{Multiple Vector Spaces}
-\label{RegLin:fig}
-\end{figure}
+
 
 
 <center>
@@ -509,25 +496,33 @@ The columns are the axes on the vector space. An N number of columns corresponds
 
  </center>
 
+	<h3>
+		Sniffing and Spoofing
+	</h3>
+
+
+
+When it comes to network data, sniffing and spoofing can be considered the two main approaches for network data processing and manipulation. 
+	Sniffing can be more directly linked to defense and analysis, whereas spoofing can be more directly linked to attacks. 
+
+<h3>
+	Sniffing
+</h3>
 	
 
-\subsection{Sniffing and Spoofing}
 
-When it comes to network data, sniffing and spoofing can be considered the two main approaches for network data processing and manipulation. Sniffing can be more directly linked to defense and analysis, whereas spoofing can be more directly linked to attacks. 
+Sniffing is the process of capturing packets and extracting data from them. The following code listing shows an example of this using Scapy 
+	(a Python library). You need to have root privileges on the computer to be able to sniff packets. 
 
-\subsubsection{Sniffing}
 
-Sniffing is the process of capturing packets and extracting data from them. The following code listing shows an example of this using Scapy (a Python library). You need to have root privileges on the computer to be able to sniff packets. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Sniffing}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+	
 from scapy.all import *
 
 
@@ -538,27 +533,36 @@ def print_pkt(pkt):
 pkt = sniff(filter='icmp', prn=print_pkt)
 
 print( pkt )
-
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 The code uses "sniff" with a filter to capture and print "icmp" packets. 
 
-\subsubsection{Spoofing}
 
-Spoofing is the process of creating or modifying packets. Any packet that is arbitrarily modified by a user or agent can be used in an attack. You need to have root privileges on the computer to be able to spoof packets. 
+<h3>
+	Spoofing
+</h3>
+	
+
+
+Spoofing is the process of creating or modifying packets. Any packet that is arbitrarily modified by a user or agent can be used in an attack. 
+	You need to have root privileges on the computer to be able to spoof packets. 
 
 The next code listing shows an example of how to spoof packets. Here we generate and send 10 ping packets to the address 8.8.8.8.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Ping Google}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
+	
 from scapy.all import *
 
 a = IP()
@@ -566,26 +570,27 @@ a.dst = '8.8.8.8'
 b = ICMP()
 p = a/b
 
-
-
 for i in range(10):
     send(p)
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
-\end{lstlisting}
-\end{minipage}
-
-In the next code listing we can further modify the ping packets to carry a text message. Consider that here we have a delivery mechanism and think of the text message as an actual payload that could be malicious. 
+In the next code listing we can further modify the ping packets to carry a text message. Consider that here we have a delivery mechanism and think 
+	of the text message as an actual payload that could be malicious. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={ Ping Packet with text }}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 from scapy.all import *
 
 a = IP()
@@ -599,21 +604,26 @@ p = a/b/c
 
 for i in range(1):
     send(p)
-
-\end{lstlisting}
-\end{minipage}
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 The possibilities with Scapy are endless. For instance, here we can create a very simple script to simulate the "traceroute" functionality. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={ Simple Traceroute }}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
+
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
 from scapy.all import *
 
 
@@ -633,14 +643,24 @@ for i in range(1, number_of_hops):
     pkt = my_packet(  i   )
     ## pkt.show()
     send(pkt)
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
-\end{lstlisting}
-\end{minipage}
+<h3>
+	Features from Network Data
+</h3>
+	
 
 
-\subsection{Features from Network Data}
 
-Sniffing is the process of collecting data from network  packets. The Python Scapy library is great for this. In the next code listing we see an example of how to collect network packet data from ping (icmp) packets using Scapy. The function "sniff" has a filter option to specify what kinds of packets to collect (e.g. icmp, http, sport=80, etc.).  
+Sniffing is the process of collecting data from network  packets. The Python Scapy library is great for this. In the next code listing
+	we see an example of how to collect network packet data from ping (icmp) packets using Scapy. The function "sniff" has a filter option to specify 
+	what kinds of packets to collect (e.g. icmp, http, sport=80, etc.).  
 
 \begin{minipage}{\linewidth}
 \lstset{language=Python}
@@ -650,17 +670,7 @@ Sniffing is the process of collecting data from network  packets. The Python Sca
 \lstset{basicstyle=\footnotesize}
 \begin{lstlisting}[backgroundcolor = \color{white}]
 
-## !pip install scapy
-from scapy.all import *
-
-a = IP()
-a.show()
-
-def print_pkt(pkt):
-    pkt.show()
-
-## need to run this on the terminal with root privileges 
-pkt = sniff(filter="icmp", prn=print_pkt)
+??
 
 \end{lstlisting}
 \end{minipage}
@@ -668,84 +678,130 @@ pkt = sniff(filter="icmp", prn=print_pkt)
 
 The results of running the sniffer can be seen in the following figure.
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.4]{images/sniffScapy.png}
-}
-\caption{Scapy result for icmp}
-\label{RegLin:fig}
-\end{figure}
-
-\subsubsection{Example to extract features from PCAP files}
-
-A PCAP file is a type of file used to store collected network data. For this example, for instance, we collected data from an IOT (Internet Of Things) network environment. The goal is to go from data in the network (in the form of packets) to a vector space representation of the data samples for use in ML applications. The following figure summarizes the pipeline. 
 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.4]{images/IOTallpipeline.png}
-}
-\caption{IOT network data pipeline}
-\label{RegLin:fig}
-\end{figure}
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/sniffScapy.png" height="500" width="auto">
+      </div>
+
+ </center>
+
+
+	
+
+	<h3>
+		Example to extract features from PCAP files
+	</h3>
+
+
+
+A PCAP file is a type of file used to store collected network data. For this example, for instance, we collected data from an IOT 
+	(Internet Of Things) network environment. The goal is to go from data in the network (in the form of packets) to a vector space 
+	representation of the data samples for use in ML applications. The following figure summarizes the pipeline. 
+
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/IOTallpipeline.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 The IOT network consists of IP enabled devices such as cameras, assistants, etc. (next Figure).
 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.45]{images/iotNetwork.png}
-}
-\caption{IOT devices}
-\label{RegLin:fig}
-\end{figure}
+
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/iotNetwork.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 
 Sniffers such as Wireshark produce PCAP files (figure below).
 
 In this example, we extract features from PCAP files in order to represent the raw data as feature vectors. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.45]{images/PCAPfileExample.png}
-}
-\caption{PCAP File}
-\label{RegLin:fig}
-\end{figure}
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/PCAPfileExample.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 The PCAP file includes many columns. Here is a description of a few of the columns:
 
-\begin{itemize}
-    \item No: The number of the packet in the captured file
-    \item Time: The timestamp of the packet
-    \item Source: The address where this packet is coming from
-    \item Destination: The address where this packet is going to
-    \item Protocol: The protocol name in a short (perhaps abbreviated) version
-    \item Length: The length of each packet
-\end{itemize}
+
+
+<ul>
+	<li>No: The number of the packet in the captured file</li>
+	<li>Time: The timestamp of the packet</li>
+	<li>Source: The address where this packet is coming from</li>
+	<li>Destination: The address where this packet is going to</li>
+	<li>Protocol: The protocol name in a short (perhaps abbreviated) version</li>
+	<li>Length: The length of each packet</li>
+	<li></li>
+</ul>
+
+	
+
 
 The following figure shows an example of some of the features we can use. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.6]{images/FeaturePCAP.png}
-}
-\caption{PCAP features}
-\label{RegLin:fig}
-\end{figure}
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/FeaturePCAP.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 Every packet is made up of headers such as IP, TCP, etc. And each header can contain multiple fields (e.g. srcport, protocol, etc.). 
 
-The following code can be used to extract features from PCAP files. The PCAP files used in this example are available on the GitHub. First we filter the PCAP file and then we extract features using "tshark". The results are written to a text file.  
+The following code can be used to extract features from PCAP files. The PCAP files used in this example are available on the GitHub. First we filter
+	the PCAP file and then we extract features using "tshark". The results are written to a text file.  
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{ caption={PCAP Feature Extraction }  }
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+The "tshark" command includes several flags. 
+
+Some of the "tshark" flags from the previous code segment are described in the following figure.
+
+
+
+
+
+
+
+<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/tsharkCommands.png" height="500" width="auto">
+      </div>
+
+ </center>
+	
+
+	
+
+	
+
+
+<center>
+<div>
+<textarea rows="55" cols="100">
+
+	
 
 import os
 import glob
@@ -797,23 +853,16 @@ for filteredFile in glob.glob('filtered_pcap/*.pcap'):
         labelFeature.writelines(label + "," + features + "\n")
 
 
-\end{lstlisting}
-\end{minipage}
-
-The "tshark" command includes several flags. 
-
-Some of the "tshark" flags from the previous code segment are described in the following figure.
-
-
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.35]{images/tsharkCommands.png}
-}
-\caption{Some tshark commands}
-\label{RegLin:fig}
-\end{figure}
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 
+	
 After running the previous code, the extracted features, written to the final text file, should look like the following. 
 
 \begin{figure}[H]\centering
