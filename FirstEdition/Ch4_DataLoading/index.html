@@ -42,11 +42,11 @@
 
     <center>
       <div>
-         <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/Ch3_TraditionalML/images/outerProd.png" height="200" width="auto">
+    
+         <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/IOTallpipeline.png" height="500" width="auto">
       </div>
 
     </center>
-
 
 
 
@@ -166,7 +166,7 @@ The code to load the data to both SKlearn based traditional machine learning alg
 	
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="10" cols="100">
 
 	
 1.0,6.1,2.8,4.7,1.2 
@@ -352,9 +352,8 @@ ML algorithm implementations in PyTorch use one-hot encoding. Quite simply, one 
 
 <center>
 <div>
-<textarea rows="25" cols="100">
+<textarea rows="15" cols="100">
 
-	
 0 
 1 
 1 
@@ -385,9 +384,8 @@ and convert them to labels in the equivalent one-hot encoded format as shown bel
 
 	<center>
 <div>
-<textarea rows="25" cols="100">
+<textarea rows="15" cols="100">
 
-	
 1,0,0 
 0,1,0 
 0,1,0 
@@ -662,18 +660,34 @@ Sniffing is the process of collecting data from network  packets. The Python Sca
 	we see an example of how to collect network packet data from ping (icmp) packets using Scapy. The function "sniff" has a filter option to specify 
 	what kinds of packets to collect (e.g. icmp, http, sport=80, etc.).  
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Scapy}}
-%%\lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
 
-??
 
-\end{lstlisting}
-\end{minipage}
+
+
+	
+<center>
+<div>
+<textarea rows="25" cols="100">
+
+	
+## !pip install scapy
+from scapy.all import *
+
+a = IP()
+a.show()
+
+def print_pkt(pkt):
+    pkt.show()
+
+## need to run this on the terminal with root privileges 
+pkt = sniff(filter="icmp", prn=print_pkt)
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 
 The results of running the sniffer can be seen in the following figure.
