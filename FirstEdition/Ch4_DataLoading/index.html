@@ -1441,19 +1441,28 @@ Deep neural networks can be used to discover the features simply by providing th
 	output layer from the original classification task. Instead, the classification task can be changed to another task. Convolutional Neural Networks (CNNs) 
 	can provide this functionality for image processing and classification.
 
-\subsubsection{A Class to Load Images into Tensors}
 
-Loading images into tensors can be challenging. The following code listing presents an object oriented approach to load images from files into PyTorch tensors. This OOP class was written by my students Danielle Turner, David Higley, and Joseph Shapiro and I thank them for it. 
+<h3>
+	A Class to Load Images into Tensors
+</h3>
+	
+
+
+Loading images into tensors can be challenging. The following code listing presents an object oriented approach to load images from files into PyTorch tensors. 
+	This OOP class was written by my students Danielle Turner, David Higley, and Joseph Shapiro and I thank them for it. 
 
 First we import the libraries. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Load Images Class - libraries}}
-%%\lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
 
 import os
 import torch
@@ -1466,22 +1475,32 @@ from torchvision import transforms
 
 from sklearn.model_selection import train_test_split
 
-\end{lstlisting}
-\end{minipage}
+   
+</textarea>
+  
+</div>
+</center>
 
 
+
+	
 
 
 Next we define the class to load the images from folders into tensors. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Load Images Class - part 1 }}
-%%\lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="45" cols="100">
+
+
 
 class ImageDataset(Dataset):
   
@@ -1520,22 +1539,35 @@ class ImageDataset(Dataset):
 
     ...
 
-\end{lstlisting}
-\end{minipage}
+
+   
+</textarea>
+  
+</div>
+</center>
 
 
+
+
+
+
+	
 
 The Dataset of images is in \textbf{data\_path} which is the path to the images folder. This should contain multiple folders of each class.
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={folder of images structure }}
-%%\lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
 
 
             - images
@@ -1546,24 +1578,41 @@ The Dataset of images is in \textbf{data\_path} which is the path to the images 
                     - some-dog.jpg
                 - ...
 
-\end{lstlisting}
-\end{minipage}
+   
+</textarea>
+  
+</div>
+</center>
 
 
-The current working directory is where the \textbf{pt} file will be stored. The \textbf{train} parameter is for whether to load train or test data. The \textbf{transform} parameter indicates the Torch transform to apply to the image data. The \textbf{target\_transform} is the transform to apply to the targets if needed. The \textbf{convert} parameter is used to indicate if the data should be converted from images, or loaded from a \textbf{pt} file. The \textbf{size} parameter is to set the size of the images to convert to. This should be the same as the size of the images in the \textbf{pt} file (e.g. 226).
-
-The next code segment includes the definitions of the \textbf{convert} and \textbf{load\_functions} for the images. 
-
-The \textbf{convert} function in this OOP class is what converts the images to a defined size and then \textbf{center} crops them.
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Load images class - part 2 }}
-%%\lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+	
+
+The current working directory is where the "pt" file will be stored. The "train" parameter is for whether to load train or test data. 
+	The "transform" parameter indicates the Torch transform to apply to the image data. The "target_transform" is the transform to
+	apply to the targets if needed. The "convert" parameter is used to indicate if the data should be converted from images, or loaded from 
+	a "pt" file. The "size" parameter is to set the size of the images to convert to. This should be the same as the size of the images
+	in the "pt" file (e.g. 226).
+
+The next code segment includes the definitions of the "convert" and "load_functions" for the images. 
+
+The "convert" function in this OOP class is what converts the images to a defined size and then "center" crops them.
+
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="55" cols="100">
+
+
+
 
 class ImageDataset(Dataset):
   
@@ -1613,72 +1662,108 @@ class ImageDataset(Dataset):
             raise ValueError('Dataset file does not exist. Try creating the dataset by running with convert=True first.') 
         self.data, self.targets, self.labels = torch.load(dataset_save)
 
-\end{lstlisting}
-\end{minipage}
+
+   
+</textarea>
+  
+</div>
+</center>
 
 
 
 
-\section{Corpora (i.e. Annotated Datasets)}
-
-A supervised machine learning algorithm is only as good as the data that is provided to it. ML models learn how human annotators assign the labels to a sample and a system can only be expected to be as good as the human annotator. Some tasks are more subjective than others for human annotators and this is usually reflected in the classifier performance. Therefore, many practitioners recommend, before measuring classifier performance, that an analysis of the subjectivity of the human annotation should be performed. This is usually referred to as Inter Annotator Agreement. 
-When annotating (labeling) a new resource, the quality of the annotation process must be measured in some way. Inter-annotator metrics refer to techniques used to measure the overall agreement between the annotations of two or more individuals (humans). Important metrics used to evaluate inter-annotator agreement (\babelEN{\cite{artsteinRef}}) include: 
-
-\begin{itemize}
-\item Average observed agreement
-\item Pi
-\item Alpha
-\item S
-\item Kappa 
-\end{itemize}
+	<h3>
+		Corpora (i.e. Annotated Datasets)
+	</h3>
 
 
+
+A supervised machine learning algorithm is only as good as the data that is provided to it. ML models learn how human annotators assign the labels 
+	to a sample and a system can only be expected to be as good as the human annotator. Some tasks are more subjective than others for human annotators and this
+	is usually reflected in the classifier performance. Therefore, many practitioners recommend, before measuring classifier performance, that an analysis of the 
+	subjectivity of the human annotation should be performed. This is usually referred to as Inter Annotator Agreement. 
+When annotating (labeling) a new resource, the quality of the annotation process must be measured in some way. Inter-annotator metrics refer to techniques used to
+	measure the overall agreement between the annotations of two or more individuals (humans). Important metrics used to evaluate inter-annotator 
+	agreement (\babelEN{\cite{artsteinRef}}) include: 
+
+
+
+
+
+<ul>
+	<li>Average observed agreement</li>
+	<li>Pi</li>
+	<li>Alpha</li>
+	<li>S</li>
+	<li>Kappa</li>
+	<li></li>
+
+</ul>
+	
 
 
 In general, these metrics differ in how they correct for expected chance agreement. 
 
-\textbf{Expected chance agreement}
+<h4>Expected chance agreement</h4>
 
-Expected chance agreement is the probability that 2 annotators will agree on their annotation for an item by chance. This probability depends on the number of classes. Formally, this probability is calculated as follows:
+Expected chance agreement is the probability that 2 annotators will agree on their annotation for an item by chance. This probability depends 
+	on the number of classes. Formally, this probability is calculated as follows:
 
-\begin{center} 
+
 $  A_e =  \sum_{k \in K} P( k | c_1) \cdot P(k | c_2)    $
-\end{center}
 
 
 
-where $ c_i  $  is the annotator $ i $ , and $ k $ is the assigned category. Inter-annotator agreement metrics are important because they help to set theoretical boundaries on the accuracy that a given machine learning methodology can achieve using the annotated corpora (\babelEN{\cite{birdRef}}). A brief description of some of the techniques is provided in the following discussion.
 
-\textbf{Average Observed Agreement (Ao)}
+where $ c_i  $  is the annotator $ i $ , and $ k $ is the assigned category. Inter-annotator agreement metrics are important because they help to set 
+	theoretical boundaries on the accuracy that a given machine learning methodology can achieve using the annotated corpora (\babelEN{\cite{birdRef}}). 
+	A brief description of some of the techniques is provided in the following discussion.
 
-Averaged observed agreement is the easiest metric to compute. It is the percentage of annotations that two annotators agreed upon. The metric is formulated as follows where the variable \textbf{“samples”} represents the total number of annotation samples, and \textbf{“agreed”} is the amount of samples for which both annotators agreed.
 
-\begin{center} 
+
+	<h4>
+		Average Observed Agreement (Ao)
+	</h4>
+
+
+Averaged observed agreement is the easiest metric to compute. It is the percentage of annotations that two annotators agreed upon. The metric is 
+	formulated as follows where the variable \textbf{“samples”} represents the total number of annotation samples, and \textbf{“agreed”} is the amount 
+	of samples for which both annotators agreed.
+
+
 $  A_o = \frac{1}{samples} \sum Agreed $
-\end{center}
 
 
-\textbf{ Chance-corrected Metrics (Acorr) }
+	<h4>
+		Chance-corrected Metrics (Acorr)
+	</h4>
 
-Chance corrected metrics are those that take into account the \textbf{expected} chance agreement \textbf{Ae}. Once chance agreement is defined, the metric can be corrected. These types of metrics include: \textbf{s}, \textbf{alpha}, and \textbf{kappa}. Formally, the main concept in these metrics is defined as follows: 
 
 
-\begin{center} 
+Chance corrected metrics are those that take into account the \textbf{expected} chance agreement \textbf{Ae}. Once chance agreement is defined, 
+	the metric can be corrected. These types of metrics include: \textbf{s}, \textbf{alpha}, and \textbf{kappa}. Formally, the main concept in these 
+	metrics is defined as follows: 
+
+
+
 $  A_{corr} =  \frac{A_o - A_e}{1 - A_e}   $
-\end{center}
+
 
 
 The following code segment shows how to perform this analysis using the well known \textbf{nltk} framework ( www.nltk.org ). 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{frame=lines}
-\lstset{caption={Inter-Annotator Agreement code}}
-%%\lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
+
+
 
 #interannotator agreement
 import nltk
@@ -1707,41 +1792,33 @@ toy2 = ['ORG','LOC','LOC','LOC']
 cm = nltk.metrics.ConfusionMatrix(toy1,toy2)
 print( cm )
 
-\end{lstlisting}
-\end{minipage}
-
-
-
-More details about data collection, corpora development, and web scraping can be found from the following sources: Web Scraping with Python by Ryan Mitchell, Calix and Knapp (2011), and Natural Language Processing with Python by Bird, Klein, and Loper.  
-
-\section{Summary}
-
-In this chapter, a discussion about issues related to data and data pre-processing was provided. In particular, the following topics were addressed: data pre-processing, reading data from csv files, types of features, corpora processing, and one-hot encoding. In the next chapter, we will begin our discussion of how to program out first deep learning models with PyTorch. 
-
-
-
 
    
-
-
-
-
-
+</textarea>
+  
+</div>
+</center>
 
 
 
 
 	
+
+More details about data collection, corpora development, and web scraping can be found from the following sources: Web Scraping with Python by 
+	Ryan Mitchell, Calix and Knapp (2011), and Natural Language Processing with Python by Bird, Klein, and Loper.  
+
+
 <h3>
-	Summary
+Summary
 </h3>
 
 
 
-This chapter provided an overview of some of the main traditional topics in machine learning. In particular, the following machine learning algorithms 
-	were presented: anomaly detection, logistic regression, KNN, and neural networks. Code examples of their implementation using the sklearn toolkit 
-	or Numpy  were presented and discussed. Additionally, issues related to classifier performance and information theory were also addressed. 
-	The next chapter will focus on issues related to data and data pre-processing that apply to "cyber security and machine learning".
+In this chapter, a discussion about issues related to data and data pre-processing was provided. In particular, the following topics were addressed: 
+	data pre-processing, reading data from csv files, types of features, corpora processing, and one-hot encoding. In the next chapter, we will 
+	begin our discussion of how to program out first deep learning models with PyTorch. 
+
+
 
 
 
