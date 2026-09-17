@@ -43,7 +43,7 @@
     <center>
       <div>
     
-         <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/IOTallpipeline.png" height="500" width="auto">
+		 <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/KDDdataVIZ.png" height="500" width="auto">
       </div>
 
     </center>
@@ -94,10 +94,6 @@ Network Security
 
 
 
-
-
-
-
 Network security relates to the computer network environment. The unit in this environment is the network packet. Think of packets as little trains with 
 	information that are sent from one computer to another over computer networks and the internet (the rail lines). There are many protocols used to send this 
 	data such as UDP/IP and TCP/IP. In general, data is encapsulated using several protocols as it is prepared to be sent across the network via packets. 
@@ -142,7 +138,7 @@ First we import the libraries as can be seen below.
 
 <center>
 <div>
-<textarea rows="35" cols="100">
+<textarea rows="25" cols="100">
 
 
 import numpy as np
@@ -192,15 +188,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 </div>
 </center>
 
-The KDD dataset is a small tabular data set in CSV format  with less than 100 features. The provided CSV file already has the data in the format of the vector space model so we can use it directly with our ML algorithms. Remember that the columns (e.g. source port, destination port, etc.) in the  CSV files represent axes in a vector space model. 
+The KDD dataset is a small tabular data set in CSV format  with less than 100 features. The provided CSV file already has the data in the format of the vector space 
+	model so we can use it directly with our ML algorithms. Remember that the columns (e.g. source port, destination port, etc.) in the  CSV files represent axes in 
+	a vector space model. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.4]{images/portsVectorSpace.png}
-}
-\caption{Ports and Protocol in Vector Space model}
-\label{RegLin:fig}
-\end{figure}
+
 
 
 	<center>
@@ -211,17 +203,13 @@ The KDD dataset is a small tabular data set in CSV format  with less than 100 fe
  </center>
 
 
-\textbf{ \underline{Note:}} Statisticians will complain about this vector space representation for port numbers (previous figure). They would argue that port 22 in the context of computer networks is not more or less than port 80 or 4000. Instead, it would be better to represent port numbers categorically as in port 22 is either 0 or 1 (its own column), port 80 as 0 or 1 (its own column), and so on. 
+<strong>Note: </strong> Statisticians will complain about this vector space representation for port numbers (previous figure). They would argue that port 22 
+	in the context of computer networks is not more or less than port 80 or 4000. Instead, it would be better to represent port numbers categorically as in port 22 is
+	either 0 or 1 (its own column), port 80 as 0 or 1 (its own column), and so on. 
 
 A snippet of the KDD data should look like this:
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.4]{images/KDDdataVIZ.png}
-}
-\caption{KDD data visualization}
-\label{RegLin:fig}
-\end{figure}
+
 
 		<center>
       <div>
@@ -232,7 +220,7 @@ A snippet of the KDD data should look like this:
 
 We can read the data using the next code listing. Notice that we use operations such as
 
-train\_df[:, :-1]
+train_df[:, :-1]
 
 to slice the data from the CSV into "X" and "y" (Figure below).
 
@@ -729,13 +717,7 @@ print(  svd_dtm_pd  )
 
 After compression, we reduce the number of columns to just 2 (next figure) in a way that we still retain most of the information from the initial set of feature tokens. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=1.5\textheight}{
-    \includegraphics[scale=0.6]{images/SVDanomaly.png}
-}
-\caption{Compressed packet payload data}
-\label{RegLin:fig}
-\end{figure}
+
 
 
 
@@ -857,7 +839,7 @@ Now we can use the following code to visualize the results of the KMeans algorit
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="25" cols="100">
 
 X = dtm_lsa
 
