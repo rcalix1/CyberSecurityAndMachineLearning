@@ -113,7 +113,11 @@ Firewalls and Intrusion Detection Systems (IDS) are a traditional way to defend 
 
 In this chapter I will present an ML based IDS, a privacy preserving auto-encoder, and more. 
 
-\section{Intrusion Detection Systems (IDS)}
+
+
+	<h3>
+		Intrusion Detection Systems (IDS)
+	</h3>
 
 
 Machine learning for intrusion detection addresses extracting data from network packets for use as features to train classifiers that can identify network attacks. 
@@ -199,6 +203,14 @@ The KDD dataset is a small tabular data set in CSV format  with less than 100 fe
 \end{figure}
 
 
+	<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/portsVectorSpace.png" height="500" width="auto">
+      </div>
+
+ </center>
+
+
 \textbf{ \underline{Note:}} Statisticians will complain about this vector space representation for port numbers (previous figure). They would argue that port 22 in the context of computer networks is not more or less than port 80 or 4000. Instead, it would be better to represent port numbers categorically as in port 22 is either 0 or 1 (its own column), port 80 as 0 or 1 (its own column), and so on. 
 
 A snippet of the KDD data should look like this:
@@ -210,6 +222,13 @@ A snippet of the KDD data should look like this:
 \caption{KDD data visualization}
 \label{RegLin:fig}
 \end{figure}
+
+		<center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/KDDdataVIZ.png" height="500" width="auto">
+      </div>
+
+ </center>
 
 We can read the data using the next code listing. Notice that we use operations such as
 
@@ -224,6 +243,13 @@ to slice the data from the CSV into "X" and "y" (Figure below).
 \caption{The CSV data sliced into X and y}
 \label{RegLin:fig}
 \end{figure}
+
+
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/KDDxANDy.png" height="500" width="auto">
+      </div>
+ </center>
 
 
 We  read and slice the data with the following code. 
@@ -486,9 +512,13 @@ Confusion Matrix:
 
 	
 
-\section{Anomaly Detection with Packet Payloads}
 
-In this section I will show an example of Anomaly Detection with packet payloads in vector spaces. I will show how to encode packet payloads with the "Bag of Words" approach. We will also use KMeans clustering and Singular Value Decomposition. Obviously, this assumes the payload data is not encrypted. 
+	<h3>
+		Anomaly Detection with Packet Payloads
+	</h3>
+
+In this section I will show an example of Anomaly Detection with packet payloads in vector spaces. I will show how to encode packet payloads with the 
+	"Bag of Words" approach. We will also use KMeans clustering and Singular Value Decomposition. Obviously, this assumes the payload data is not encrypted. 
 
 
 The following code listings describe the process. First we import the libraries. 
@@ -525,7 +555,8 @@ import matplotlib.pyplot as plt
 </center>
 	
 
-Next we proceed to define a "hex" tokenizer. The data in the payloads is assumed to be hex values of length 2. Therefore, we will extract every 2 characters as a token for use as our vocabulary. This can be done with the following code. 
+Next we proceed to define a "hex" tokenizer. The data in the payloads is assumed to be hex values of length 2. Therefore, we will extract every 2 characters 
+	as a token for use as our vocabulary. This can be done with the following code. 
 
 
 
@@ -554,7 +585,8 @@ def hex_tokenizer(text):
 
 
 	
-In the next code segment, I will create the data set for this example. It is a random set of hexadecimal values in seven packets. I have intentionally made the first five samples similar to each other and dissimilar to the last 2 samples. The last 2 are the anomaly packets. 
+In the next code segment, I will create the data set for this example. It is a random set of hexadecimal values in seven packets. I have intentionally
+	made the first five samples similar to each other and dissimilar to the last 2 samples. The last 2 are the anomaly packets. 
 
 
 
@@ -660,6 +692,12 @@ The data now looks as follows:
 
 
 
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/EncodedHexDataAnomaly.png" height="500" width="auto">
+      </div>
+ </center>
+	
 
 For visualization purposes, we now proceed to compress the data using Singular Value Decomposition (SVD).
 
@@ -700,6 +738,14 @@ After compression, we reduce the number of columns to just 2 (next figure) in a 
 \end{figure}
 
 
+
+ <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/SVDanomaly.png" height="500" width="auto">
+      </div>
+ </center>
+
+	
 We can now proceed to plot the compressed data as is. The following code listing shows how to plot 2 columns using matplotlib.
 
 
@@ -740,6 +786,13 @@ The plot can be seen in the following figure.
 \caption{Plot before KMeans}
 \label{RegLin:fig}
 \end{figure}
+
+
+	 <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/plotSVDbeforeKMEANS.png" height="500" width="auto">
+      </div>
+ </center>
 
 
 
@@ -847,7 +900,18 @@ The final plot is as follows. Notice the 2 stars representing the 2 anomalies on
 \label{RegLin:fig}
 \end{figure}
 
-\section{Restricted Boltzman Machines}
+
+	 <center>
+      <div>
+        <img src="https://rcalix1.github.io/CyberSecurityAndMachineLearning/FirstEdition/images/SVDplotAfterKMEANS.png" height="500" width="auto">
+      </div>
+ </center>
+
+
+
+	<h3>
+		Restricted Boltzman Machines
+	</h3>
 
 Restricted Boltzman Machines (RBMs)  build on the idea of Hopfield networks and can be used to discover properties in data or anomalies. RBMs were first developed
 	in the 1980's and, as such, have a more basic NN structure than the advanced deep neural networks of today.
@@ -924,20 +988,20 @@ class RBM:
 </center>
 	
 
-Now we can proceed to provide the data and train the model. Notice that the data here is binary so it consists of 0s and 1s. This could be used for ports numbers, for instance. 
+Now we can proceed to provide the data and train the model. Notice that the data here is binary so it consists of 0s and 1s. This could be used for ports 
+	numbers, for instance. 
 
 For example:
 
-\begin{itemize}
-    \item port 22 .....0
-    \item port 80 .....1
-    \item port 8080...0
-    \item etc.
-\end{itemize}
 
 
 
-
+<ul>
+	<li>port 22 .....0</li>
+	<li>port 80 .....1</li>
+	<li>port 8080...0</li>
+	<li>etc.</li>
+</ul>
 
 
 
@@ -1038,9 +1102,17 @@ print( distance )
 For this example, the distance between the input test sample and the reconstructed sample is "6". 
 
 
-\section{Privacy Preserving Auto-Encoder}
+	<h3>
+		Privacy Preserving Auto-Encoder
+	</h3>
 
-One of the biggest problems in developing ML models for cyber security is getting the data. Many companies and institutions do not like to share their data given that it may include sensitive private data that should not be shared. In this section I discuss a use case of a technique for cyber defense that is privacy preserving. The approach involves auto-encoders and it is a type of anomaly detection system. The basic idea is to train multiple auto encoders that each learn to reconstruct normal network data as embeddings (e.g. for http or telnet traffic). Once these auto-encoders are trained, they can be used to create embeddings of new network traffic test samples. If the produced embeddings deviate too much from the trained profile distribution, then the auto-encoder based system can flag the traffic as an anomaly. This approach is general purpose and privacy preserving since it only requires benign samples that are normal to the site's distribution. This technique can be thought of as an unsupervised  type of ML approach. 
+One of the biggest problems in developing ML models for cyber security is getting the data. Many companies and institutions do not like to share their
+	data given that it may include sensitive private data that should not be shared. In this section I discuss a use case of a technique for cyber defense that 
+	is privacy preserving. The approach involves auto-encoders and it is a type of anomaly detection system. The basic idea is to train multiple auto encoders that 
+	each learn to reconstruct normal network data as embeddings (e.g. for http or telnet traffic). Once these auto-encoders are trained, they can be used to create
+	embeddings of new network traffic test samples. If the produced embeddings deviate too much from the trained profile distribution, then the auto-encoder based 
+	system can flag the traffic as an anomaly. This approach is general purpose and privacy preserving since it only requires benign samples that are normal to the
+	site's distribution. This technique can be thought of as an unsupervised  type of ML approach. 
 
 
 In this section I will provide a simple example, using random data, of the general privacy preserving auto-encoder approach. 
@@ -1125,10 +1197,11 @@ train_dl = DataLoader(dataset=train_ds, batch_size=64, shuffle=True)
 </center>
 	
 
-Notice that "x\_train" and "y\_train" are the same data. 
+Notice that "x_train" and "y_train" are the same data. 
 
 
-We can now define a simple Auto-Encoder architecture.  The encoder layer goes from input to the hidden (latent) layer. And the decoder layer goes from the hidden (latent) layer to the output layer. Notice input and output have the same size and will be the same data samples during training. 
+We can now define a simple Auto-Encoder architecture.  The encoder layer goes from input to the hidden (latent) layer. And the decoder layer goes from the hidden 
+	(latent) layer to the output layer. Notice input and output have the same size and will be the same data samples during training. 
 
 
 
@@ -1224,7 +1297,9 @@ for epoch in range(10):
 
 	
 
-Once the model is trained, we can run it on, for example, 3 suspicious test samples. We measure the distance between the original and the re-constructed samples. Produced samples with the highest distance from the original sample are flagged as anomalous (i.e. more different). We use the Euclidean distance for this distance measurement. 
+Once the model is trained, we can run it on, for example, 3 suspicious test samples. We measure the distance between the original and the re-constructed samples. 
+	Produced samples with the highest distance from the original sample are flagged as anomalous (i.e. more different). We use the Euclidean distance for this 
+	distance measurement. 
 
 
 
