@@ -138,7 +138,7 @@ First we import the libraries as can be seen below.
 
 <center>
 <div>
-<textarea rows="25" cols="100">
+<textarea rows="20" cols="100">
 
 
 import numpy as np
@@ -168,7 +168,7 @@ Next we set some parameters such as the batch size, learning rate, and device.
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="10" cols="100">
 
 
 batch_size = 8
@@ -224,13 +224,7 @@ train_df[:, :-1]
 
 to slice the data from the CSV into "X" and "y" (Figure below).
 
-\begin{figure}[H]\centering
-\adjustbox{max height=0.6\textheight}{
-    \includegraphics[scale=0.4]{images/KDDxANDy.png}
-}
-\caption{The CSV data sliced into X and y}
-\label{RegLin:fig}
-\end{figure}
+
 
 
  <center>
@@ -318,7 +312,7 @@ We can now define a neural network architecture for the IDS. Notice that we defi
 
 <center>
 <div>
-<textarea rows="35" cols="100">
+<textarea rows="25" cols="100">
 
 
 class Net(nn.Module):
@@ -556,7 +550,7 @@ Next we proceed to define a "hex" tokenizer. The data in the payloads is assumed
 
 <center>
 <div>
-<textarea rows="15" cols="100">
+<textarea rows="10" cols="100">
 
 
 def hex_tokenizer(text):
@@ -670,13 +664,6 @@ print( dtm_pd )
 
 The data now looks as follows:
 
-\begin{figure}[H]\centering
-\adjustbox{max height=1.5\textheight}{
-    \includegraphics[scale=0.4]{images/EncodedHexDataAnomaly.png}
-}
-\caption{Encoded hex data}
-\label{RegLin:fig}
-\end{figure}
 
 
 
@@ -761,13 +748,7 @@ plt.show()
 
 The plot can be seen in the following figure.
 
-\begin{figure}[H]\centering
-\adjustbox{max height=1.5\textheight}{
-    \includegraphics[scale=0.45]{images/plotSVDbeforeKMEANS.png}
-}
-\caption{Plot before KMeans}
-\label{RegLin:fig}
-\end{figure}
+
 
 
 	 <center>
@@ -822,7 +803,7 @@ print( y_lsa )
 </center>
 	
 
-The results for the seven packets are in "y\_lsa". Printing this vector gives us the following: 
+The results for the seven packets are in "y_lsa". Printing this vector gives us the following: 
 
 [0, 0, 0, 0, 0, 1, 1]
 
@@ -874,13 +855,7 @@ plt.show()
 	
 The final plot is as follows. Notice the 2 stars representing the 2 anomalies on the upper left hand corner. 
 
-\begin{figure}[H]\centering
-\adjustbox{max height=1.5\textheight}{
-    \includegraphics[scale=0.45]{images/SVDplotAfterKMEANS.png}
-}
-\caption{Plot after KMeans}
-\label{RegLin:fig}
-\end{figure}
+
 
 
 	 <center>
