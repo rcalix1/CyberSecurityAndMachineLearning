@@ -38,7 +38,7 @@
 
 <div class="main">    <!-- for the fixed nav bar -->
 
-<h1>Chapter 4 - Data Loading and Pre-processing(Sample) </h1>
+<h1>Chapter 6 - Network Security (Sample) </h1>
 
     <center>
       <div>
@@ -84,7 +84,7 @@
     
 
 <h1>
-Data Loading and Pre-processing
+Network Security
 	
 </h1>
 
@@ -94,43 +94,52 @@ Data Loading and Pre-processing
 
 
 
-\chapter{Network Security}
 
 
 
-Network security relates to the computer network environment. The unit in this environment is the network packet. Think of packets as little trains with information that are sent from one computer to another over computer networks and the internet (the rail lines). There are many protocols used to send this data such as UDP/IP and TCP/IP. In general, data is encapsulated using several protocols as it is prepared to be sent across the network via packets. 
 
-Hackers try to understand these protocols to find vulnerabilities that they can exploit. In general, machine learning algorithms can be used to analyze incoming packets to try to detect which ones could be related to an attack.
+Network security relates to the computer network environment. The unit in this environment is the network packet. Think of packets as little trains with 
+	information that are sent from one computer to another over computer networks and the internet (the rail lines). There are many protocols used to send this 
+	data such as UDP/IP and TCP/IP. In general, data is encapsulated using several protocols as it is prepared to be sent across the network via packets. 
+
+Hackers try to understand these protocols to find vulnerabilities that they can exploit. In general, machine learning algorithms can be used to analyze incoming
+	packets to try to detect which ones could be related to an attack.
 
 Common network attacks include: denial of service attacks, SYN flooding, TCP session hijacking, buffer overflow attacks, and many more. 
 
-Firewalls and Intrusion Detection Systems (IDS) are a traditional way to defend against these attacks. The problem is that these approaches depend on already knowing the characteristics of the attack. There are other types of attacks that are unknown, and these may require more advanced approaches such as machine learning.
+Firewalls and Intrusion Detection Systems (IDS) are a traditional way to defend against these attacks. The problem is that these approaches depend on already
+	knowing the characteristics of the attack. There are other types of attacks that are unknown, and these may require more advanced approaches such as machine 
+	learning.
 
 In this chapter I will present an ML based IDS, a privacy preserving auto-encoder, and more. 
 
 \section{Intrusion Detection Systems (IDS)}
 
 
-Machine learning for intrusion detection addresses extracting data from network packets for use as features to train classifiers that can identify network attacks. Examples in the literature of ML for IDS include studies such as:  \cite{SankaranCalix2013Ref}, etc. There are some well known datasets in this area such as the KDD dataset. Good Python libraries for this kind of work include Python's Scapy which can be very helpful to collect the data.
+Machine learning for intrusion detection addresses extracting data from network packets for use as features to train classifiers that can identify network attacks. 
+	Examples in the literature of ML for IDS include studies such as:  \cite{SankaranCalix2013Ref}, etc. There are some well known datasets in this area such as
+	the KDD dataset. Good Python libraries for this kind of work include Python's Scapy which can be very helpful to collect the data.
 
 The following is an example of ML for intrusion detection. The data for this example is available here:
 
-\begin{itemize}
-    \item https://github.com/rcalix1/CyberSecurityAndMachineLearning/tree/main/FirstEdition
 
-\end{itemize}
+
+	<ul>
+		<li>
+			https://github.com/rcalix1/CyberSecurityAndMachineLearning/tree/main/FirstEdition
+		</li>
+	</ul>
 
 
 First we import the libraries as can be seen below.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - Libraries}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
 
 import numpy as np
 import pandas as pd
@@ -144,19 +153,23 @@ from torch.utils.data import TensorDataset, DataLoader
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
-\end{lstlisting}
-\end{minipage}
+
+
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 Next we set some parameters such as the batch size, learning rate, and device.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - Parameters}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 batch_size = 8
 learning_rate = 1e-3
@@ -166,8 +179,14 @@ random_seed = int(random.random() * 100)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-\end{lstlisting}
-\end{minipage}
+
+
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 The KDD dataset is a small tabular data set in CSV format  with less than 100 features. The provided CSV file already has the data in the format of the vector space model so we can use it directly with our ML algorithms. Remember that the columns (e.g. source port, destination port, etc.) in the  CSV files represent axes in a vector space model. 
 
@@ -210,14 +229,12 @@ to slice the data from the CSV into "X" and "y" (Figure below).
 We  read and slice the data with the following code. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - Read the data}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
 
 train_df = pd.read_csv('train_kdd_small.csv').to_numpy()
 test_df = pd.read_csv('test_kdd_small.csv').to_numpy()
@@ -230,20 +247,27 @@ for col in range(1, 4):
     x_train[:, col] = LabelEncoder().fit_transform(x_train[:, col])
     x_test[:, col]  = LabelEncoder().fit_transform( x_test[:, col])
 
-\end{lstlisting}
-\end{minipage}
+
+
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 The label encoder is used to convert string based text into numbers. 
 Next we scale the data, transform the string labels and features, and  create the data loaders.
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - Data processing and Loaders}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="25" cols="100">
+
 
 x_train = StandardScaler().fit_transform(x_train)
 x_test  = StandardScaler().fit_transform(x_test)
@@ -259,24 +283,29 @@ y_test  = torch.from_numpy(y_test.astype(np.int64))
 train_ds = TensorDataset(x_train, y_train)
 train_dl = DataLoader(dataset=train_ds, batch_size=batch_size, shuffle=True)
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+	
 
 
 We can now define a neural network architecture for the IDS. Notice that we define a standard deep learning architecture. 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - The Net}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+<center>
+<div>
+<textarea rows="35" cols="100">
+
 
 class Net(nn.Module):
     def __init__(self):
@@ -302,10 +331,15 @@ class Net(nn.Module):
         
         return pred
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 
 Now we define the training loop. The training loop is very similar to our previous implementations from chapter 5. 
@@ -314,14 +348,15 @@ Now we define the training loop. The training loop is very similar to our previo
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - The Training Loop}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 def train_loop(n_epochs, model, loss_fn, optimizer, scheduler):
     model.train()
@@ -339,22 +374,30 @@ def train_loop(n_epochs, model, loss_fn, optimizer, scheduler):
             print('lr:', scheduler.get_last_lr())
 
 
-\end{lstlisting}
-\end{minipage}
 
+
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 In the next code listing we can instantiate the model, the optimizer, the scheduler, and the loss function. Notice that we use Cross Entropy for the loss function.
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - Define loss function and model}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 model = Net().to(device)
 
@@ -364,22 +407,27 @@ scheduler = lr_scheduler.OneCycleLR(optimizer=optimizer, max_lr=learning_rate, e
 loss_fn = nn.CrossEntropyLoss()
 
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 With all that defined, we are now ready to train the IDS model. We can now run the training loop and visualize the loss values.
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - Loss performance after training}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 train_loop(n_epochs, model, loss_fn, optimizer, scheduler)
 
@@ -392,11 +440,14 @@ lr: [4.510549641772479e-08]
 
 
 
-\end{lstlisting}
-\end{minipage}
 
-
-
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 
 Finally, we can print out the performance. From the metrics, we can see that the model performs really well. 
@@ -404,14 +455,16 @@ Finally, we can print out the performance. From the metrics, we can see that the
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={IDS - Performance and results}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 Accuracy: 1.00
 Precision: 1.000
@@ -423,10 +476,15 @@ Confusion Matrix:
 
 
 
-\end{lstlisting}
-\end{minipage}
 
+   
+   
+</textarea>
+  
+</div>
+</center>
 
+	
 
 \section{Anomaly Detection with Packet Payloads}
 
@@ -435,14 +493,16 @@ In this section I will show an example of Anomaly Detection with packet payloads
 
 The following code listings describe the process. First we import the libraries. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - Libraries}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 import sklearn
 import pandas as pd
@@ -455,46 +515,59 @@ from sklearn.decomposition import TruncatedSVD
 import matplotlib.pyplot as plt
 
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 Next we proceed to define a "hex" tokenizer. The data in the payloads is assumed to be hex values of length 2. Therefore, we will extract every 2 characters as a token for use as our vocabulary. This can be done with the following code. 
 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - Hex tokenizer}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 def hex_tokenizer(text):
     return [ text[i:i+2] for i in range(0, len(text), 2)]
 
 
-\end{lstlisting}
-\end{minipage}
+
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 
+	
 In the next code segment, I will create the data set for this example. It is a random set of hexadecimal values in seven packets. I have intentionally made the first five samples similar to each other and dissimilar to the last 2 samples. The last 2 are the anomaly packets. 
 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - The Data}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 ## Packet payloads
 
@@ -507,23 +580,28 @@ examples = ['a0328000bfdd',           ## Normal
             'df90421664aa'            ## -> Anomaly
 ]
 
-\end{lstlisting}
-\end{minipage}
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 
 In the next code listing we instantiate the "Bag of Words" Vectorizer from "sklearn". We train it on the data and print the identified 2-character long hex tokens. 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - The Vectorizer}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 vectorizer = CountVectorizer( tokenizer=hex_tokenizer, lowercase=False)
 
@@ -536,28 +614,39 @@ print(  vectorizer.get_feature_names_out()  )
 ## ['00' '12' '16' '32' '42' '64' '80' '90' 'a0' 'aa' 'ae' 'bf' 'cc' 'dd'
  'df' 'f4' 'ff']
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+	
 
 We can use pandas to display the vectorized data using the code in the following code listing. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - The data vectorized}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 dtm_pd = pd.DataFrame( dtm.toarray(), index=examples, columns=vectorizer.get_feature_names_out()  ).head(10)
 
 print( dtm_pd )
 
-\end{lstlisting}
-\end{minipage}
+
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 The data now looks as follows:
 
@@ -577,23 +666,28 @@ For visualization purposes, we now proceed to compress the data using Singular V
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - Compress data for visualization}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 lsa = TruncatedSVD(2)
 dtm_lsa = lsa.fit_transform(  dtm  )
 svd_dtm_pd = pd.DataFrame( dtm_lsa, index=examples, columns=["SVD1", "SV2"]  ).head(10)
 print(  svd_dtm_pd  )
 
-\end{lstlisting}
-\end{minipage}
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 After compression, we reduce the number of columns to just 2 (next figure) in a way that we still retain most of the information from the initial set of feature tokens. 
 
@@ -609,14 +703,15 @@ After compression, we reduce the number of columns to just 2 (next figure) in a 
 We can now proceed to plot the compressed data as is. The following code listing shows how to plot 2 columns using matplotlib.
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - Plot Compressed data for visualization}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 xs = [ w[0] for w in dtm_lsa ]
 ys = [ w[1] for w in dtm_lsa ]
@@ -628,9 +723,13 @@ plt.show()
 
 
 
-\end{lstlisting}
-\end{minipage}
-
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 The plot can be seen in the following figure.
 
@@ -649,14 +748,16 @@ We are now ready to perform the Anomaly Detection approach using an unsupervised
 The code can be seen in the next code listing. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - KMeans Clustering}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 from sklearn.cluster import KMeans
 km_lsa = KMeans(
@@ -676,10 +777,15 @@ print( y_lsa )
 ## array([0, 0, 0, 0, 0, 1, 1], dtype=int32)
 
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 The results for the seven packets are in "y\_lsa". Printing this vector gives us the following: 
 
@@ -690,14 +796,15 @@ As can be seen, the last 2 anomalous samples have been clustered as 1 and the fi
 Now we can use the following code to visualize the results of the KMeans algorithm.
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Anomaly Detection with Packet Payloads - Code to plot after KMeans Clustering}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
 
 X = dtm_lsa
 
@@ -721,10 +828,15 @@ plt.legend()
 plt.show()
 
 
-\end{lstlisting}
-\end{minipage}
 
+   
+   
+</textarea>
+  
+</div>
+</center>
 
+	
 The final plot is as follows. Notice the 2 stars representing the 2 anomalies on the upper left hand corner. 
 
 \begin{figure}[H]\centering
@@ -737,20 +849,21 @@ The final plot is as follows. Notice the 2 stars representing the 2 anomalies on
 
 \section{Restricted Boltzman Machines}
 
-Restricted Boltzman Machines (RBMs)  build on the idea of Hopfield networks and can be used to discover properties in data or anomalies. RBMs were first developed in the 1980's and, as such, have a more basic NN structure than the advanced deep neural networks of today.
+Restricted Boltzman Machines (RBMs)  build on the idea of Hopfield networks and can be used to discover properties in data or anomalies. RBMs were first developed
+	in the 1980's and, as such, have a more basic NN structure than the advanced deep neural networks of today.
 
 The following code segments show an example of how to use RBMs for anomaly  detection. 
 
 First we define the libraries and the RBM net. As you can see, the RBM has the basic structure of a neural network including hidden layers and weight optimization steps. 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={RBMs - The Net}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="55" cols="100">
+
 import numpy as np
 class RBM:
     def __init__(self, n_visible, n_hidden, learning_rate=0.1):
@@ -802,8 +915,14 @@ class RBM:
         return reconstructed
 
 
-\end{lstlisting}
-\end{minipage}
+
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 Now we can proceed to provide the data and train the model. Notice that the data here is binary so it consists of 0s and 1s. This could be used for ports numbers, for instance. 
 
@@ -816,14 +935,16 @@ For example:
     \item etc.
 \end{itemize}
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={RBMs - Data and Train}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="55" cols="100">
+
 
 data = np.array([
     [1,1, 1, 0, 1, 0],
@@ -853,22 +974,28 @@ Epoch is 9, Reconstruction Error: 7.5254
 Epoch is 10, Reconstruction Error: 7.4025
 
 
-\end{lstlisting}
-\end{minipage}
 
 
-Once the model is trained, we can use it to reconstruct an input into an output. We can then measure the distance between the input and output, and we use this distance to determine if the sample is an anomaly. 
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+	
+Once the model is trained, we can use it to reconstruct an input into an output. We can then measure the distance between the input and output,
+	and we use this distance to determine if the sample is an anomaly. 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={RBMs - Anomaly Detection}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="45" cols="100">
 
 
 test_sample   = np.array([1, 0, 1, 0, 0, 0])  # New input
@@ -898,9 +1025,15 @@ print( distance )
 ## Result: 6
 
 
-\end{lstlisting}
-\end{minipage}
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+	
 
 For this example, the distance between the input test sample and the reconstructed sample is "6". 
 
@@ -917,14 +1050,13 @@ Let us get started!
 First we import the libraries. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Privacy Preserving AutoEncoder - Libraries}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+	<center>
+<div>
+<textarea rows="35" cols="100">
+
 
 import torch
 import numpy as np
@@ -943,10 +1075,13 @@ from torchmetrics.functional.pairwise import pairwise_euclidean_distance
 
 
 
-\end{lstlisting}
-\end{minipage}
 
-
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 
 
@@ -959,14 +1094,17 @@ Next we can generate the random data and create the DataLoader. The random data 
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Privacy Preserving AutoEncoder - Random Data and DataLoader}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 privacy_tensor   = torch.randn( 1000, 784 )
 
@@ -978,10 +1116,14 @@ train_dl = DataLoader(dataset=train_ds, batch_size=64, shuffle=True)
 
 
 
-\end{lstlisting}
-\end{minipage}
 
-
+   
+   
+</textarea>
+  
+</div>
+</center>
+	
 
 Notice that "x\_train" and "y\_train" are the same data. 
 
@@ -993,14 +1135,12 @@ We can now define a simple Auto-Encoder architecture.  The encoder layer goes fr
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Privacy Preserving AutoEncoder - Auto Encoder Net}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 class Autoencoder(nn.Module):
     
@@ -1025,11 +1165,14 @@ class Autoencoder(nn.Module):
         return decoded
 
 
-\end{lstlisting}
-\end{minipage}
 
 
-
+   
+   
+</textarea>
+  
+</div>
+</center>
 
 
 
@@ -1042,14 +1185,14 @@ We are now ready to train the auto encoder with the following code.
 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Privacy Preserving AutoEncoder - Training}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+<center>
+<div>
+<textarea rows="15" cols="100">
+
 
 input_dim    = 784  
 encoding_dim = 32 
@@ -1070,22 +1213,29 @@ for epoch in range(10):
         print(loss)
 
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+	
 
 Once the model is trained, we can run it on, for example, 3 suspicious test samples. We measure the distance between the original and the re-constructed samples. Produced samples with the highest distance from the original sample are flagged as anomalous (i.e. more different). We use the Euclidean distance for this distance measurement. 
 
 
-\begin{minipage}{\linewidth}
-\lstset{language=Python}
-\lstset{showstringspaces=false}  %% remove weird symbol in spaces
-\lstset{frame=lines}
-\lstset{caption={Privacy Preserving AutoEncoder - Text Samples}}
-%%% \lstset{label={lst:code\_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}[backgroundcolor = \color{white}]
+
+
+
+
+
+<center>
+<div>
+<textarea rows="55" cols="100">
+
 
 sample1  = torch.randn( 1, 784 )
 print( sample1.shape )
@@ -1125,14 +1275,24 @@ Result:
 ## tensor([[28.5768]], grad_fn=<SqrtBackward0>)
 
 
-\end{lstlisting}
-\end{minipage}
 
 
+   
+   
+</textarea>
+  
+</div>
+</center>
+
+	
 
 For this example we conclude that sample 2 seems to be the most different with a distance of 29.14. 
 
-\section{Summary}
+
+
+<h3>
+	Summary
+</h3>	
 
 This chapter addressed ML for network security. 
 
@@ -1398,28 +1558,7 @@ ML algorithm implementations in PyTorch use one-hot encoding. Quite simply, one 
 
 
 
-<center>
-<div>
-<textarea rows="15" cols="100">
 
-0 
-1 
-1 
-2 
-0 
-1 
-1 
-2 
-1 
-...
-
-
-   
-   
-</textarea>
-  
-</div>
-</center>
 
 	
 
