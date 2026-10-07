@@ -12,25 +12,23 @@
 ---
 
 
-
-
 # Dynamic Malware Analysis Dataset
 
 ## Overview
 
 This dataset contains features extracted from **dynamic execution logs** of malware and goodware programs.
 
-Dynamic malware analysis examines what a program does while it is running. Rather than analyzing the program's source code or executable file directly, we observe behaviors such as:
+Dynamic malware analysis examines what a program does while it is running. Rather than examining only the executable file, we observe program behaviors such as:
 
 - File operations
 - Registry operations
 - DLL usage
-- System calls
+- System activity
 - Network activity
 - Process activity
 - Operating system resources
 
-These behaviors can then be converted into numerical feature vectors that can be used with machine learning algorithms.
+These behaviors are converted into numerical feature vectors that can be used with machine learning algorithms.
 
 ---
 
@@ -50,22 +48,22 @@ The dataset contains:
 1 class label
 ```
 
-Therefore, the feature matrix can be represented as
-
-\[
-X \in \mathbb{R}^{142 \times 1000}
-\]
-
-and the corresponding class vector as
-
-\[
-y \in \{-1,1\}^{142}.
-\]
-
-The CSV file therefore contains **1001 columns**:
+The complete CSV file therefore contains:
 
 ```text
-1000 feature columns + class_name
+142 rows x 1001 columns
+```
+
+The machine learning feature matrix is:
+
+```text
+X = 142 samples x 1000 features
+```
+
+The class vector is:
+
+```text
+y = 142 class labels
 ```
 
 ---
@@ -78,7 +76,7 @@ The final column is:
 class_name
 ```
 
-There are two classes in the dataset:
+There are two classes:
 
 ```text
 class_name = -1
@@ -92,15 +90,15 @@ The dataset contains:
 50 samples from the other class
 ```
 
-These classes correspond to the malware and goodware observations used to construct the dataset.
+These classes represent the malware and goodware observations used to construct the dataset.
 
 ---
 
 ## Features
 
-Each observation is represented using approximately 1000 features extracted from its execution log.
+Each program is represented using 1000 features extracted from its execution log.
 
-Example features include terms related to:
+Example feature names include:
 
 ```text
 createfile
@@ -115,9 +113,9 @@ usb
 chrome
 ```
 
-These features describe behaviors or resources observed during execution.
+These features represent behaviors, operations, or resources observed while a program is executing.
 
-For example, a program may generate log entries associated with:
+For example, an execution log may contain activity associated with:
 
 ```text
 CreateFile
@@ -128,44 +126,49 @@ System32
 TCP
 ```
 
-The occurrences of these terms can be counted and placed into a numerical feature vector.
-
-Conceptually, an execution log
-
-```text
-Program Execution
-       |
-       v
-Dynamic Log
-       |
-       v
-Feature Extraction
-       |
-       v
-1000-Dimensional Feature Vector
-       |
-       v
-Machine Learning
-       |
-       v
-Malware / Goodware Classification
-```
+The occurrences of these terms can be counted and used as numerical features.
 
 ---
 
-## Feature Vector
+## Converting a Log into a Feature Vector
 
-For one program, the resulting feature vector can be represented as
+The basic process is:
 
-\[
-\mathbf{x}
-=
-[x_1,x_2,\ldots,x_{1000}]
-\]
+```text
+Program
+   |
+   v
+Program Execution
+   |
+   v
+Dynamic Execution Log
+   |
+   v
+Feature Extraction
+   |
+   v
+1000 Numerical Features
+   |
+   v
+Machine Learning
+   |
+   v
+Malware / Goodware Classification
+```
 
-where each \(x_i\) represents the value of a particular behavioral feature.
+Each program is converted into a feature vector:
 
-For example,
+```text
+x = [x1, x2, x3, ..., x1000]
+```
+
+where:
+
+```text
+xi = value of behavioral feature i
+```
+
+For example:
 
 ```text
 createfile = 15
@@ -173,67 +176,41 @@ readfile   = 8
 regopenkey = 4
 kernel32   = 21
 tcp        = 2
-...
 ```
 
-produces part of a feature vector such as
+Part of the resulting feature vector might therefore look like:
 
-\[
-\mathbf{x}
-=
-[15,8,4,21,2,\ldots].
-\]
+```text
+x = [15, 8, 4, 21, 2, ...]
+```
 
-Every program is therefore converted from a variable-length execution log into a fixed-length numerical representation.
+This allows a variable-length execution log to be represented by a fixed-length numerical vector.
 
 ---
 
-## Machine Learning Representation
+## Dataset Representation
 
-The complete dataset can be represented as
+The dataset can be viewed conceptually as:
 
-\[
-X =
-\begin{bmatrix}
-x_{11} & x_{12} & \cdots & x_{1,1000}\\
-x_{21} & x_{22} & \cdots & x_{2,1000}\\
-\vdots & \vdots & \ddots & \vdots\\
-x_{142,1} & x_{142,2} & \cdots & x_{142,1000}
-\end{bmatrix}.
-\]
+```text
+             Feature 1   Feature 2   ...   Feature 1000   Class
 
-The corresponding labels are
+Sample 1        x11         x12       ...      x1,1000      y1
+Sample 2        x21         x22       ...      x2,1000      y2
+Sample 3        x31         x32       ...      x3,1000      y3
+   ...          ...         ...       ...        ...        ...
+Sample 142    x142,1      x142,2      ...     x142,1000    y142
+```
 
-\[
-y =
-\begin{bmatrix}
-y_1\\
-y_2\\
-\vdots\\
-y_{142}
-\end{bmatrix}
-\]
+Therefore:
 
-where
+```text
+X = feature data
+y = class labels
 
-\[
-y_i \in \{-1,1\}.
-\]
-
-The resulting data can be used with supervised machine learning algorithms such as:
-
-- Neural Networks
-- Logistic Regression
-- Support Vector Machines
-- Decision Trees
-- Random Forests
-
-It can also be explored using unsupervised methods such as:
-
-- K-Means
-- Autoencoders
-- Restricted Boltzmann Machines
-- Anomaly Detection
+X shape = (142, 1000)
+y shape = (142,)
+```
 
 ---
 
@@ -250,7 +227,7 @@ print(data.shape)
 print(data.head())
 ```
 
-Separate the features and labels:
+The features and class labels can then be separated:
 
 ```python
 X = data.drop(columns=["class_name"])
@@ -260,35 +237,66 @@ print(X.shape)
 print(y.shape)
 ```
 
-The expected dimensions are approximately:
+Expected output:
 
 ```text
-X: (142, 1000)
-y: (142,)
+(142, 1000)
+(142,)
 ```
+
+---
+
+## Machine Learning
+
+The resulting feature vectors can be used with supervised machine learning algorithms such as:
+
+- Neural Networks
+- Logistic Regression
+- Support Vector Machines
+- Decision Trees
+- Random Forests
+
+The data can also be explored using unsupervised machine learning methods such as:
+
+- K-Means
+- Autoencoders
+- Restricted Boltzmann Machines
+- Anomaly Detection
 
 ---
 
 ## Why Dynamic Analysis?
 
-Malware and goodware may behave differently when executed.
+Malware and goodware may exhibit different behaviors when they execute.
 
 For example, malicious software may:
 
 - Modify unusual registry locations
-- Access sensitive system files
+- Access system files
 - Create or delete files
 - Load particular DLLs
 - Spawn processes
 - Execute command-line tools
 - Establish network connections
 
-Machine learning allows these behavioral patterns to be analyzed simultaneously.
+A single execution log may contain a large amount of information. Machine learning provides a way to analyze many behavioral features simultaneously.
 
-Instead of manually examining thousands of log entries, the execution behavior is converted into a numerical vector that can be analyzed automatically.
+The overall idea is:
+
+```text
+Raw program behavior
+        |
+        v
+Numerical representation
+        |
+        v
+Machine learning model
+        |
+        v
+Behavior classification
+```
+
+Instead of manually examining thousands of individual log entries, the program behavior is converted into a numerical representation that can be analyzed automatically.
 
 ---
 
-## Accessibility
-
-This README provides a text-based description of the dataset, its structure, feature representation, and intended machine learning use. Mathematical expressions are accompanied by textual explanations and code examples so that the material does not depend solely on visual representations.
