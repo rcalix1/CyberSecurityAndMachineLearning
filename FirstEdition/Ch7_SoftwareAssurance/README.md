@@ -881,7 +881,87 @@ print("\nPrediction:", predicted_class.item())
 
 
 
+Read form STRACE log
 
+```
+
+
+import re
+
+
+# ============================================================
+# READ STRACE FILE
+# ============================================================
+
+filename = "execution_log.txt"
+
+system_calls = []
+
+
+with open(filename, "r") as f:
+
+    for line in f:
+
+        # extract system call name
+
+        match = re.match(r"([a-zA-Z0-9_]+)\(", line)
+
+        if match:
+
+            system_calls.append(match.group(1))
+
+
+# ============================================================
+# SHOW SYSTEM CALLS
+# ============================================================
+
+print("System Calls:")
+
+print(system_calls)
+
+
+# ============================================================
+# BREAK INTO SEQUENCES OF 10
+# ============================================================
+
+sequence_length = 10
+
+X = []
+
+
+for i in range(0, len(system_calls) - sequence_length + 1, sequence_length):
+
+    sequence = system_calls[i:i + sequence_length]
+
+    X.append(sequence)
+
+
+# ============================================================
+# DISPLAY SEQUENCES
+# ============================================================
+
+print("\nSequences:")
+
+for sequence in X:
+
+    print(sequence)
+
+
+# ============================================================
+# ADD LABEL
+#
+# This trace came from a known normal execution.
+# ============================================================
+
+y = [0] * len(X)
+
+
+print("\nLabels:")
+
+print(y)
+
+
+```
 
 
 
