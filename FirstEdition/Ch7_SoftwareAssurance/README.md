@@ -646,7 +646,7 @@ for i in range(0, len(exe), block_size):
 
 ## Synthetic system-call sequences, learned embeddings, and LSTM
 
-* Paper: https://www.astesj.com/v05/i04/p26/?utm_source=chatgpt.com
+* Paper: https://www.astesj.com/v05/i04/p26/?
 
 
 ```
