@@ -641,6 +641,249 @@ for i in range(0, len(exe), block_size):
 
 ```
 
+---
+
+
+## Synthetic system-call sequences, learned embeddings, and LSTM
+
+
+```
+
+
+import torch
+import random
+from torch import nn
+
+
+# ============================================================
+# SYSTEM CALLS
+# ============================================================
+
+calls = [
+    "openat",
+    "read",
+    "write",
+    "close",
+    "mmap",
+    "mprotect",
+    "execve",
+    "socket",
+    "connect"
+]
+
+call_to_id = {call: i for i, call in enumerate(calls)}
+
+
+# ============================================================
+# CREATE RANDOM SYSTEM-CALL SEQUENCES
+#
+# 0 = normal
+# 1 = suspicious
+# ============================================================
+
+normal_calls = [
+    "openat",
+    "read",
+    "write",
+    "close",
+    "mmap"
+]
+
+suspicious_calls = [
+    "mprotect",
+    "execve",
+    "socket",
+    "connect"
+]
+
+
+X = []
+y = []
+
+
+# normal sequences
+
+for i in range(100):
+
+    sequence = random.choices(normal_calls, k=10)
+
+    X.append(sequence)
+
+    y.append(0)
+
+
+# suspicious sequences
+
+for i in range(100):
+
+    sequence = random.choices(calls, k=6)
+
+    sequence += random.choices(suspicious_calls, k=4)
+
+    random.shuffle(sequence)
+
+    X.append(sequence)
+
+    y.append(1)
+
+
+# ============================================================
+# SYSTEM CALLS -> INTEGER IDs
+# ============================================================
+
+X = torch.tensor([
+    [call_to_id[call] for call in sequence]
+    for sequence in X
+])
+
+y = torch.tensor(y)
+
+
+print("Example Sequence:")
+print(X[0])
+
+
+# ============================================================
+# LSTM
+# ============================================================
+
+class Net(nn.Module):
+
+    def __init__(self):
+
+        super().__init__()
+
+        self.embedding = nn.Embedding(
+            len(calls),
+            4
+        )
+
+        self.lstm = nn.LSTM(
+            input_size=4,
+            hidden_size=8,
+            batch_first=True
+        )
+
+        self.fc = nn.Linear(8, 2)
+
+
+    def forward(self, x):
+
+        # system call IDs -> learned vectors
+
+        x = self.embedding(x)
+
+        output, (hidden, cell) = self.lstm(x)
+
+        x = hidden[-1]
+
+        return self.fc(x)
+
+
+model = Net()
+
+
+# ============================================================
+# TRAIN
+# ============================================================
+
+loss_fn = nn.CrossEntropyLoss()
+
+optimizer = torch.optim.Adam(
+    model.parameters(),
+    lr=0.01
+)
+
+
+for epoch in range(100):
+
+    prediction = model(X)
+
+    loss = loss_fn(prediction, y)
+
+    optimizer.zero_grad()
+
+    loss.backward()
+
+    optimizer.step()
+
+
+    if epoch % 20 == 0:
+
+        print(
+            "Epoch:",
+            epoch,
+            "Loss:",
+            round(loss.item(), 4)
+        )
+
+
+# ============================================================
+# SHOW LEARNED EMBEDDINGS
+# ============================================================
+
+print("\nLearned Embeddings:")
+
+for call in calls:
+
+    call_id = torch.tensor(call_to_id[call])
+
+    vector = model.embedding(call_id)
+
+    print(
+        call,
+        "->",
+        vector.detach().numpy()
+    )
+
+
+# ============================================================
+# TEST
+# ============================================================
+
+test = [
+    "openat",
+    "read",
+    "mprotect",
+    "execve",
+    "socket",
+    "connect",
+    "read",
+    "write",
+    "close",
+    "close"
+]
+
+
+test = torch.tensor([
+    [call_to_id[call] for call in test]
+])
+
+
+with torch.no_grad():
+
+    prediction = model(test)
+
+    predicted_class = prediction.argmax(dim=1)
+
+
+print("\nPrediction:", predicted_class.item())
+
+
+# 0 = normal
+# 1 = suspicious
+
+
+
+
+
+```
+
+
+
+
+
+
 
 
 
