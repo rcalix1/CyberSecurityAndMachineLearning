@@ -469,13 +469,177 @@ These feature vectors can then be used for malware classification, anomaly detec
 
 
 
+---
+
+##  Entropy score analysis of packed executable
+
+* Paper-> https://dl.acm.org/doi/10.1145/2388576.2388607
+
+
+Malware authors may pack, compress, or encrypt regions of an executable to hide malicious code and make static analysis more difficult. These packed regions often contain more random-looking byte distributions and therefore have higher Shannon entropy than surrounding structured regions. By calculating entropy across blocks of an executable, we can identify unusually high-entropy regions that may indicate packed or encrypted code.
 
 
 
+```
+
+import numpy as np
 
 
+def entropy(data):
+
+    counts = np.bincount(data, minlength=256)
+    probabilities = counts[counts > 0] / len(data)
+
+    return -np.sum(probabilities * np.log2(probabilities))
 
 
+# ============================================================
+# EXAMPLE 1: SIMULATED FILE USING HEX
+#
+# Imagine these are consecutive regions from an executable.
+# Region 3 represents a packed/encrypted region.
+# ============================================================
+
+hex_data = """
+
+# REGION 1 - normal
+4D 5A 00 00 4D 5A 00 00 4D 5A 00 00 4D 5A 00 00
+
+# REGION 2 - normal
+10 20 10 20 10 20 10 20 10 20 10 20 10 20 10 20
+
+# REGION 3 - packed/encrypted
+A7 3C F1 82 19 DD 64 B2 EF 91 37 C8 52 0D FA 76
+
+# REGION 4 - normal
+30 40 30 40 30 40 30 40 30 40 30 40 30 40 30 40
+
+"""
+
+
+# Remove comments and convert hexadecimal to integers
+
+values = []
+
+for line in hex_data.splitlines():
+
+    line = line.strip()
+
+    if line and not line.startswith("#"):
+
+        values.extend(
+            int(x, 16) for x in line.split()
+        )
+
+
+exe = np.array(values, dtype=np.uint8)
+
+
+# Each region contains 16 bytes
+
+block_size = 16
+
+
+print("HEX EXAMPLE")
+
+for i in range(0, len(exe), block_size):
+
+    block = exe[i:i + block_size]
+
+    H = entropy(block)
+
+    print(
+        "Region", i // block_size + 1,
+        "Entropy:", round(H, 3)
+    )
+
+
+# ============================================================
+# EXAMPLE 2: SAME IDEA USING RANDOM DATA
+#
+# Simulate a larger executable with a packed region
+# in the middle.
+# ============================================================
+
+normal1 = np.random.randint(0, 40, 2000, dtype=np.uint8)
+
+packed = np.random.randint(0, 256, 1000, dtype=np.uint8)
+
+normal2 = np.random.randint(0, 40, 2000, dtype=np.uint8)
+
+
+exe = np.concatenate((normal1, packed, normal2))
+
+
+block_size = 500
+
+
+print("\nRANDOM EXAMPLE")
+
+for i in range(0, len(exe), block_size):
+
+    block = exe[i:i + block_size]
+
+    H = entropy(block)
+
+    print(
+        "Bytes", i, "-", i + len(block) - 1,
+        "Entropy:", round(H, 3)
+    )
+
+```
+
+For an EXE
+
+```
+
+import numpy as np
+
+
+def entropy(data):
+
+    counts = np.bincount(data, minlength=256)
+    probabilities = counts[counts > 0] / len(data)
+
+    return -np.sum(probabilities * np.log2(probabilities))
+
+
+# ============================================================
+# EXAMPLE 3: READ A REAL EXECUTABLE FILE
+# ============================================================
+
+filename = "program.exe"
+
+
+# Read the executable as raw bytes
+
+with open(filename, "rb") as f:
+
+    raw_data = f.read()
+
+
+# Convert raw bytes to integers from 0 to 255
+
+exe = np.frombuffer(raw_data, dtype=np.uint8)
+
+
+# Analyze the executable in blocks
+
+block_size = 1024
+
+
+for i in range(0, len(exe), block_size):
+
+    block = exe[i:i + block_size]
+
+    H = entropy(block)
+
+    print(
+        "Bytes", i, "-", i + len(block) - 1,
+        "Entropy:", round(H, 3)
+    )
+
+```
 
 
 
