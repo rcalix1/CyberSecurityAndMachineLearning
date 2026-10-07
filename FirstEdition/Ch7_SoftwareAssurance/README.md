@@ -424,6 +424,8 @@ The file
 execution_log.txt
 ```
 
+* FirstEdition/Ch7_SoftwareAssurance/execution_log.txt
+
 will then contain the system calls generated during execution of `/bin/ls`.
 
 You can examine the log using:
