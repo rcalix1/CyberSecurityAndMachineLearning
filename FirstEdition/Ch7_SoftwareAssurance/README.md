@@ -300,3 +300,185 @@ Instead of manually examining thousands of individual log entries, the program b
 
 ---
 
+
+## Generating Dynamic Analysis Logs in Linux
+
+Dynamic analysis examines the behavior of a program while the program is executing. In Linux, one simple tool for performing dynamic analysis is `strace`.
+
+`strace` records the Linux system calls made by a running program. These calls provide information about how the program interacts with the operating system.
+
+Examples of behavior that can be observed include:
+
+```text
+openat()     Opening files and shared libraries
+read()       Reading data
+write()      Writing data
+execve()     Executing programs
+clone()      Creating processes or threads
+socket()     Creating network sockets
+connect()    Making network connections
+mmap()       Mapping files and libraries into memory
+mprotect()   Changing memory permissions
+```
+
+Linux does not have a Windows Registry or DLL files. However, similar types of behavioral information can still be collected.
+
+For example:
+
+```text
+Windows                    Linux
+
+DLL activity        ->     Shared library (.so) activity
+File activity       ->     openat(), read(), write()
+Process activity    ->     clone(), fork(), execve()
+Network activity    ->     socket(), connect(), sendto()
+Memory activity     ->     mmap(), mprotect()
+Registry activity   ->     No direct Linux equivalent
+```
+
+The general dynamic analysis process is:
+
+```text
+Executable Program
+        |
+        v
+      strace
+        |
+        v
+System Call Log
+        |
+        v
+Feature Extraction
+        |
+        v
+Machine Learning Dataset
+```
+
+### Install strace
+
+On Ubuntu Linux:
+
+```bash
+sudo apt install strace
+```
+
+A simple test from the command line is:
+
+```bash
+strace -f -o execution_log.txt /bin/ls
+```
+
+Here:
+
+```text
+-f                     Trace child processes
+-o execution_log.txt   Save the trace to a file
+/bin/ls                Program being analyzed
+```
+
+The resulting `execution_log.txt` will contain system activity generated while `/bin/ls` executes.
+
+For example, the log may contain entries similar to:
+
+```text
+execve("/bin/ls", ...)
+openat(..., "/etc/ld.so.cache", ...)
+openat(..., "libc.so.6", ...)
+mmap(...)
+read(...)
+write(...)
+close(...)
+```
+
+### Python Example
+
+The same analysis can be performed from Python:
+
+```python
+import subprocess
+
+program = "/bin/ls"
+log_file = "execution_log.txt"
+
+with open(log_file, "w") as log:
+
+    subprocess.run(
+        ["strace", "-f", program],
+        stderr=log,
+        timeout=30
+    )
+
+print("Dynamic analysis complete.")
+print("Log saved to:", log_file)
+```
+
+Run the Python program:
+
+```bash
+python dynamic_analysis.py
+```
+
+The file
+
+```text
+execution_log.txt
+```
+
+will then contain the system calls generated during execution of `/bin/ls`.
+
+You can examine the log using:
+
+```bash
+cat execution_log.txt
+```
+
+or:
+
+```bash
+less execution_log.txt
+```
+
+### From Logs to Machine Learning Features
+
+The raw `strace` log can subsequently be processed to count different types of program behavior.
+
+For example:
+
+```text
+openat     = 34
+read       = 12
+write      = 7
+mmap       = 21
+mprotect   = 5
+execve     = 1
+connect    = 0
+```
+
+These values can be converted into a feature vector:
+
+```text
+x = [34, 12, 7, 21, 5, 1, 0, ...]
+```
+
+Repeating this process for many programs produces a dataset in which each row represents the dynamic behavior of one executable program.
+
+These feature vectors can then be used for malware classification, anomaly detection, clustering, or other machine learning tasks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
