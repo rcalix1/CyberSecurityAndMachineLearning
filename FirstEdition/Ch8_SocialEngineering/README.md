@@ -193,6 +193,71 @@ df.to_csv("email_url_features.csv", index=False)
 ---
 
 
+## Phishing Campaign Graph Analysis
+
+This example demonstrates how graph theory can be used to investigate phishing campaigns by identifying relationships between emails, domains, and IP addresses.
+
+Rather than classifying individual emails, the objective is to discover groups of potentially related phishing activities based on shared network infrastructure.
+
+### Methodology
+
+1. Generate six simulated phishing emails in `.eml` format.
+2. Read the emails using Python's `email` library.
+3. Extract URLs and domain names using regular expressions.
+4. Associate each domain with an IP address using simulated DNS records.
+5. Construct a graph using NetworkX.
+6. Identify connected components representing potential phishing campaigns.
+7. Visualize the graph using Matplotlib.
+
+### Graph Representation
+
+A graph is defined as:
+
+$$
+G = (V,E)
+$$
+
+where:
+
+- **V** represents nodes consisting of emails, domains, and IP addresses.
+- **E** represents relationships between nodes.
+
+The graph contains three types of nodes:
+
+| Node Type | Description |
+|---|---|
+| Email | An email containing a URL |
+| Domain | Domain extracted from the URL |
+| IP Address | IP address associated with the domain |
+
+Edges connect emails to domains and domains to IP addresses.
+
+### Connected Components
+
+A connected component is a set of nodes in which every node can be reached from every other node through a sequence of edges.
+
+The example generates three connected components:
+
+- Campaign 1: Three emails sharing an IP address.
+- Campaign 2: Two emails sharing another IP address.
+- Campaign 3: One isolated email and its associated infrastructure.
+
+### Python Libraries
+
+- `email`: Creating and reading email files.
+- `re`: Extracting URLs from email content.
+- `urllib.parse`: Extracting domain names.
+- `networkx`: Constructing graphs and identifying connected components.
+- `matplotlib`: Visualizing the network.
+
+### Cybersecurity Application
+
+Graph analysis can help security analysts identify potentially coordinated phishing campaigns, shared infrastructure, and relationships between suspicious websites.
+
+This methodology can be extended using graph clustering, community detection, and Graph Neural Networks (GNNs).
+
+**Note:** The example uses simulated emails and DNS records. Shared IP addresses suggest possible relationships but do not necessarily establish that websites belong to the same attacker.
+
 
 
 ```
