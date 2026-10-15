@@ -386,5 +386,229 @@ plt.show()
 
 ---
 
+## Node to Vec
 
+
+
+
+## Phishing Campaign Detection with Node2Vec and K-Means
+
+This example demonstrates how graph representation learning and unsupervised machine learning can be used to discover potentially related phishing campaigns.
+
+Node2Vec is used to learn numerical embeddings of graph nodes representing emails, domains, and IP addresses. K-Means clustering is then applied to identify groups of emails with similar network relationships.
+
+### Methodology
+
+1. Generate simulated phishing infrastructure containing emails, domains, and IP addresses.
+2. Construct an undirected graph using NetworkX.
+3. Apply Node2Vec to generate random walks through the graph.
+4. Train a Word2Vec-based model to learn numerical node embeddings.
+5. Extract the learned embeddings for each email.
+6. Apply K-Means clustering to group emails based on their embeddings.
+7. Use Principal Component Analysis (PCA) to visualize the clusters in two dimensions.
+
+### Graph Representation
+
+The graph is defined as:
+
+$$
+G = (V,E)
+$$
+
+where:
+
+- **V** represents emails, domains, and IP addresses.
+- **E** represents relationships between these entities.
+
+### Node2Vec
+
+Node2Vec learns a mapping from graph nodes to numerical vectors:
+
+$$
+f: V \rightarrow \mathbb{R}^{d}
+$$
+
+where $d$ is the embedding dimension.
+
+The algorithm generates biased random walks through the graph and learns embeddings by maximizing the probability of observing neighboring nodes within the sampled walks.
+
+A simplified objective is:
+
+$$
+\max_f \sum_{u \in V}
+\sum_{v \in N(u)}
+\log P(v \mid f(u))
+$$
+
+where $N(u)$ represents the sampled context nodes of vertex $u$.
+
+### K-Means Clustering
+
+The learned email embeddings are grouped using K-Means:
+
+$$
+\min_{\mu_1,\ldots,\mu_K}
+\sum_{k=1}^{K}
+\sum_{\mathbf{x}_i \in C_k}
+\|\mathbf{x}_i-\mu_k\|^2
+$$
+
+where:
+
+- $K$ is the number of clusters.
+- $C_k$ is the set of embeddings assigned to cluster $k$.
+- $\mu_k$ is the centroid of cluster $k$.
+
+### Visualization
+
+Principal Component Analysis (PCA) reduces the eight-dimensional node embeddings to two dimensions for visualization.
+
+Each point represents an email, and its color indicates the cluster assigned by K-Means.
+
+### Python Libraries
+
+- `networkx`: Graph construction.
+- `node2vec`: Graph embedding learning.
+- `gensim`: Word2Vec training.
+- `scikit-learn`: K-Means clustering and PCA.
+- `matplotlib`: Visualization.
+- `numpy`: Numerical operations.
+
+### Cybersecurity Application
+
+This methodology can help identify phishing emails associated with shared infrastructure, discover relationships between suspicious domains, and investigate potentially coordinated phishing campaigns.
+
+Unlike connected components detection, Node2Vec uses machine learning to generate numerical representations of graph structure.
+
+**Note:** The example uses simulated infrastructure and a small dataset. Three clusters are specified in advance for demonstration purposes. The resulting clusters do not necessarily establish that emails belong to the same phishing campaign.
+
+### Reference
+
+Grover, A., and Leskovec, J. (2016). "node2vec: Scalable Feature Learning for Networks." Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pp. 855–864.
+
+
+
+
+```
+
+
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+
+from node2vec import Node2Vec
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+
+########################################
+# 1. Simulated phishing infrastructure
+########################################
+
+records = [
+    ("email1", "login-alert.example", "192.0.2.10"),
+    ("email2", "verify-account.example", "192.0.2.10"),
+    ("email3", "security-update.example", "192.0.2.10"),
+    ("email4", "payment-check.example", "198.51.100.20"),
+    ("email5", "billing-alert.example", "198.51.100.20"),
+    ("email6", "unrelated.example", "203.0.113.30")
+]
+
+G = nx.Graph()
+
+for email, domain, ip in records:
+    G.add_edge(email, domain)
+    G.add_edge(domain, ip)
+
+########################################
+# 2. Node2Vec representation learning
+########################################
+
+node2vec = Node2Vec(
+    G,
+    dimensions=8,
+    walk_length=10,
+    num_walks=100,
+    workers=1,
+    seed=42
+)
+
+model = node2vec.fit(
+    window=5,
+    min_count=1,
+    batch_words=4,
+    seed=42
+)
+
+########################################
+# 3. Extract email embeddings
+########################################
+
+emails = [r[0] for r in records]
+
+X = np.array([
+    model.wv[email] for email in emails
+])
+
+print("Embedding matrix:", X.shape)
+print(X)
+
+########################################
+# 4. K-Means clustering
+########################################
+
+kmeans = KMeans(
+    n_clusters=3,
+    random_state=42,
+    n_init=10
+)
+
+labels = kmeans.fit_predict(X)
+
+for email, label in zip(emails, labels):
+    print(email, "Cluster:", label)
+
+########################################
+# 5. PCA visualization
+########################################
+
+pca = PCA(n_components=2)
+X2 = pca.fit_transform(X)
+
+plt.figure(figsize=(8, 6))
+
+plt.scatter(
+    X2[:, 0],
+    X2[:, 1],
+    c=labels,
+    cmap="viridis",
+    s=180
+)
+
+for i, email in enumerate(emails):
+    plt.annotate(
+        email,
+        (X2[i, 0], X2[i, 1]),
+        xytext=(5, 5),
+        textcoords="offset points"
+    )
+
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("Node2Vec Phishing Campaign Clustering")
+plt.tight_layout()
+plt.show()
+
+
+```
+
+
+
+
+
+
+
+
+
+
+---
 
