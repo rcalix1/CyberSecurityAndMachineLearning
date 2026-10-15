@@ -1,0 +1,3 @@
+URL,URL_Length,Having_IP_Address,Having_At_Symbol,Number_of_Dots,HTTPS
+http://192.0.2.10/login/verify-account,38,1,0,3,0
+https://secure-account.example.com/login,40,0,0,2,1
