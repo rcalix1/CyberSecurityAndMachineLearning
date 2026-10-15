@@ -2,6 +2,15 @@
 
 * link
 
+---
+
+## A Corpus of Encoded Malware Byte Information as Images for Efficient Classification
+
+* https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10090131
+
+
+---
+
 ## Transfer Learning for malware detection
 
 * Follow these links for malware data 
