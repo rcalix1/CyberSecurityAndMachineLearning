@@ -599,13 +599,17 @@ $$
 \mathbf{h}=W^\top\mathbf{x}
 $$
 
-where $\mathbf{x}$ is the one-hot encoded node and $\mathbf{h}$ is its learned embedding.
 
-The output probabilities are:
+
+
+where `x` is the one-hot encoded node and `h` is its learned embedding.
+
+The output probabilities are computed using softmax:
 
 $$
-\hat{\mathbf{y}}=\operatorname{softmax}(V\mathbf{h}+\mathbf{b})
+\hat{y} = \mathrm{softmax}(Vh + b)
 $$
+
 
 ### 4. Training
 
