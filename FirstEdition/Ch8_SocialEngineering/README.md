@@ -190,7 +190,136 @@ df.to_csv("email_url_features.csv", index=False)
 
 
 
+---
 
+
+
+
+```
+
+
+import networkx as nx
+import matplotlib.pyplot as plt
+from email.message import EmailMessage
+from email import policy
+from email.parser import BytesParser
+from urllib.parse import urlparse
+import re
+
+########################################
+# 1. Create sample phishing emails
+########################################
+
+records = [
+    ("email1", "http://login-alert.example"),
+    ("email2", "http://verify-account.example"),
+    ("email3", "http://security-update.example"),
+    ("email4", "http://payment-check.example"),
+    ("email5", "http://billing-alert.example"),
+    ("email6", "http://unrelated.example")
+]
+
+# Simulated DNS records
+# Real applications would query DNS
+dns = {
+    "login-alert.example": "192.0.2.10",
+    "verify-account.example": "192.0.2.10",
+    "security-update.example": "192.0.2.10",
+    "payment-check.example": "198.51.100.20",
+    "billing-alert.example": "198.51.100.20",
+    "unrelated.example": "203.0.113.30"
+}
+
+for name, url in records:
+
+    msg = EmailMessage()
+    msg["From"] = "support@example.com"
+    msg["To"] = "student@example.com"
+    msg["Subject"] = "Verify Your Account"
+    msg.set_content(f"Please verify your account: {url}")
+
+    with open(name + ".eml", "wb") as f:
+        f.write(msg.as_bytes())
+
+########################################
+# 2. Read emails and construct graph
+########################################
+
+G = nx.Graph()
+
+for name, _ in records:
+
+    with open(name + ".eml", "rb") as f:
+        msg = BytesParser(policy=policy.default).parse(f)
+
+    body = msg.get_body(preferencelist=("plain",))
+    text = body.get_content()
+
+    urls = re.findall(r"https?://[^\s<>\"']+", text)
+
+    for url in urls:
+
+        domain = urlparse(url).hostname
+        ip = dns[domain]
+
+        G.add_node(name, type="email")
+        G.add_node(domain, type="domain")
+        G.add_node(ip, type="ip")
+
+        G.add_edge(name, domain)
+        G.add_edge(domain, ip)
+
+########################################
+# 3. Detect connected components
+########################################
+
+clusters = list(nx.connected_components(G))
+
+print("Potential phishing campaigns:", len(clusters))
+
+for i, cluster in enumerate(clusters):
+    print(f"\nCampaign {i+1}")
+    print(sorted(cluster))
+
+########################################
+# 4. Visualize graph
+########################################
+
+colors = {
+    "email": "lightblue",
+    "domain": "orange",
+    "ip": "lightgreen"
+}
+
+node_colors = [
+    colors[G.nodes[n]["type"]]
+    for n in G.nodes()
+]
+
+plt.figure(figsize=(13, 8))
+
+nx.draw(
+    G,
+    pos=nx.spring_layout(G, seed=42),
+    with_labels=True,
+    node_color=node_colors,
+    node_size=2200,
+    font_size=8,
+    edge_color="gray"
+)
+
+plt.title("Phishing Campaign Graph Analysis")
+plt.tight_layout()
+plt.show()
+
+
+
+
+```
+
+
+
+---
 
 
 
