@@ -241,6 +241,46 @@ The result remains encrypted until the authorized user decrypts it.
 
 
 
+## Encrypted training
+
+
+```
+import tenseal as ts
+
+# 1. Encryption context (more levels for multiplication)
+ctx = ts.context(
+    ts.SCHEME_TYPE.CKKS,
+    poly_modulus_degree=16384,
+    coeff_mod_bit_sizes=[60, 40, 40, 40, 40, 40, 60]
+)
+ctx.global_scale = 2**40
+ctx.generate_galois_keys()
+
+# 2. Training data: y = 2x (encrypted)
+X = ts.ckks_vector(ctx, [1., 2., 3.])
+Y = ts.ckks_vector(ctx, [2., 4., 6.])
+
+# 3. Initial weight and learning rate
+w = 1.0
+lr = 0.1
+
+# 4. Forward pass on encrypted data
+pred = X * w
+
+# 5. Gradient of mean squared error (encrypted)
+gradient = ((pred - Y) * X).sum() * (2 / 3)
+
+# 6. Update weight (remains encrypted)
+w_new = w - lr * gradient
+
+# 7. Decrypt updated weight
+print("Updated weight:", w_new.decrypt())
+print("Expected:", 1.93333)
+
+
+```
+
+
 
 
 
