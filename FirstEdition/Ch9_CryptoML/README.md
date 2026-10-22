@@ -74,7 +74,7 @@ print("Expected answer:", 11)
 
 
 
-## Simplified CKKS Encryption: Numerical Example
+## Simplified CKKS Encryption (Intuition): Numerical Example
 
 **The key idea:** Encryption is designed so that the secret-key terms cancel during decryption. This also allows computations on encrypted values.
 
