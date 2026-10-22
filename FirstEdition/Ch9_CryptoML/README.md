@@ -78,6 +78,13 @@ print("Expected answer:", 11)
 
 **The key idea:** Encryption is designed so that the secret-key terms cancel during decryption. This also allows computations on encrypted values.
 
+## Paper
+
+* The example here is a very simplified intuition of the general idea
+* The full discussion can be found in the paper:
+* Homomorphic Encryption for Arithmetic of Approximate Numbers
+* https://link.springer.com/chapter/10.1007/978-3-319-70694-8_15
+
 ### 1. Generate Keys
 
 Choose:
