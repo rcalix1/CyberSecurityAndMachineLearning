@@ -74,7 +74,6 @@ print("Expected answer:", 11)
 
 
 
-
 ## Simplified CKKS Encryption: Numerical Example
 
 **The key idea:** Encryption is designed so that the secret-key terms cancel during decryption. This also allows computations on encrypted values.
@@ -119,7 +118,7 @@ $$
 Encrypted message:
 
 $$
-\boxed{\operatorname{Enc}(5)=(4960,14)}
+Enc(5)=(4960,14)
 $$
 
 ### 3. Decrypt: Why Does It Work?
@@ -133,8 +132,7 @@ $$
 Substitute:
 
 $$
-m'=\frac{4960+14(3)}{1000}
-=\boxed{5.002}
+m'=\frac{4960+14(3)}{1000}=5.002
 $$
 
 **Why does this recover the original number?**
@@ -145,19 +143,37 @@ $$
 c_0+c_1s=(-as+e)u+m\Delta+aus
 $$
 
+Expanding:
+
+$$
+=-asu+eu+m\Delta+aus
+$$
+
 The secret-key terms cancel:
 
 $$
-\underbrace{-asu+aus}_{0}+eu+m\Delta
+-asu+aus=0
 $$
 
 Therefore:
 
 $$
-\boxed{m'=m+\frac{eu}{\Delta}}
+c_0+c_1s=m\Delta+eu
 $$
 
-The original number is recovered with a small approximation error.
+Divide by the scale:
+
+$$
+m'=m+\frac{eu}{\Delta}
+$$
+
+Using our numbers:
+
+$$
+m'=5+\frac{1(2)}{1000}=5.002
+$$
+
+**The original number is recovered with a small approximation error because the secret-key terms cancel.**
 
 ### 4. Why Can We Add Encrypted Numbers?
 
@@ -174,7 +190,7 @@ $$
 Therefore:
 
 $$
-\operatorname{Enc}(6)=(5940,21)
+Enc(6)=(5940,21)
 $$
 
 Add the encrypted pairs without decrypting:
@@ -190,7 +206,13 @@ m'=\frac{10900+35(3)}{1000}
 $$
 
 $$
-\boxed{m'=11.005\approx 5+6}
+m'=11.005
+$$
+
+The expected answer is:
+
+$$
+5+6=11
 $$
 
 **Why does this work?**
@@ -205,10 +227,17 @@ $$
 y=w_1x_1+w_2x_2+b
 $$
 
-CKKS allows these additions and multiplications to be performed on encrypted inputs, without first decrypting them.
+CKKS allows additions and multiplications to be performed on encrypted inputs without first decrypting them.
+
+For example:
+
+$$
+Enc(5)+Enc(6)\longrightarrow Enc(11)
+$$
+
+The result remains encrypted until the authorized user decrypts it.
 
 **Note:** This is an educational simplification using ordinary integers. Real CKKS uses polynomial rings, modular arithmetic, additional randomness, and more sophisticated operations for multiplication.
-
 
 
 
