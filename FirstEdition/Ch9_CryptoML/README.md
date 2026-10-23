@@ -1,6 +1,7 @@
 ## ML and Crypto
 
-* link
+* Fully homomorphic encryption using ideal lattices, Gentry, 2009
+* https://dl.acm.org/doi/10.1145/1536414.1536440
 
 ## A neural net
 
