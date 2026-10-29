@@ -154,16 +154,20 @@ where:
 - $y$ = correct class
 - $\epsilon$ = maximum allowed perturbation magnitude
 
+
+
+
+
 One popular method is the **Fast Gradient Sign Method (FGSM)**:
 
 $$
-\Delta = \epsilon \operatorname{sign}
-\left(\nabla_X \mathcal{L}(f_\theta(X),y)\right)
+\Delta = \epsilon \,\mathrm{sign}\left(\nabla_X \mathcal{L}(f_\theta(X),y)\right)
 $$
 
 FGSM uses gradients to identify directions that increase the model's classification loss.
 
 Unlike random noise, FGSM deliberately pushes the input toward an incorrect prediction.
+
 
 ### 6. Key Observation
 
