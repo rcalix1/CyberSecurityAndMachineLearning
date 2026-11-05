@@ -1,5 +1,7 @@
 ## Federated Learning
 
+* Communication-Efficient Learning of Deep Networks from Decentralized Data
+* https://proceedings.mlr.press/v54/mcmahan17a.html?utm_source=chatgpt.com
 
 # Federated Learning and Privacy
 
