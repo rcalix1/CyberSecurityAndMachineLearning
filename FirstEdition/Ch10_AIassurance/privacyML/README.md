@@ -136,6 +136,10 @@ where $x$ is the input and $\theta$ represents the model's trained parameters.
 In model inversion, we know a desired output $y^*$ and want to find an input $x$ that produces it.
 
 
+$$
+x^{*} = \underset{x}{\operatorname{argmin}} \; L(f_{\theta}(x), y^{*})
+$$
+
 
 $$
 x^{*} = \operatorname*{arg\,min}_{x} L(f_{\theta}(x), y^{*})
