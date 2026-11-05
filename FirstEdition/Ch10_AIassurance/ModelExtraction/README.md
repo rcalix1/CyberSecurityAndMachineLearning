@@ -1,6 +1,8 @@
 ## Model Extraction
 
 * or model stealing
+* Stealing Machine Learning Models via Prediction APIs
+* https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/tramer
 
 ---
 
