@@ -267,6 +267,90 @@ print("Watermarked:", detect(watermarked))
 ```
 
 
+---
+
+
+
+```
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+
+words = ["cat", "dog", "bird", "fish", "horse", "mouse"]
+probs = np.array([0.30, 0.25, 0.20, 0.10, 0.10, 0.05])
+
+green = {"cat", "bird", "horse"}
+
+# Boost green-token probabilities
+wm_probs = np.array([
+    p * 2 if w in green else p
+    for w, p in zip(words, probs)
+])
+wm_probs /= wm_probs.sum()
+
+# Expected green probability without watermark
+p_green = sum(p for w, p in zip(words, probs) if w in green)
+
+def z_score(tokens):
+    n = len(tokens)
+    G = sum(w in green for w in tokens)
+
+    return (G - n * p_green) / np.sqrt(n * p_green * (1 - p_green))
+
+# Compare three scenarios
+token_counts = [100, 1000, 10000]
+normal_z = []
+watermarked_z = []
+
+for n in token_counts:
+
+    normal = np.random.choice(words, n, p=probs)
+    watermarked = np.random.choice(words, n, p=wm_probs)
+
+    zn = z_score(normal)
+    zw = z_score(watermarked)
+
+    normal_z.append(zn)
+    watermarked_z.append(zw)
+
+    print(f"\nNumber of tokens: {n}")
+    print(f"Normal:      Z = {zn:.2f}")
+    print(f"Watermarked: Z = {zw:.2f}")
+
+# Plot the results
+plt.figure(figsize=(9, 5))
+
+plt.plot(token_counts, normal_z, 'o-', label="Normal")
+plt.plot(token_counts, watermarked_z, 's-', label="Watermarked")
+
+plt.axhline(0, color='gray', linestyle='--', linewidth=1)
+
+plt.xlabel("Number of Tokens")
+plt.ylabel("Z-score")
+plt.title("LLM Watermark Detection: Z-score vs. Text Length")
+plt.legend()
+plt.grid(True)
+plt.xscale("log")
+plt.xticks(token_counts, ["100", "1,000", "10,000"])
+
+plt.show()
+
+
+
+```
+
+
+
+
+
+---
+
+
+
+
 
 
 
