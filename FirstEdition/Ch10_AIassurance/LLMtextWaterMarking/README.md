@@ -271,6 +271,99 @@ print("Watermarked:", detect(watermarked))
 
 
 
+## Statistical Detection of LLM Watermarks Using Z-Scores
+
+### Why Do We Need a Z-Score?
+
+Previously, we introduced a watermark by increasing the probability of selecting green-list tokens.
+
+However, simply counting green tokens is not enough. Even normal text contains green tokens by chance.
+
+The **Z-score** measures how much the observed number of green tokens differs from what we would expect without watermarking, expressed in standard deviations.
+
+This is conceptually similar to chance correction in metrics such as Cohen's kappa, although the Z-score measures statistical deviation rather than agreement.
+
+### Z-Score Equation
+
+$$
+Z = \frac{G - np}{\sqrt{np(1-p)}}
+$$
+
+Where:
+
+- `G` = observed number of green tokens
+- `n` = total number of generated tokens
+- `p` = probability of a green token without watermarking
+- `np` = expected number of green tokens
+
+### Example: 100 Tokens
+
+Suppose:
+
+- Total tokens = 100
+- Expected green-token probability = 0.60
+- Observed green tokens = 75
+
+The expected number of green tokens is:
+
+$$
+100(0.60) = 60
+$$
+
+The Z-score becomes:
+
+$$
+Z = \frac{75 - 60}{\sqrt{100(0.60)(0.40)}} = 3.06
+$$
+
+**Interpretation:** We observed 75 green tokens instead of the expected 60. This is 3.06 standard deviations above expectation, providing statistical evidence of watermarking.
+
+### Experiment: Does Text Length Matter?
+
+Using the Python code above, we compare three scenarios:
+
+1. Short text: 100 tokens
+2. Medium text: 1,000 tokens
+3. Long text: 10,000 tokens
+
+For each scenario, we generate both normal and watermarked text, calculate their Z-scores, and plot the results.
+
+| Number of tokens | Expected normal Z-score | Expected watermarked Z-score |
+|---|---:|---:|
+| 100 | 0 | 3.06 |
+| 1,000 | 0 | 9.68 |
+| 10,000 | 0 | 30.62 |
+
+These are theoretical expected values. The actual simulated results vary because token selection is random.
+
+### Understanding the Plot
+
+- **X-axis:** Number of generated tokens (logarithmic scale).
+- **Y-axis:** Z-score measuring deviation from the expected green-token count.
+- **Normal text:** Z-scores fluctuate around zero.
+- **Watermarked text:** Z-scores tend to increase as the number of tokens grows.
+
+The watermark becomes statistically easier to detect with longer text because the accumulated green-token bias becomes more distinguishable from random fluctuations.
+
+Under the assumptions of our example, the expected watermarked Z-score increases approximately with the square root of the number of tokens.
+
+### Important Observation
+
+A high Z-score does not provide absolute proof of watermarking. It indicates that the observed green-token frequency would be unusual under the assumed normal-generation model.
+
+Our example uses a fixed green list and independent token sampling. Real LLM watermarking algorithms typically use changing green lists and more sophisticated statistical detection.
+
+### Questions for Students
+
+1. Why is counting green tokens alone insufficient?
+2. What does a Z-score of zero mean?
+3. Why does the watermarked Z-score increase with text length?
+4. What happens to the plot if the green-token probability boost is reduced?
+5. Why might detecting a watermark in a very short text be difficult?
+
+
+
+
 ```
 
 
