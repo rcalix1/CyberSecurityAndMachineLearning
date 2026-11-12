@@ -353,13 +353,7 @@ A high Z-score does not provide absolute proof of watermarking. It indicates tha
 
 Our example uses a fixed green list and independent token sampling. Real LLM watermarking algorithms typically use changing green lists and more sophisticated statistical detection.
 
-### Questions for Students
 
-1. Why is counting green tokens alone insufficient?
-2. What does a Z-score of zero mean?
-3. Why does the watermarked Z-score increase with text length?
-4. What happens to the plot if the green-token probability boost is reduced?
-5. Why might detecting a watermark in a very short text be difficult?
 
 
 
