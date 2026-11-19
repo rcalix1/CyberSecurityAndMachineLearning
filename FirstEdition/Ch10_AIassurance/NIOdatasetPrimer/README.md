@@ -4,7 +4,6 @@
 
 
 
-
 # GPT Data Primer Optimization Using NIO
 
 ## 1. Introduction
@@ -110,9 +109,9 @@ The training procedure uses:
 
 The resulting trained weights are saved as the reference:
 
-$$
+\[
 \theta_{\text{ref}}
-$$
+\]
 
 These are the weights NIO attempts to reproduce.
 
@@ -130,7 +129,263 @@ Initially, the primer is random:
 primer = nn.Parameter(torch.randn(6, 3))
 ```
 
-Each position contains three train
+Each position contains three trainable values corresponding to the vocabulary `a`, `b`, and `c`.
+
+A softmax converts these values into probabilities:
+
+\[
+P_{ij}=\frac{e^{z_{ij}}}{\sum_k e^{z_{ik}}}
+\]
+
+These continuous probabilities allow NIO to optimize the primer through backpropagation.
+
+The primer is not initially told to contain the sequence `abc`.
+
+## 7. Neural Inverse Optimization
+
+The central objective is to find a synthetic primer that causes GPT 2 to learn weights similar to GPT 1.
+
+First, GPT 2 is trained using only the primer:
+
+\[
+\theta_{\text{primer}}
+=
+\operatorname{Train}(\theta_0,D_{\text{primer}})
+\]
+
+Then NIO compares the resulting weights against the reference weights:
+
+\[
+\boxed{
+L_{\text{NIO}}
+=
+\sum_l
+\operatorname{Mean}
+\left[
+(\theta_{\text{primer}}^{(l)}
+-
+\theta_{\text{ref}}^{(l)})^2
+\right]
+}
+\]
+
+Here, \(l\) identifies a parameter tensor in the network.
+
+NIO updates the primer to minimize this loss.
+
+**Important:** NIO does not directly optimize GPT 2's weights. GPT 2's weights are updated through ordinary gradient-descent training on the primer.
+
+NIO differentiates through these training steps to determine how the primer should change.
+
+### Optimization Process
+
+```text
+             Original Dataset
+                    |
+                    v
+                  GPT 1
+                    |
+                    v
+             Reference Weights
+                    |
+                    |
+Random Primer       |
+      |             |
+      v             |
+    GPT 2           |
+      |             |
+      v             |
+ Trained Weights    |
+      |             |
+      +------Compare+
+               |
+               v
+         Weight Difference
+               |
+               v
+         NIO Updates Primer
+               |
+               +---- Repeat
+```
+
+At each NIO iteration, GPT 2 starts again from the original initial weights and is trained on the current primer.
+
+## 8. Experimental Results
+
+The experiment used:
+
+| Parameter | Value |
+|---|---|
+| Original dataset | 600 characters |
+| Primer size | 6 soft-character positions |
+| GPT 1 training steps | 20 |
+| GPT 2 training steps | 20 |
+| NIO iterations | 200 |
+| GPT learning rate | 0.1 |
+| NIO learning rate | 0.1 |
+
+### NIO Weight Optimization
+
+| NIO Iteration | Weight Difference |
+|---|---:|
+| 0 | 0.03518 |
+| 20 | 0.00559 |
+| 40 | 0.00390 |
+| 60 | 0.00227 |
+| 80 | 0.00138 |
+| 100 | 0.00111 |
+| 120 | 0.00100 |
+| 140 | 0.00092 |
+| 160 | 0.00087 |
+| 180 | 0.00082 |
+
+NIO reduced the weight-difference objective by approximately **97.7%** between iterations 0 and 180.
+
+### Discovered Primer
+
+The final primer, decoded by selecting the most probable character at each position, was:
+
+```text
+cabcac
+```
+
+The original dataset followed the repeating pattern:
+
+```text
+abcabcabc...
+```
+
+NIO was not explicitly given this pattern when initializing the primer.
+
+Note that `cabcac` is only a readable representation. GPT 2 actually trains on the continuous probability distributions, not the decoded string.
+
+### Final Model Comparison
+
+Both models were evaluated on the original dataset without additional training.
+
+| Model | Evaluation Loss |
+|---|---:|
+| GPT 1 — Original Dataset | 0.86926 |
+| GPT 2 — NIO Primer Only | 0.91245 |
+
+The difference in prediction loss was approximately 0.0432.
+
+This demonstrates that the primer-trained model achieved behavior reasonably close to the reference model on this simple task.
+
+However, GPT 2 did not recover the original dataset, and this experiment does not establish that the total computational cost was reduced. The cost of discovering the primer must also be considered.
+
+## 9. Connection to Cryptanalysis
+
+In classical cryptanalysis, we may observe encrypted information and attempt to infer the unknown key.
+
+In neural network inversion, we observe the trained model weights and attempt to infer information about the training process.
+
+Ordinary neural network training follows:
+
+\[
+D_{\text{train}}
+\xrightarrow{\text{Training}}
+\theta
+\]
+
+NIO investigates the inverse direction:
+
+\[
+\theta
+\xrightarrow{\text{Inverse Optimization}}
+D_{\text{synthetic}}
+\]
+
+The synthetic dataset may reproduce some learned behavior without being identical to the original training data.
+
+This creates an interesting cybersecurity question:
+
+**How much information about a private training dataset can be extracted from publicly available neural network weights?**
+
+## 10. Student Experiments
+
+**Experiment 1 — Increase Training Steps**
+
+Change:
+
+```python
+STEPS = 20
+```
+
+to:
+
+```python
+STEPS = 40
+```
+
+Does NIO still reproduce the reference weights?
+
+**Experiment 2 — Change Primer Size**
+
+Change:
+
+```python
+primer = nn.Parameter(torch.randn(6, 3))
+```
+
+to:
+
+```python
+primer = nn.Parameter(torch.randn(10, 3))
+```
+
+Update the primer-window construction to use all available four-character input windows and their next-character targets.
+
+Does a larger primer improve weight matching?
+
+**Experiment 3 — Change the Original Dataset**
+
+Replace:
+
+```python
+text = "abc" * 200
+```
+
+with:
+
+```python
+text = "aabbcc" * 100
+```
+
+Can NIO discover a useful primer for a different pattern?
+
+**Experiment 4 — Investigate Model Inversion**
+
+Suppose the original dataset is confidential, but the model weights are publicly available.
+
+Can NIO reveal meaningful information about the structure of the original training data?
+
+How would you distinguish genuine recovery of training information from synthetic data that merely produces similar predictions?
+
+## 11. Research Questions
+
+This small experiment motivates several larger research questions:
+
+- Can NIO discover primers for larger language models?
+- Can a synthetic primer reproduce a model's behavior with fewer training steps?
+- Can information about private training datasets be recovered from model weights?
+- How does primer size affect the quality of weight matching?
+- Do different neural network architectures reveal different amounts of training information?
+- Can NIO reduce total training cost after accounting for primer optimization?
+
+## 12. Conclusion
+
+This experiment demonstrates how NIO can optimize a small synthetic dataset to reproduce aspects of a trained neural network.
+
+Using a six-position primer, NIO reduced the weight-difference objective substantially and produced a second GPT with prediction performance close to the reference model.
+
+The broader cybersecurity connection is **training-data information leakage through model inversion**.
+
+The experiment does not establish recovery of private training examples, but it provides a simple starting point for investigating what information learned neural network weights may reveal.
+
+The central research question is:
+
+**If we know the architecture and trained weights of a neural network, what can we discover about the data that produced them?**
 
 
 
