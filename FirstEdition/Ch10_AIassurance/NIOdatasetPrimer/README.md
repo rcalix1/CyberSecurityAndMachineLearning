@@ -110,9 +110,9 @@ The training procedure uses:
 
 The resulting trained weights are saved as the reference:
 
-\[
+$$
 \theta_{\text{ref}}
-\]
+$$
 
 These are the weights NIO attempts to reproduce.
 
