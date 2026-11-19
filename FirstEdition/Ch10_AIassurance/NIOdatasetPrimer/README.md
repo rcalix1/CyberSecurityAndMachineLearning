@@ -960,7 +960,265 @@ plt.show()
 ```
 
 
+Attempt 4
 
+
+```python
+
+
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import matplotlib.pyplot as plt
+import copy
+from torch.func import functional_call
+
+torch.manual_seed(42)
+
+# --------------------------------------------------
+# Dataset: abcabcabc...
+# --------------------------------------------------
+
+text = "abc" * 200
+vocab = "abc"
+
+data = torch.tensor([vocab.index(c) for c in text])
+
+X = torch.stack([data[i:i+4] for i in range(len(data)-4)])
+Y = torch.stack([data[i+1:i+5] for i in range(len(data)-4)])
+
+
+# --------------------------------------------------
+# Tiny GPT
+# --------------------------------------------------
+
+class TinyGPT(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.embed = nn.Embedding(3, 8)
+        self.attn = nn.MultiheadAttention(8, 1, batch_first=True)
+        self.fc = nn.Linear(8, 3)
+
+    def forward(self, x):
+
+        if x.ndim == 2:
+            h = self.embed(x)
+        else:
+            h = x @ self.embed.weight
+
+        mask = torch.triu(
+            torch.ones(h.size(1), h.size(1)),
+            diagonal=1
+        ).bool()
+
+        h, _ = self.attn(h, h, h, attn_mask=mask)
+
+        return self.fc(h)
+
+
+# --------------------------------------------------
+# GPT 1: Train normally on original dataset
+# --------------------------------------------------
+
+STEPS = 20
+LR = 0.1
+
+gpt1 = TinyGPT()
+
+# Save initial weights for GPT 2
+initial_weights = copy.deepcopy(gpt1.state_dict())
+
+optimizer = torch.optim.SGD(gpt1.parameters(), lr=LR)
+
+for step in range(STEPS):
+
+    logits = gpt1(X)
+    loss = F.cross_entropy(
+        logits.reshape(-1, 3), Y.reshape(-1)
+    )
+
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+
+# Save GPT 1's trained weights
+reference_weights = {
+    name: p.detach().clone()
+    for name, p in gpt1.named_parameters()
+}
+
+print("GPT 1 training loss:", loss.item())
+
+
+# --------------------------------------------------
+# GPT 2: Same initial weights as GPT 1
+# --------------------------------------------------
+
+gpt2 = TinyGPT()
+gpt2.load_state_dict(initial_weights)
+
+starting_weights = {
+    name: p.detach().clone()
+    for name, p in gpt2.named_parameters()
+}
+
+
+# --------------------------------------------------
+# NIO: Six synthetic characters
+# --------------------------------------------------
+
+primer = nn.Parameter(torch.randn(6, 3))
+
+nio_optimizer = torch.optim.Adam([primer], lr=0.1)
+
+nio_losses = []
+
+
+# --------------------------------------------------
+# Train GPT 2 on the primer
+#
+# Special training loop needed for NIO gradients
+# --------------------------------------------------
+
+def train_gpt2(probs):
+
+    # Two training examples, each four characters long
+    px = torch.stack([probs[:4], probs[1:5]])
+    py = torch.stack([probs[1:5], probs[2:6]])
+
+    # Always restart from original weights
+    weights = {
+        name: p.clone().requires_grad_(True)
+        for name, p in starting_weights.items()
+    }
+
+    for step in range(STEPS):
+
+        # Forward pass using current weights
+        logits = functional_call(gpt2, weights, (px,))
+
+        # Prediction loss
+        loss = -(
+            py * F.log_softmax(logits, dim=-1)
+        ).sum(-1).mean()
+
+        # Gradients, preserving graph for NIO
+        gradients = torch.autograd.grad(
+            loss, tuple(weights.values()),
+            create_graph=True
+        )
+
+        # SGD update
+        weights = {
+            name: w - LR * g
+            for (name, w), g in zip(
+                weights.items(), gradients
+            )
+        }
+
+    return weights
+
+
+# --------------------------------------------------
+# NIO: Optimize the primer
+# --------------------------------------------------
+
+for iteration in range(200):
+
+    probs = F.softmax(primer, dim=-1)
+
+    # Train GPT 2 using current primer
+    weights = train_gpt2(probs)
+
+    # Compare GPT 2 weights with GPT 1
+    loss = sum(
+        ((weights[name] - reference_weights[name]) ** 2).mean()
+        for name in weights
+    )
+
+    # Update ONLY the primer
+    nio_optimizer.zero_grad()
+    loss.backward()
+    nio_optimizer.step()
+
+    nio_losses.append(loss.item())
+
+    if iteration % 20 == 0:
+
+        letters = "".join(
+            vocab[i] for i in probs.argmax(dim=1)
+        )
+
+        print(
+            f"NIO {iteration}: "
+            f"Loss = {loss.item():.5f}, "
+            f"Primer = {letters}"
+        )
+
+
+# --------------------------------------------------
+# Final evaluation
+# --------------------------------------------------
+
+final_probs = F.softmax(primer.detach(), dim=-1)
+
+print("\nFinal primer:")
+print("".join(
+    vocab[i] for i in final_probs.argmax(dim=1)
+))
+
+# Train GPT 2 one last time using optimized primer
+final_weights = train_gpt2(final_probs)
+
+with torch.no_grad():
+
+    logits1 = gpt1(X)
+    loss1 = F.cross_entropy(
+        logits1.reshape(-1, 3), Y.reshape(-1)
+    )
+
+    logits2 = functional_call(gpt2, final_weights, (X,))
+    loss2 = F.cross_entropy(
+        logits2.reshape(-1, 3), Y.reshape(-1)
+    )
+
+print("\nFinal comparison:")
+print(f"GPT 1 (original data): {loss1.item():.5f}")
+print(f"GPT 2 (primer only):   {loss2.item():.5f}")
+
+
+# --------------------------------------------------
+# Plot 1: NIO loss
+# --------------------------------------------------
+
+plt.figure(figsize=(7, 4))
+plt.plot(nio_losses)
+plt.xlabel("NIO Iteration")
+plt.ylabel("Weight Difference")
+plt.title("NIO Optimization of GPT Data Primer")
+plt.grid(True)
+plt.show()
+
+
+# --------------------------------------------------
+# Plot 2: GPT prediction comparison
+# --------------------------------------------------
+
+plt.figure(figsize=(5, 4))
+plt.bar(
+    ["GPT 1\nOriginal Data", "GPT 2\nNIO Primer"],
+    [loss1.item(), loss2.item()]
+)
+plt.ylabel("Cross-Entropy Loss")
+plt.title("GPT Prediction Loss Comparison")
+plt.grid(axis="y")
+plt.show()
+
+
+
+
+```
 
 
 
