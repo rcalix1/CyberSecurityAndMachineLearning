@@ -148,23 +148,13 @@ The central objective is to find a synthetic primer that causes GPT 2 to learn w
 First, GPT 2 is trained using only the primer:
 
 $$
-\theta_{\text{primer}}
-=
-\operatorname{Train}(\theta_0,D_{\text{primer}})
+\theta_{\text{primer}} = \operatorname{Train}(\theta_0,D_{\text{primer}})
 $$
 
 Then NIO compares the resulting weights against the reference weights:
 
 $$
-L_{\text{NIO}}
-=
-\sum_l
-\operatorname{Mean}
-\left[
-(\theta_{\text{primer}}^{(l)}
--
-\theta_{\text{ref}}^{(l)})^2
-\right]
+L_{\text{NIO}} = \sum_l \operatorname{Mean}\left[(\theta_{\text{primer}}^{(l)}-\theta_{\text{ref}}^{(l)})^2\right]
 $$
 
 Here, $l$ identifies a parameter tensor in the network.
