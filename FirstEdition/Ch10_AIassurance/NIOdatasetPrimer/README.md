@@ -145,19 +145,21 @@ The primer is not initially told to contain the sequence `abc`.
 
 The central objective is to find a synthetic primer that causes GPT 2 to learn weights similar to GPT 1.
 
+
 First, GPT 2 is trained using only the primer:
 
 $$
-\theta_{\text{primer}} = \operatorname{Train}(\theta_0,D_{\text{primer}})
+\theta_{primer} = Train(\theta_0, D_{primer})
 $$
 
 Then NIO compares the resulting weights against the reference weights:
 
 $$
-L_{\text{NIO}} = \sum_l \operatorname{Mean}\left[(\theta_{\text{primer}}^{(l)}-\theta_{\text{ref}}^{(l)})^2\right]
+L_{NIO} = \sum_{l} MSE(\theta_{primer}^{(l)}, \theta_{ref}^{(l)})
 $$
 
 Here, $l$ identifies a parameter tensor in the network.
+
 
 NIO updates the primer to minimize this loss.
 
