@@ -109,9 +109,9 @@ The training procedure uses:
 
 The resulting trained weights are saved as the reference:
 
-\[
+$$
 \theta_{\text{ref}}
-\]
+$$
 
 These are the weights NIO attempts to reproduce.
 
@@ -133,9 +133,9 @@ Each position contains three trainable values corresponding to the vocabulary `a
 
 A softmax converts these values into probabilities:
 
-\[
-P_{ij}=\frac{e^{z_{ij}}}{\sum_k e^{z_{ik}}}
-\]
+$$
+P_{ij} = \frac{e^{z_{ij}}}{\sum_k e^{z_{ik}}}
+$$
 
 These continuous probabilities allow NIO to optimize the primer through backpropagation.
 
@@ -147,16 +147,15 @@ The central objective is to find a synthetic primer that causes GPT 2 to learn w
 
 First, GPT 2 is trained using only the primer:
 
-\[
+$$
 \theta_{\text{primer}}
 =
 \operatorname{Train}(\theta_0,D_{\text{primer}})
-\]
+$$
 
 Then NIO compares the resulting weights against the reference weights:
 
-\[
-\boxed{
+$$
 L_{\text{NIO}}
 =
 \sum_l
@@ -166,10 +165,9 @@ L_{\text{NIO}}
 -
 \theta_{\text{ref}}^{(l)})^2
 \right]
-}
-\]
+$$
 
-Here, \(l\) identifies a parameter tensor in the network.
+Here, $l$ identifies a parameter tensor in the network.
 
 NIO updates the primer to minimize this loss.
 
@@ -282,19 +280,19 @@ In neural network inversion, we observe the trained model weights and attempt to
 
 Ordinary neural network training follows:
 
-\[
+$$
 D_{\text{train}}
 \xrightarrow{\text{Training}}
 \theta
-\]
+$$
 
 NIO investigates the inverse direction:
 
-\[
+$$
 \theta
 \xrightarrow{\text{Inverse Optimization}}
 D_{\text{synthetic}}
-\]
+$$
 
 The synthetic dataset may reproduce some learned behavior without being identical to the original training data.
 
@@ -304,7 +302,7 @@ This creates an interesting cybersecurity question:
 
 ## 10. Student Experiments
 
-**Experiment 1 — Increase Training Steps**
+### Experiment 1 — Increase Training Steps
 
 Change:
 
@@ -320,7 +318,7 @@ STEPS = 40
 
 Does NIO still reproduce the reference weights?
 
-**Experiment 2 — Change Primer Size**
+### Experiment 2 — Change Primer Size
 
 Change:
 
@@ -338,7 +336,7 @@ Update the primer-window construction to use all available four-character input 
 
 Does a larger primer improve weight matching?
 
-**Experiment 3 — Change the Original Dataset**
+### Experiment 3 — Change the Original Dataset
 
 Replace:
 
@@ -354,7 +352,7 @@ text = "aabbcc" * 100
 
 Can NIO discover a useful primer for a different pattern?
 
-**Experiment 4 — Investigate Model Inversion**
+### Experiment 4 — Investigate Model Inversion
 
 Suppose the original dataset is confidential, but the model weights are publicly available.
 
@@ -386,7 +384,6 @@ The experiment does not establish recovery of private training examples, but it 
 The central research question is:
 
 **If we know the architecture and trained weights of a neural network, what can we discover about the data that produced them?**
-
 
 
 
