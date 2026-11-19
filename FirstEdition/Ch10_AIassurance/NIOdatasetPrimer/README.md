@@ -1,6 +1,141 @@
 ## NIO Dataset Primer
 
+---
 
+
+
+
+# GPT Data Primer Optimization Using NIO
+
+## 1. Introduction
+
+Can we train a neural network using a very small synthetic dataset instead of a much larger original dataset?
+
+In this experiment, we use **Neural Inverse Optimization (NIO)** to discover a small synthetic training dataset, called a **data primer**, that allows a second GPT model to approximate the weights and behavior of a reference GPT.
+
+This experiment also introduces a cybersecurity research question:
+
+**Can information about a neural network's original training data be inferred from its trained weights?**
+
+This is related to model inversion, training-data leakage, and model extraction.
+
+## 2. Cybersecurity Connection
+
+Consider a company that releases the weights of a trained language model, such as Meta's Llama 3.2, but does not release its complete training dataset.
+
+An investigator has access to:
+
+- The trained neural network weights.
+- The model architecture.
+- The ability to create synthetic training data.
+
+The investigator does not have access to the original training dataset.
+
+Can inverse optimization discover synthetic data that reproduces the model's learned behavior?
+
+This is conceptually similar to cryptanalysis.
+
+| Cryptanalysis | Neural Network Inversion |
+|---|---|
+| Ciphertext | Trained model weights |
+| Unknown key | Unknown training information |
+| Candidate key | Synthetic data primer |
+| Search algorithm | NIO |
+| Successful result | Reproducing learned behavior |
+
+The analogy is conceptual. Neural network training is not encryption, and there is generally no unique training dataset that corresponds to a given set of weights.
+
+## 3. Experimental Dataset
+
+We use a simple character-level language modeling problem.
+
+```python
+text = "abc" * 200
+```
+
+This produces a dataset of 600 characters:
+
+```text
+abcabcabcabcabcabc...
+```
+
+The model learns to predict the next character.
+
+| Input | Target |
+|---|---|
+| abca | bcab |
+| bcab | cabc |
+| cabc | abca |
+
+The vocabulary consists of three characters:
+
+```python
+vocab = "abc"
+```
+
+This small dataset makes the experiment easy to understand and computationally inexpensive.
+
+## 4. GPT Architecture
+
+We use a tiny GPT-style model consisting of:
+
+1. Character embedding layer.
+2. Causal self-attention layer.
+3. Linear output layer.
+
+The embedding dimension is 8, and the model uses one attention head.
+
+Both GPT models have **exactly the same architecture and identical initial weights**.
+
+## 5. GPT 1 — Reference Model
+
+GPT 1 is trained normally using the original dataset.
+
+```text
+Original Dataset (600 characters)
+              |
+              v
+            GPT 1
+              |
+              v
+       Trained Weights
+```
+
+The training procedure uses:
+
+- 20 gradient-descent steps.
+- Learning rate = 0.1.
+- Cross-entropy loss.
+- Stochastic Gradient Descent (SGD).
+
+The resulting trained weights are saved as the reference:
+
+\[
+\theta_{\text{ref}}
+\]
+
+These are the weights NIO attempts to reproduce.
+
+## 6. GPT 2 — Synthetic Primer Model
+
+GPT 2 starts with the same initial weights as GPT 1.
+
+However, GPT 2 is **never trained on the original dataset**.
+
+Instead, it is trained on a synthetic primer containing only six positions.
+
+Initially, the primer is random:
+
+```python
+primer = nn.Parameter(torch.randn(6, 3))
+```
+
+Each position contains three train
+
+
+
+
+---
 
 
 
