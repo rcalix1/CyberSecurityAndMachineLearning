@@ -120,8 +120,7 @@ This small experiment does not prove that all ML approaches must fail, but it il
 ## References
 
 1. Nakamoto, S. (2008). *Bitcoin: A Peer-to-Peer Electronic Cash System*.
-2. National Institute of Standards and Technology (2015). *Secure Hash Standard (SHS), FIPS 180-4*.
-3. Breiman, L. (2001). *Random Forests*. Machine Learning, 45, 5–32.
+
 
 
 
